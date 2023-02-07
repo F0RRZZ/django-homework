@@ -1,8 +1,15 @@
+import os
+
 from pathlib import Path
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "SECRETKEY"
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 DEBUG = True
 
@@ -17,7 +24,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "homepage.apps.HomepageConfig",
     "catalog.apps.CatalogConfig",
-    "about.apps.AboutConfig"
+    "about.apps.AboutConfig",
 ]
 
 MIDDLEWARE = [
@@ -60,19 +67,19 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth."
-                "password_validation.UserAttributeSimilarityValidator",
+        "password_validation.UserAttributeSimilarityValidator",
     },
     {
         "NAME": "django.contrib.auth."
-                "password_validation.MinimumLengthValidator",
+        "password_validation.MinimumLengthValidator",
     },
     {
         "NAME": "django.contrib.auth."
-                "password_validation.CommonPasswordValidator",
+        "password_validation.CommonPasswordValidator",
     },
     {
         "NAME": "django.contrib.auth."
-                "password_validation.NumericPasswordValidator",
+        "password_validation.NumericPasswordValidator",
     },
 ]
 
