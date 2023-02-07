@@ -37,13 +37,13 @@ source venv/bin/activate
 
 3. Устанавливаем зависимости
 
-Windows
+Windows:
 
 ```
 pip install -r requirements.txt
 ```
 
-Linux/MacOS
+Linux/MacOS:
 
 ```
 pip3 install -r requirements.txt
@@ -53,7 +53,7 @@ pip3 install -r requirements.txt
 
 4. Запускаем сервер
 
-Windows
+Windows:
 ```
 cd homework
 python manage.py runserver
