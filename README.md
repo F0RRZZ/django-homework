@@ -1,6 +1,4 @@
 # django-homework
-## Запуск в dev-режиме
-
 ---
 
 #### ! Для того, чтобы проделать представленные шаги на Windows, необходимо установить git bash!
@@ -36,6 +34,8 @@ source venv/bin/activate
 ---
 
 3. Устанавливаем зависимости
+---
+* Основные зависимости:
 
 Windows:
 
@@ -50,8 +50,45 @@ pip3 install -r requirements.txt
 ```
 
 ---
+* Зависимости для разработки
 
-4. Запускаем сервер
+Windows:
+
+```
+pip install -r requirements-dev.txt
+```
+
+Linux/MacOS:
+
+```
+pip3 install -r requirements-dev.txt
+```
+
+---
+* Зависимости для тестов
+
+Windows:
+
+```
+pip install -r requirements-dev.txt
+```
+
+Linux/MacOS:
+
+```
+pip3 install -r requirements-dev.txt
+```
+
+
+---
+4. Переменные окружения (secret key)
+
+Для того, чтобы внести свой secret key, нужно создать файл .env, после чего
+создать переменную окружения SECRET_KEY, куда потом передать свой ключ.
+(пример файла .env находится в файле .env.example)
+---
+
+5. Запускаем сервер
 
 Windows:
 ```
