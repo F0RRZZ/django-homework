@@ -32,6 +32,6 @@ jobs:
     - name: Lint with flake8
       run: |
         flake8 .
-    -name: Check with black
+    - name: Check with black
       run: |
         black --check .
