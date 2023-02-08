@@ -1,3 +1,4 @@
+[![Python package](https://github.com/F0RRZZ/django-homework/actions/workflows/python-package.yml/badge.svg?branch=task3)](https://github.com/F0RRZZ/django-homework/actions/workflows/python-package.yml)
 # django-homework
 ---
 
@@ -79,8 +80,8 @@ Linux/MacOS:
 pip3 install -r requirements-dev.txt
 ```
 
-
 ---
+
 4. Переменные окружения
 
 Чтобы создать и отредактировать переменные окружения, сначала пройдите по пути:
