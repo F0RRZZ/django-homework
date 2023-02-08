@@ -1,13 +1,11 @@
 from pathlib import Path
 import environ
 
-
 env = environ.Env(
     DEBUG=(bool, False),
     SECRET_KEY=(str, "dummy-key"),
     ALLOWED_HOSTS=(list, ["*"]),
 )
-
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
