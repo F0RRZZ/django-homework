@@ -7,7 +7,7 @@
 
 1. Клонируем репозиторий
 
-```
+```shell
 git clone https://github.com/F0RRZZ/django-homework.git
 ```
 
@@ -16,7 +16,7 @@ git clone https://github.com/F0RRZZ/django-homework.git
 2. Создаем и активируем venv
 
 Windows:
-```
+```shell
 cd django-homework
 python -m venv venv
 source venv/Scripts/activate
@@ -25,7 +25,7 @@ source venv/Scripts/activate
 
 Linux/MacOS:
 
-```
+```shell
 cd django-homework
 python3 -m venv venv
 source venv/bin/activate
@@ -39,13 +39,13 @@ source venv/bin/activate
 
 Windows:
 
-```
+```shell
 pip install -r requirements.txt
 ```
 
 Linux/MacOS:
 
-```
+```shell
 pip3 install -r requirements.txt
 ```
 
@@ -54,13 +54,13 @@ pip3 install -r requirements.txt
 
 Windows:
 
-```
+```shell
 pip install -r requirements-dev.txt
 ```
 
 Linux/MacOS:
 
-```
+```shell
 pip3 install -r requirements-dev.txt
 ```
 
@@ -69,13 +69,13 @@ pip3 install -r requirements-dev.txt
 
 Windows:
 
-```
+```shell
 pip install -r requirements-dev.txt
 ```
 
 Linux/MacOS:
 
-```
+```shell
 pip3 install -r requirements-dev.txt
 ```
 
@@ -104,12 +104,12 @@ cp .env.example .env
 5. Запускаем сервер
 
 Windows:
-```
+```shell
 cd homework
 python manage.py runserver
 ```
 Linux/MacOS:
-```
+```shell
 cd homework
 python3 manage.py runserver
 ```
