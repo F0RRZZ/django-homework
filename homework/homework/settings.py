@@ -6,7 +6,7 @@ from pathlib import Path
 env = environ.Env(
     DEBUG=(bool, False),
     SECRET_KEY=(str, "dummy-key"),
-    ALLOWED_HOSTS=(list, ["*"])
+    ALLOWED_HOSTS=(list, ["*"]),
 )
 
 
