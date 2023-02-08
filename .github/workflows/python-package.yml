@@ -34,4 +34,4 @@ jobs:
         flake8 .
     - name: Check with black
       run: |
-        black . --check --line-length 79 --skip-string-normalization
+        black .
