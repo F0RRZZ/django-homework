@@ -1,12 +1,24 @@
+import environ
+
 from pathlib import Path
+
+
+env = environ.Env(
+    DEBUG=(bool, False),
+    SECRET_KEY=(str, "dummy-key"),
+    ALLOWED_HOSTS=(list, ["*"])
+)
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "SECRETKEY"
+environ.Env.read_env()
 
-DEBUG = True
+SECRET_KEY = env("SECRET_KEY")
 
-ALLOWED_HOSTS = []
+DEBUG = env("DEBUG")
+
+ALLOWED_HOSTS = env("ALLOWED_HOSTS")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -17,7 +29,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "homepage.apps.HomepageConfig",
     "catalog.apps.CatalogConfig",
-    "about.apps.AboutConfig"
+    "about.apps.AboutConfig",
 ]
 
 MIDDLEWARE = [
@@ -61,19 +73,19 @@ DATABASES = {
 AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth."
-                "password_validation.UserAttributeSimilarityValidator",
+        "password_validation.UserAttributeSimilarityValidator",
     },
     {
         "NAME": "django.contrib.auth."
-                "password_validation.MinimumLengthValidator",
+        "password_validation.MinimumLengthValidator",
     },
     {
         "NAME": "django.contrib.auth."
-                "password_validation.CommonPasswordValidator",
+        "password_validation.CommonPasswordValidator",
     },
     {
         "NAME": "django.contrib.auth."
-                "password_validation.NumericPasswordValidator",
+        "password_validation.NumericPasswordValidator",
     },
 ]
 
