@@ -31,7 +31,7 @@ jobs:
         pip install -r requirements.txt
     - name: Lint with flake8
       run: |
-        flake8 . --max-line-length 79 --statistics --show-source --count
+        flake8 .
     - name: Check with black
       run: |
-        black . --check --line-length 79
+        black . --check --line-length 79 --skip-string-normalization
