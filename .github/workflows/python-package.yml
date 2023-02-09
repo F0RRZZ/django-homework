@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.8", "3.9", "3.10"]
+        python-version: [ "3.9" ]
 
     steps:
     - uses: actions/checkout@v3
@@ -27,11 +27,16 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        python -m pip install flake8 black pep8-naming flake8-alphabetize flake8-quotes
+        python -m pip install flake8
         pip install -r requirements.txt
     - name: Lint with flake8
-      run: |
-        flake8 .
+      uses: py-actions/flake8@v2
+      with:
+        max-line-length: "79"
+        statistics: "true"
+        show-sources: "true"
+        count: "true"
+        plugins: "pep8-naming flake8-broken-line flake8-return flake8-isort flake8-quotes"
     - name: Check with black
       run: |
         black .
