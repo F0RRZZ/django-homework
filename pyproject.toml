@@ -1,4 +1,12 @@
 [tool.black]
 line-length = 79
-check = true
 skip-string-normalization = true
+exclude = '''
+/(
+    \.idea
+  | \.git
+  | \.DS_Store
+  | \.vscode
+  | \.venv
+)/
+'''
