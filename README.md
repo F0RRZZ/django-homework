@@ -1,4 +1,4 @@
-[![Python package](https://github.com/F0RRZZ/django-homework/actions/workflows/python-package.yml/badge.svg?branch=task3)](https://github.com/F0RRZZ/django-homework/actions/workflows/python-package.yml)
+[![Python Linting](https://github.com/F0RRZZ/django-homework/actions/workflows/python-package.yml/badge.svg?branch=task3)](https://github.com/F0RRZZ/django-homework/actions/workflows/python-package.yml)
 # django-homework
 ---
 
