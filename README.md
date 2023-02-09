@@ -71,13 +71,13 @@ pip3 install -r requirements-dev.txt
 Windows:
 
 ```shell
-pip install -r requirements-dev.txt
+pip install -r requirements-test.txt
 ```
 
 Linux/MacOS:
 
 ```shell
-pip3 install -r requirements-dev.txt
+pip3 install -r requirements-test.txt
 ```
 
 ---
