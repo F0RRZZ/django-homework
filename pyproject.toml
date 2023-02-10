@@ -22,3 +22,4 @@ exclude = '''
 )/
 '''
 ignore_missing_imports = true
+verbose = true
