@@ -1,6 +1,4 @@
 [tool.black]
-line-length = 79
-skip-string-normalization = true
 exclude = '''
 /(
     \.idea
@@ -10,3 +8,5 @@ exclude = '''
   | \.venv
 )/
 '''
+line-length = 79
+skip-string-normalization = true

@@ -3,7 +3,7 @@ from pathlib import Path
 import environ
 
 env = environ.Env(
-    DEBUG=(bool, False),
+    DEBUG=(bool, True),
     SECRET_KEY=(str, 'dummy-key'),
     ALLOWED_HOSTS=(list, ['*']),
 )
