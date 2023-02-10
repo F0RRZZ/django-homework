@@ -112,11 +112,9 @@ cd ..
 
 Windows:
 ```shell
-cd homework
 python manage.py runserver
 ```
 Linux/MacOS:
 ```shell
-cd homework
 python3 manage.py runserver
 ```
