@@ -3,6 +3,7 @@
 ---
 
 #### ! Для того, чтобы проделать представленные шаги на Windows, необходимо установить git bash!
+[Git Bash](https://gitforwindows.org/)
 
 ---
 
@@ -112,11 +113,9 @@ cd ..
 
 Windows:
 ```shell
-cd homework
 python manage.py runserver
 ```
 Linux/MacOS:
 ```shell
-cd homework
 python3 manage.py runserver
 ```
