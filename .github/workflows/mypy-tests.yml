@@ -5,9 +5,9 @@ name: MyPy Checking
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "task2" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "task2" ]
 
 jobs:
   build:
