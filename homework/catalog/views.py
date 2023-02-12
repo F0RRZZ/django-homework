@@ -14,4 +14,4 @@ def catalog_re(request, number):
 
 
 def positive_number(request, number):
-    return HttpResponse(f'<body>Positive integer</body>')
+    return HttpResponse('<body>Positive integer</body>')
