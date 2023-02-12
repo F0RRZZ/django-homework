@@ -17,5 +17,24 @@ class CatalogPageTests(TestCase):
     def test_wrong_item_choice(self):
         response = Client().get('/catalog/item/')
         self.assertEqual(
-            response.status_code, 404, 'Clicking on an incorrect product link'
+            response.status_code, 404, 'Invalid product link worked'
+        )
+
+    def test_right_regex(self):
+        response = Client().get('/catalog/re/1/')
+        self.assertEqual(
+            response.status_code, 200, 'Error with the right regex'
+        )
+
+    def test_wrong_regex(self):
+        response_negative_number = Client().get('/catalog/re/-1/')
+        self.assertEqual(
+            response_negative_number.status_code,
+            404,
+            'Regex with negative number worked'
+        )
+
+        response_str = Client().get('/catalog/re/a/')
+        self.assertEqual(
+            response_str.status_code, 404, 'Regex with string worked'
         )

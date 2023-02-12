@@ -7,3 +7,7 @@ def item_list(request):
 
 def item_detail(request, item):
     return HttpResponse(f'<body>Подробно об элементе {item}</body>')
+
+
+def catalog_re(request, number):
+    return HttpResponse(f'<body>Number: {number}</body>')
