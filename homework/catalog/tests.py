@@ -31,7 +31,7 @@ class CatalogPageTests(TestCase):
         self.assertEqual(
             response_negative_number.status_code,
             404,
-            'Regex with negative number worked'
+            'Regex with negative number worked',
         )
 
         response_str = Client().get('/catalog/re/a/')
@@ -50,7 +50,7 @@ class CatalogPageTests(TestCase):
         self.assertEqual(
             response_negative_number.status_code,
             404,
-            'Link with negative number worked'
+            'Link with negative number worked',
         )
 
         response_str = Client().get('/catalog/converter/a')
