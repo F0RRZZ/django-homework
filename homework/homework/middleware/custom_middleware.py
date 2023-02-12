@@ -1,4 +1,10 @@
+import environ
 from django.http import HttpResponse
+
+env = environ.Env(
+    CUSTOM_MIDDLEWARE_ENABLED=(bool, False)
+)
+middleware_enabled = env('CUSTOM_MIDDLEWARE_ENABLED')
 
 
 class CustomMiddleware:
@@ -8,7 +14,9 @@ class CustomMiddleware:
 
     def __call__(self, request):
         response = self.get_response(request)
-        if self.counter != 10:
+        if not middleware_enabled:
+            return response
+        if self.counter != 9:
             self.counter += 1
             return response
         self.counter = 0
@@ -17,5 +25,4 @@ class CustomMiddleware:
             .replace('<body>', '')
             .replace('</body>', '')
         )
-        new_response = HttpResponse(f'<body>{text[::-1]}</body>')
-        return new_response
+        return HttpResponse(f'<body>{text[::-1]}</body>')
