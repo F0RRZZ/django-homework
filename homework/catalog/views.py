@@ -11,3 +11,7 @@ def item_detail(request, item):
 
 def catalog_re(request, number):
     return HttpResponse(f'<body>Number: {number}</body>')
+
+
+def positive_number(request, number):
+    return HttpResponse(f'<body>Positive integer</body>')
