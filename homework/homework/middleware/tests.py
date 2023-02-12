@@ -1,9 +1,7 @@
 import environ
 from django.test import Client, TestCase
 
-env = environ.Env(
-    CUSTOM_MIDDLEWARE_ENABLED=(bool, False)
-)
+env = environ.Env(CUSTOM_MIDDLEWARE_ENABLED=(bool, False))
 middleware_enabled = env('CUSTOM_MIDDLEWARE_ENABLED')
 
 
