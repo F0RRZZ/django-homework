@@ -1,6 +1,6 @@
-[![Python Linting](https://github.com/F0RRZZ/django-homework/actions/workflows/python-package.yml/badge.svg)](https://github.com/F0RRZZ/django-homework/actions/workflows/python-package.yml)
+[![Python Linting](https://github.com/F0RRZZ/django-homework/actions/workflows/python-linting-tests.yml/badge.svg)](https://github.com/F0RRZZ/django-homework/actions/workflows/python-linting-tests.yml)
 [![Checking with mypy](https://github.com/F0RRZZ/django-homework/actions/workflows/mypy-tests.yml/badge.svg)](https://github.com/F0RRZZ/django-homework/actions/workflows/mypy-tests.yml)
-[![Django CI](https://github.com/F0RRZZ/django-homework/actions/workflows/django.yml/badge.svg)](https://github.com/F0RRZZ/django-homework/actions/workflows/django.yml)
+[![Django CI](https://github.com/F0RRZZ/django-homework/actions/workflows/django-tests.yml/badge.svg)](https://github.com/F0RRZZ/django-homework/actions/workflows/django-tests.yml)
 
 # django-homework
 ---
