@@ -1,6 +1,9 @@
+import os
 from pathlib import Path
 
 import environ
+
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env(
     DEBUG=(bool, True),
@@ -8,9 +11,7 @@ env = environ.Env(
     ALLOWED_HOSTS=(list, ['*']),
 )
 
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-environ.Env.read_env()
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 SECRET_KEY = env('SECRET_KEY')
 

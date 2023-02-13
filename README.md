@@ -91,7 +91,7 @@ pip3 install -r requirements-test.txt
 Чтобы создать и отредактировать переменные окружения, сначала пройдите по пути:
 
 ```shell
-cd homework/homework
+cd homework/
 ```
 
 В данной директории находится тестовый .env (.env.example)

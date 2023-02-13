@@ -1,7 +1,13 @@
+import os
+from pathlib import Path
+
 import environ
 from django.http import HttpResponse
 
+BASE_DIR = Path(__file__).parent.parent.parent
+
 env = environ.Env(CUSTOM_MIDDLEWARE_ENABLED=(bool, False))
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 middleware_enabled = env('CUSTOM_MIDDLEWARE_ENABLED')
 
 
