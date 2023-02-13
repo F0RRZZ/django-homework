@@ -26,9 +26,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    # installed apps
     'debug_toolbar',
-
+    # created apps
     'about.apps.AboutConfig',
     'catalog.apps.CatalogConfig',
     'homepage.apps.HomepageConfig',
