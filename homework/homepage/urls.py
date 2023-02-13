@@ -2,4 +2,8 @@ from django.urls import path
 
 from . import views
 
-urlpatterns = [path('', views.home), path('coffee/', views.teapot_error)]
+app_name = 'homepage'
+urlpatterns = [
+    path('', views.home, name='index'),
+    path('coffee/', views.teapot_error, name='teapot-error'),
+]
