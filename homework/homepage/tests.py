@@ -9,7 +9,7 @@ class StaticURLTests(TestCase):
         self.assertEqual(
             response.status_code,
             HTTPStatus.OK,
-            'Error when going to the homepage'
+            'Error when going to the homepage',
         )
 
     def test_coffee_endpoint(self):

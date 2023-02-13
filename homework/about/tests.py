@@ -9,5 +9,5 @@ class AboutPageTests(TestCase):
         self.assertEqual(
             response.status_code,
             HTTPStatus.OK,
-            'Error when going to the page "about"'
+            'Error when going to the page "about"',
         )
