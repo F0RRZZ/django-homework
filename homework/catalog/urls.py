@@ -14,7 +14,7 @@ urlpatterns = [
         name='postitive-number-check',
     ),
     re_path(
-        r're/(?P<number>\d+)',
+        r're/(?P<number>[1-9]\d*)/$',
         views.catalog_re,
         name='re-positive-number-check',
     ),

@@ -28,43 +28,47 @@ class CatalogPageTests(TestCase):
         )
 
     def test_link_with_regex(self):
-        response = Client().get('/catalog/re/1/')
-        response_negative_number = Client().get('/catalog/re/-1/')
-        response_str = Client().get('/catalog/re/a/')
-        self.assertEqual(
-            response.status_code, HTTPStatus.OK, 'Error with the right regex'
-        )
-
-        self.assertEqual(
-            response_negative_number.status_code,
-            HTTPStatus.NOT_FOUND,
-            'Regex with negative number worked',
-        )
-
-        self.assertEqual(
-            response_str.status_code,
-            HTTPStatus.NOT_FOUND,
-            'Regex with string worked',
-        )
+        cases = [
+            ('/catalog/re/1/', HTTPStatus.OK),
+            ('/catalog/re/10/', HTTPStatus.OK),
+            ('/catalog/re/235236236/', HTTPStatus.OK),
+            ('/catalog/re/0/', HTTPStatus.NOT_FOUND),
+            ('/catalog/re/-1/', HTTPStatus.NOT_FOUND),
+            ('/catalog/re/010/', HTTPStatus.NOT_FOUND),
+            ('/catalog/re/1.0/', HTTPStatus.NOT_FOUND),
+            ('/catalog/re/1a/', HTTPStatus.NOT_FOUND),
+            ('/catalog/re/a/', HTTPStatus.NOT_FOUND),
+            ('/catalog/re/^1/', HTTPStatus.NOT_FOUND),
+            ('/catalog/re/aa1/', HTTPStatus.NOT_FOUND),
+            ('/catalog/re/z1x/', HTTPStatus.NOT_FOUND),
+            ('/catalog/re/^1.0/', HTTPStatus.NOT_FOUND),
+        ]
+        for case in cases:
+            response = Client().get(case[0])
+            self.assertEqual(
+                response.status_code,
+                case[1],
+            )
 
     def test_link_with_positive_number(self):
-        response = Client().get('/catalog/converter/1')
-        response_negative_number = Client().get('/catalog/converter/-1')
-        response_str = Client().get('/catalog/converter/a')
-        self.assertEqual(
-            response.status_code,
-            HTTPStatus.OK,
-            'Error with the positive number',
-        )
-
-        self.assertEqual(
-            response_negative_number.status_code,
-            HTTPStatus.NOT_FOUND,
-            'Link with negative number worked',
-        )
-
-        self.assertEqual(
-            response_str.status_code,
-            HTTPStatus.NOT_FOUND,
-            'Link with string worked',
-        )
+        cases = [
+            ('/catalog/re/1/', HTTPStatus.OK),
+            ('/catalog/re/10/', HTTPStatus.OK),
+            ('/catalog/re/235236236/', HTTPStatus.OK),
+            ('/catalog/re/0/', HTTPStatus.NOT_FOUND),
+            ('/catalog/re/-1/', HTTPStatus.NOT_FOUND),
+            ('/catalog/re/010/', HTTPStatus.NOT_FOUND),
+            ('/catalog/re/1.0/', HTTPStatus.NOT_FOUND),
+            ('/catalog/re/1a/', HTTPStatus.NOT_FOUND),
+            ('/catalog/re/a/', HTTPStatus.NOT_FOUND),
+            ('/catalog/re/^1/', HTTPStatus.NOT_FOUND),
+            ('/catalog/re/aa1/', HTTPStatus.NOT_FOUND),
+            ('/catalog/re/z1x/', HTTPStatus.NOT_FOUND),
+            ('/catalog/re/^1.0/', HTTPStatus.NOT_FOUND),
+        ]
+        for case in cases:
+            response = Client().get(case[0])
+            self.assertEqual(
+                response.status_code,
+                case[1],
+            )
