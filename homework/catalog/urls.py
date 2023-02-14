@@ -10,12 +10,12 @@ urlpatterns = [
     path('<int:item>/', views.item_detail, name='item-detail'),
     path(
         'converter/<posint:number>',
-        views.positive_number,
+        views.item_detail,
         name='postitive-number-check',
     ),
     re_path(
         r're/(?P<number>[1-9]\d*)/$',
-        views.catalog_re,
+        views.item_detail,
         name='re-positive-number-check',
     ),
 ]
