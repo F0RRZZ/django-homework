@@ -21,4 +21,9 @@ class StaticURLTests(TestCase):
         )
 
     def test_coffee_endpoint_text(self):
-        ...
+        response = Client().get('/coffee/')
+        self.assertEqual(
+            response.content.decode('utf-8'),
+            'Я чайник',
+            'Endpoint /coffee does not return 418 status code',
+        )
