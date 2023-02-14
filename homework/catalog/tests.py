@@ -18,13 +18,13 @@ class CatalogPageTests(TestCase):
         self.assertEqual(
             response.status_code,
             HTTPStatus.OK,
-            'Error with the right type of item',
+            'Error with the right type of item (/catalog/1/)',
         )
 
         self.assertEqual(
             response_str.status_code,
             HTTPStatus.NOT_FOUND,
-            'Item link with string worked',
+            'Item link with string worked (/catalog/item/)',
         )
 
     def test_link_with_regex(self):
@@ -48,6 +48,7 @@ class CatalogPageTests(TestCase):
             self.assertEqual(
                 response.status_code,
                 case[1],
+                f'(URL: {case[0]})'
             )
 
     def test_link_with_positive_number(self):
@@ -71,4 +72,5 @@ class CatalogPageTests(TestCase):
             self.assertEqual(
                 response.status_code,
                 case[1],
+                f'(URL: {case[0]})'
             )
