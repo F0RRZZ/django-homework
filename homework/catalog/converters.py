@@ -1,5 +1,5 @@
 class PositiveInteger:
-    regex = '[0-9]+'
+    regex = '[1-9]\d*$'
 
     def to_python(self, value):
         return int(value)
