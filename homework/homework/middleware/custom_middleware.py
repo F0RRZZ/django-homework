@@ -24,9 +24,5 @@ class CustomMiddleware:
             self.counter += 1
             return response
         self.counter = 0
-        text = (
-            response.content.decode('utf-8')
-            .replace('<body>', '')
-            .replace('</body>', '')
-        )
-        return HttpResponse(f'<body>{text[::-1]}</body>')
+        text = response.content.decode('utf-8')
+        return HttpResponse(text[::-1])

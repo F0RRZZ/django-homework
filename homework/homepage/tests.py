@@ -12,10 +12,13 @@ class StaticURLTests(TestCase):
             'Error when going to the homepage',
         )
 
-    def test_coffee_endpoint(self):
+    def test_coffee_endpoint_status(self):
         response = Client().get('/coffee/')
         self.assertEqual(
             response.status_code,
             HTTPStatus.IM_A_TEAPOT,
             'Endpoint /coffee does not return 418 status code',
         )
+
+    def test_coffee_endpoint_text(self):
+        ...

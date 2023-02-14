@@ -24,7 +24,7 @@ class CatalogPageTests(TestCase):
         self.assertEqual(
             response_str.status_code,
             HTTPStatus.NOT_FOUND,
-            'Item link with string worked (/catalog/item/)',
+            'Item url with string worked (/catalog/item/)',
         )
 
     def test_link_with_regex(self):
