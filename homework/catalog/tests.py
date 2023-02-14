@@ -46,9 +46,7 @@ class CatalogPageTests(TestCase):
         for case in cases:
             response = Client().get(case[0])
             self.assertEqual(
-                response.status_code,
-                case[1],
-                f'(URL: {case[0]})'
+                response.status_code, case[1], f'(URL: {case[0]})'
             )
 
     def test_link_with_positive_number(self):
@@ -70,7 +68,5 @@ class CatalogPageTests(TestCase):
         for case in cases:
             response = Client().get(case[0])
             self.assertEqual(
-                response.status_code,
-                case[1],
-                f'(URL: {case[0]})'
+                response.status_code, case[1], f'(URL: {case[0]})'
             )
