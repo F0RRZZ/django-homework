@@ -1,20 +1,28 @@
-import os
-from pathlib import Path
-
-import environ
+from django.conf import settings
 from django.http import HttpResponse
 
-BASE_DIR = Path(__file__).parent.parent.parent
-
-env = environ.Env(CUSTOM_MIDDLEWARE_ENABLED=(bool, False))
-environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
-middleware_enabled = env('CUSTOM_MIDDLEWARE_ENABLED')
+middleware_enabled = settings.WORDS_REVERSING_MIDDLEWARE_ENABLED
 
 
-class CustomMiddleware:
+class RussianWordsReverseMiddleware:
     def __init__(self, get_response):
         self.counter = 0
         self.get_response = get_response
+
+    @classmethod
+    def reverse_russian_words(cls, text):
+        alphabet = 'абвгдеёжзийклмнопрстуфхцчшщъыьэюя'
+        result, word = '', ''
+        for symbol in text:
+            if symbol.lower() not in alphabet:
+                if word:
+                    result += word[::-1]
+                    word = ''
+                result += symbol
+            else:
+                word += symbol
+        result += word[::-1]
+        return result
 
     def __call__(self, request):
         response = self.get_response(request)
@@ -25,4 +33,4 @@ class CustomMiddleware:
             return response
         self.counter = 0
         text = response.content.decode('utf-8')
-        return HttpResponse(text[::-1])
+        return HttpResponse(self.reverse_russian_words(text))
