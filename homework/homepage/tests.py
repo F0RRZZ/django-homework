@@ -25,5 +25,5 @@ class StaticURLTests(TestCase):
         self.assertEqual(
             response.content.decode('utf-8'),
             'Я чайник',
-            'Endpoint /coffee does not return 418 status code',
+            'Endpoint /coffee does not return text: "Я чайник"',
         )
