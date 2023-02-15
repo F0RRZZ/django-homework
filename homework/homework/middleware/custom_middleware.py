@@ -3,8 +3,6 @@ from django.http import HttpResponse
 
 from ..russian_words_reverser import reverse_russian_words
 
-middleware_enabled = settings.RUSSIAN_WORDS_REVERSING_MIDDLEWARE_ENABLED
-
 
 class RussianWordsReverseMiddleware:
     def __init__(self, get_response):
@@ -13,7 +11,7 @@ class RussianWordsReverseMiddleware:
 
     def __call__(self, request):
         response = self.get_response(request)
-        if not middleware_enabled:
+        if not settings.RUSSIAN_WORDS_REVERSING_MIDDLEWARE_ENABLED:
             return response
         if self.counter != 9:
             self.counter += 1
