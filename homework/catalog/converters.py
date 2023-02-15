@@ -5,4 +5,4 @@ class PositiveInteger:
         return int(value)
 
     def to_url(self, value):
-        return f'{int(value)}'
+        return str(value)

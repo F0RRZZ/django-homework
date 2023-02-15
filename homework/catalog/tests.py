@@ -12,7 +12,7 @@ class CatalogPageTests(TestCase):
             'Error when going to the page "catalog"',
         )
 
-    def test_item_choice(self):
+    def test_catalog_item_endpoint(self):
         response = Client().get('/catalog/1/')
         response_str = Client().get('/catalog/item/')
         self.assertEqual(
@@ -27,46 +27,27 @@ class CatalogPageTests(TestCase):
             'Item url with string worked (/catalog/item/)',
         )
 
-    def test_link_with_regex(self):
+    def test_catalog_item_positive_integer_endpoint(self):
+        urls = ['/catalog/re/{}/', '/catalog/converter/{}']
         cases = [
-            ('/catalog/re/1/', HTTPStatus.OK),
-            ('/catalog/re/10/', HTTPStatus.OK),
-            ('/catalog/re/235236236/', HTTPStatus.OK),
-            ('/catalog/re/0/', HTTPStatus.NOT_FOUND),
-            ('/catalog/re/-1/', HTTPStatus.NOT_FOUND),
-            ('/catalog/re/010/', HTTPStatus.NOT_FOUND),
-            ('/catalog/re/1.0/', HTTPStatus.NOT_FOUND),
-            ('/catalog/re/1a/', HTTPStatus.NOT_FOUND),
-            ('/catalog/re/a/', HTTPStatus.NOT_FOUND),
-            ('/catalog/re/^1/', HTTPStatus.NOT_FOUND),
-            ('/catalog/re/aa1/', HTTPStatus.NOT_FOUND),
-            ('/catalog/re/z1x/', HTTPStatus.NOT_FOUND),
-            ('/catalog/re/^1.0/', HTTPStatus.NOT_FOUND),
+            ('1', HTTPStatus.OK),
+            ('10', HTTPStatus.OK),
+            ('235236236', HTTPStatus.OK),
+            ('0', HTTPStatus.NOT_FOUND),
+            ('-1', HTTPStatus.NOT_FOUND),
+            ('010', HTTPStatus.NOT_FOUND),
+            ('1.0', HTTPStatus.NOT_FOUND),
+            ('1a', HTTPStatus.NOT_FOUND),
+            ('a', HTTPStatus.NOT_FOUND),
+            ('^1', HTTPStatus.NOT_FOUND),
+            ('aa1', HTTPStatus.NOT_FOUND),
+            ('z1x', HTTPStatus.NOT_FOUND),
+            ('^1.0', HTTPStatus.NOT_FOUND),
         ]
-        for case in cases:
-            response = Client().get(case[0])
-            self.assertEqual(
-                response.status_code, case[1], f'(URL: {case[0]})'
-            )
-
-    def test_link_with_positive_number(self):
-        cases = [
-            ('/catalog/re/1/', HTTPStatus.OK),
-            ('/catalog/re/10/', HTTPStatus.OK),
-            ('/catalog/re/235236236/', HTTPStatus.OK),
-            ('/catalog/re/0/', HTTPStatus.NOT_FOUND),
-            ('/catalog/re/-1/', HTTPStatus.NOT_FOUND),
-            ('/catalog/re/010/', HTTPStatus.NOT_FOUND),
-            ('/catalog/re/1.0/', HTTPStatus.NOT_FOUND),
-            ('/catalog/re/1a/', HTTPStatus.NOT_FOUND),
-            ('/catalog/re/a/', HTTPStatus.NOT_FOUND),
-            ('/catalog/re/^1/', HTTPStatus.NOT_FOUND),
-            ('/catalog/re/aa1/', HTTPStatus.NOT_FOUND),
-            ('/catalog/re/z1x/', HTTPStatus.NOT_FOUND),
-            ('/catalog/re/^1.0/', HTTPStatus.NOT_FOUND),
-        ]
-        for case in cases:
-            response = Client().get(case[0])
-            self.assertEqual(
-                response.status_code, case[1], f'(URL: {case[0]})'
-            )
+        for url in urls:
+            for case in cases:
+                test_url = url.format(case[0])
+                response = Client().get(test_url)
+                self.assertEqual(
+                    response.status_code, case[1], f'(URL: {test_url})'
+                )
