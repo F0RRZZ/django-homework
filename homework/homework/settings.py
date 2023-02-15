@@ -9,7 +9,7 @@ env = environ.Env(
     DEBUG=(bool, True),
     SECRET_KEY=(str, 'dummy-key'),
     ALLOWED_HOSTS=(list, ['*']),
-    WORDS_REVERSING_MIDDLEWARE_ENABLED=(bool, False),
+    RUSSIAN_WORDS_REVERSING_MIDDLEWARE_ENABLED=(bool, False),
 )
 
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
@@ -17,7 +17,9 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 SECRET_KEY = env('SECRET_KEY')
 DEBUG = env('DEBUG')
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
-WORDS_REVERSING_MIDDLEWARE_ENABLED = env('WORDS_REVERSING_MIDDLEWARE_ENABLED')
+RUSSIAN_WORDS_REVERSING_MIDDLEWARE_ENABLED = env(
+    'RUSSIAN_WORDS_REVERSING_MIDDLEWARE_ENABLED'
+)
 
 INSTALLED_APPS = [
     'django.contrib.admin',
