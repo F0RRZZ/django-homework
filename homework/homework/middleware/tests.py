@@ -18,7 +18,7 @@ class CustomMiddlewareTests(TestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         original_text = response.content.decode('utf-8')
         reversed_text = original_text
-        for _ in range(10):
+        for _ in range(20):
             response = client.get('/')
             text = response.content.decode('utf-8')
             if text != original_text:
@@ -37,7 +37,7 @@ class CustomMiddlewareTests(TestCase):
         response = client.get('/')
         original_text = response.content.decode('utf-8')
         reversed_text = ''
-        for _ in range(10):
+        for _ in range(20):
             response = client.get('/')
             text = response.content.decode('utf-8')
             if text != original_text:
