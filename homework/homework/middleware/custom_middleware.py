@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.http import HttpResponse
 
-from ..russian_words_reverser import reverse_russian_words
+from homework.middleware.russian_words_reverser import reverse_russian_words
 
 
 class RussianWordsReverseMiddleware:

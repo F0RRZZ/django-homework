@@ -2,7 +2,7 @@ from http import HTTPStatus
 
 from django.test import Client, TestCase, override_settings
 
-from ..russian_words_reverser import reverse_russian_words
+from homework.middleware.russian_words_reverser import reverse_russian_words
 
 
 class CustomMiddlewareTests(TestCase):
