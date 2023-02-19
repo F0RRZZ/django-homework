@@ -1,0 +1,133 @@
+[
+{
+  "model": "catalog.tag",
+  "pk": 1,
+  "fields": {
+    "is_published": true,
+    "name": "тег 1",
+    "slug": "tag1"
+  }
+},
+{
+  "model": "catalog.tag",
+  "pk": 2,
+  "fields": {
+    "is_published": true,
+    "name": "тег 2",
+    "slug": "tag2"
+  }
+},
+{
+  "model": "catalog.tag",
+  "pk": 3,
+  "fields": {
+    "is_published": true,
+    "name": "тег 3",
+    "slug": "tag3"
+  }
+},
+{
+  "model": "catalog.tag",
+  "pk": 4,
+  "fields": {
+    "is_published": true,
+    "name": "тег 4",
+    "slug": "tag4"
+  }
+},
+{
+  "model": "catalog.tag",
+  "pk": 5,
+  "fields": {
+    "is_published": true,
+    "name": "тег 5",
+    "slug": "tag5"
+  }
+},
+{
+  "model": "catalog.item",
+  "pk": 1,
+  "fields": {
+    "is_published": true,
+    "name": "товар 1",
+    "category": 1,
+    "text": "превосходно роскошно слово",
+    "tags": [
+      2,
+      4
+    ]
+  }
+},
+{
+  "model": "catalog.item",
+  "pk": 2,
+  "fields": {
+    "is_published": true,
+    "name": "товар 2",
+    "category": 2,
+    "text": "роскошный товар 2",
+    "tags": [
+      5
+    ]
+  }
+},
+{
+  "model": "catalog.item",
+  "pk": 3,
+  "fields": {
+    "is_published": true,
+    "name": "товар 3",
+    "category": 1,
+    "text": "превосходный товар 3",
+    "tags": [
+      2
+    ]
+  }
+},
+{
+  "model": "catalog.item",
+  "pk": 4,
+  "fields": {
+    "is_published": true,
+    "name": "товар 4",
+    "category": 2,
+    "text": "не превосходный товар 4",
+    "tags": [
+      3
+    ]
+  }
+},
+{
+  "model": "catalog.item",
+  "pk": 5,
+  "fields": {
+    "is_published": true,
+    "name": "товар 5",
+    "category": 1,
+    "text": "совсем не роскошный товар",
+    "tags": [
+      1
+    ]
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 1,
+  "fields": {
+    "is_published": true,
+    "name": "категория 1",
+    "slug": "slug",
+    "weight": 100
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 2,
+  "fields": {
+    "is_published": true,
+    "name": "категория 2",
+    "slug": "slug2",
+    "weight": 500
+  }
+}
+]

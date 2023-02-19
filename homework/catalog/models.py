@@ -5,7 +5,7 @@ import django.db.models
 
 
 def luxury_words_validator(value: str):
-    if 'превосходно' not in value and 'роскошно' not in value:
+    if 'превосходн' not in value.lower() and 'роскошн' not in value.lower():
         raise django.core.exceptions.ValidationError(
             'В тексте должны быть слова "превосходно" или "роскошно"'
         )
@@ -31,6 +31,9 @@ class Tag(Core.models.AbstractModel):
     class Meta:
         verbose_name = 'Тег'
         verbose_name_plural = 'Теги'
+
+    def __str__(self):
+        return self.name
 
 
 class Item(Core.models.AbstractModel):
