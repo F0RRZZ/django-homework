@@ -6,7 +6,7 @@ from homepage import views
 
 class CustomMiddlewareTests(TestCase):
     @override_settings(RUSSIAN_WORDS_REVERSING_MIDDLEWARE_ENABLED=False)
-    def test_is_middleware_correctly_working(self):
+    def test_reverse_russian_words_disabled(self):
         response = self.client.get('/')
         self.assertEqual(response.status_code, HTTPStatus.OK)
         original_text = response.content.decode('utf-8')
@@ -20,7 +20,7 @@ class CustomMiddlewareTests(TestCase):
         self.assertEquals(original_text, reversed_text)
 
     @override_settings(RUSSIAN_WORDS_REVERSING_MIDDLEWARE_ENABLED=True)
-    def test_is_content_reversing(self):
+    def test_reverse_russian_words_enabled(self):
         cases = [
             ('/', '!стр124ок[a]', '!ртс124ко[a]'),
             ('/', '1287!*#&874198274#!', '1287!*#&874198274#!'),
