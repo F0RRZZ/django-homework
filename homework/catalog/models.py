@@ -47,6 +47,7 @@ class Item(Core.models.AbstractModel):
         'слова "превосходно" или "роскошно"',
         validators=[
             luxury_words_validator,
+            words_count_validator,
         ],
     )
 
