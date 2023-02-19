@@ -7,7 +7,7 @@ import django.db.models
 def luxury_words_validator(value: str):
     if 'превосходно' not in value and 'роскошно' not in value:
         raise django.core.exceptions.ValidationError(
-            'В тексте должно быть слово "превосходно" или "роскошно"'
+            'В тексте должны быть слова "превосходно" или "роскошно"'
         )
 
 
