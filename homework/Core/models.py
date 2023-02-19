@@ -9,7 +9,7 @@ class AbstractModel(django.db.models.Model):
         help_text='max 150 символов',
         validators=[
             django.core.validators.MaxLengthValidator(150),
-        ]
+        ],
     )
 
     class Meta:

@@ -1,12 +1,15 @@
 [tool.black]
 exclude = '''
-/(
-    \.idea
-  | \.git
-  | \.DS_Store
-  | \.vscode
-  | \.venv
-)/
+(
+  /(
+      \.git
+    | \.mypy_cache
+    | \.venv
+    | migrations
+    | build
+    | dist
+  )/
+)
 '''
 line-length = 79
 skip-string-normalization = true
