@@ -5,6 +5,8 @@ exclude = '''
       \.git
     | \.mypy_cache
     | \.venv
+    | \.DS_Store
+    | \.idea
     | migrations
     | build
     | dist
@@ -16,13 +18,18 @@ skip-string-normalization = true
 
 [tool.mypy]
 exclude = '''
-/(
-    \.idea
-  | \.git
-  | \.DS_Store
-  | \.vscode
-  | \.venv
-)/
+(
+  /(
+      \.git
+    | \.mypy_cache
+    | \.venv
+    | \.DS_Store
+    | \.idea
+    | migrations
+    | build
+    | dist
+  )/
+)
 '''
 ignore_missing_imports = true
 verbose = true
