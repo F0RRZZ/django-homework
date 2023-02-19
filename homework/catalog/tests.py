@@ -64,30 +64,23 @@ class ModelsTests(TestCase):
             is_published=True,
             name='Тестовая категория',
             slug='test-category-slug',
-            weight=100
+            weight=100,
         )
         cls.tag = catalog.models.Tag.objects.create(
-            is_published=True,
-            name='Тестовый тег',
-            slug='test-tag-slug'
+            is_published=True, name='Тестовый тег', slug='test-tag-slug'
         )
 
     def test_unable_create_one_letter(self):
         item_count = catalog.models.Item.objects.count()
         with self.assertRaises(django.core.exceptions.ValidationError):
             self.item = catalog.models.Item(
-                name='Тестовый товар',
-                category=self.category,
-                text='1'
+                name='Тестовый товар', category=self.category, text='1'
             )
             self.item.full_clean()
             self.item.save()
             self.item.tags.add(ModelsTests.tag)
 
-        self.assertEqual(
-            catalog.models.Item.objects.count(),
-            item_count
-        )
+        self.assertEqual(catalog.models.Item.objects.count(), item_count)
 
     def test_create(self):
         item_count = catalog.models.Item.objects.count()
@@ -100,10 +93,7 @@ class ModelsTests(TestCase):
         self.item.save()
         self.item.tags.add(ModelsTests.tag)
 
-        self.assertEqual(
-            catalog.models.Item.objects.count(),
-            item_count + 1
-        )
+        self.assertEqual(catalog.models.Item.objects.count(), item_count + 1)
 
     def test_luxury_words_validator(self):
         cases = [
@@ -113,7 +103,7 @@ class ModelsTests(TestCase):
             ('здесь тест не упадет(роскошно)', True),
             ('роскошно, превосходно слово', True),
             ('роскошнопревосходно слово слово', True),
-            ('оченьроскошно слово слово', True)
+            ('оченьроскошно слово слово', True),
         ]
         for case, result in cases:
             failed = False
@@ -140,7 +130,7 @@ class ModelsTests(TestCase):
         cases = [
             ('роскошно превосходно', False),
             ('роскошно превосходно слово', True),
-            ('роскошно слово ', False)
+            ('роскошно слово ', False),
         ]
         for case, result in cases:
             failed = False
