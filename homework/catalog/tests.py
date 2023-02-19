@@ -1,3 +1,5 @@
+import catalog.models
+import django.core.exceptions
 from http import HTTPStatus
 
 from django.test import Client, TestCase
@@ -51,3 +53,55 @@ class CatalogPageTests(TestCase):
                 self.assertEqual(
                     response.status_code, case[1], f'(URL: {test_url})'
                 )
+
+
+class ModelsTests(TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        super().setUpClass()
+
+        cls.category = catalog.models.Category.objects.create(
+            is_published=True,
+            name='Тестовая категория',
+            slug='test-category-slug',
+            weight=100
+        )
+        cls.tag = catalog.models.Tag.objects.create(
+            is_published=True,
+            name='Тестовый тег',
+            slug='test-tag-slug'
+        )
+
+    def test_unable_create_one_letter(self):
+        item_count = catalog.models.Item.objects.count()
+        with self.assertRaises(django.core.exceptions.ValidationError):
+            self.item = catalog.models.Item(
+                name='Тестовый товар',
+                category=self.category,
+                text='1'
+            )
+            self.item.tags.add(ModelsTests.tag)
+            self.item.full_clean()
+            self.item.save()
+
+        self.assertEqual(
+            catalog.models.Item.objects.count(),
+            item_count
+        )
+
+    def test_create(self):
+        item_count = catalog.models.Item.objects.count()
+
+        self.item = catalog.models.Item(
+            name='Тестовый товар',
+            category=self.category,
+            text='123',
+        )
+        self.item.tags.add(ModelsTests.tag)
+        self.item.full_clean()
+        self.item.save()
+
+        self.assertEqual(
+            catalog.models.Item.object.count(),
+            item_count + 1
+        )

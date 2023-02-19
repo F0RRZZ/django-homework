@@ -19,6 +19,7 @@ def words_count_validator(value: str):
 
 
 class Tag(Core.models.AbstractModel):
+    id = django.db.models.AutoField(primary_key=True)
     slug = django.db.models.SlugField(
         help_text='max 200 символов',
         validators=[
@@ -37,9 +38,9 @@ class Item(Core.models.AbstractModel):
         'category',
         on_delete=django.db.models.CASCADE,
         verbose_name='Категория',
-        null=True,
+        related_name='catalog_items',
     )
-    tags = django.db.models.ManyToManyField(Tag)
+    tags = django.db.models.ManyToManyField(Tag, related_name='tags')
     text = django.db.models.TextField(
         'Описание',
         help_text='Описание должно быть больше, чем из 2-х слов и содержать '
