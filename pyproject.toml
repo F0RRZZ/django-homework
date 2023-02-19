@@ -17,19 +17,6 @@ line-length = 79
 skip-string-normalization = true
 
 [tool.mypy]
-exclude = '''
-(
-  /(
-      \.git
-    | \.mypy_cache
-    | \.venv
-    | \.DS_Store
-    | \.idea
-    | migrations
-    | build
-    | dist
-  )/
-)
-'''
+exclude = ['venv', 'migrations', '.git', '.idea', '.vs_code', '.DS_Store']
 ignore_missing_imports = true
 verbose = true
