@@ -1,7 +1,7 @@
-import catalog.models
-import django.core.exceptions
 from http import HTTPStatus
 
+import catalog.models
+import django.core.exceptions
 from django.test import Client, TestCase
 
 
