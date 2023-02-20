@@ -3,9 +3,12 @@ import django.db.models
 
 
 class PublishedWithNameBaseModel(django.db.models.Model):
-    is_published = django.db.models.BooleanField('Опубликовано', default=True)
+    is_published = django.db.models.BooleanField(
+        'опубликовано',
+        default=True
+    )
     name = django.db.models.TextField(
-        'Название',
+        'название',
         help_text='max 150 символов',
         validators=[
             django.core.validators.MaxLengthValidator(150),
