@@ -44,7 +44,7 @@ class Category(
     Core.models.PublishedWithNameBaseModel,
     Core.models.SluggedBaseModel,
 ):
-    weight = django.db.models.IntegerField(
+    weight = django.db.models.PositiveSmallIntegerField(
         'вес',
         default=100,
         validators=[
