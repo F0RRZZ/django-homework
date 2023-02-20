@@ -125,30 +125,3 @@ class ModelsTests(TestCase):
                 raise Exception(
                     f'The tests not failed at the incorrect value: {case}'
                 )
-
-    def test_words_count_validator(self):
-        cases = [
-            ('роскошно превосходно', False),
-            ('роскошно превосходно слово', True),
-            ('роскошно слово ', False),
-        ]
-        for case, result in cases:
-            failed = False
-            try:
-                self.item = catalog.models.Item(
-                    name='Тестовый товар',
-                    category=self.category,
-                    text=case,
-                )
-                self.item.full_clean()
-                self.item.save()
-            except django.core.exceptions.ValidationError:
-                if result:
-                    raise Exception(
-                        f'The test failed at the correct value: {case}'
-                    )
-                failed = True
-            if not failed and not result:
-                raise Exception(
-                    f'The tests not failed at the incorrect value: {case}'
-                )

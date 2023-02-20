@@ -29,7 +29,6 @@ class Item(Core.models.PublishedWithNameBaseModel):
         ),
         validators=[
             catalog.validators.luxury_words_validator,
-            catalog.validators.words_count_validator,
         ],
     )
 
