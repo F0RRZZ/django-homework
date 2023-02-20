@@ -1,21 +1,8 @@
 import Core.models
+import catalog.validators
 import django.core.exceptions
 import django.core.validators
 import django.db.models
-
-
-def luxury_words_validator(value: str):
-    if 'превосходн' not in value.lower() and 'роскошн' not in value.lower():
-        raise django.core.exceptions.ValidationError(
-            'В тексте должны быть слова "превосходно" или "роскошно"'
-        )
-
-
-def words_count_validator(value: str):
-    if len(value.split()) <= 2:
-        raise django.core.exceptions.ValidationError(
-            'В тексте должно быть больше 2-х слов'
-        )
 
 
 class Tag(Core.models.AbstractModel):
@@ -49,8 +36,8 @@ class Item(Core.models.AbstractModel):
         help_text='Описание должно быть больше, чем из 2-х слов и содержать '
         'слова "превосходно" или "роскошно"',
         validators=[
-            luxury_words_validator,
-            words_count_validator,
+            catalog.validators.luxury_words_validator,
+            catalog.validators.words_count_validator,
         ],
     )
 
