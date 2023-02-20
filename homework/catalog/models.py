@@ -6,7 +6,8 @@ import django.db.models
 
 
 class Tag(
-    Core.models.PublishedWithNameBaseModel, Core.models.SluggedBaseModel,
+    Core.models.PublishedWithNameBaseModel,
+    Core.models.SluggedBaseModel,
 ):
     class Meta:
         verbose_name = 'Тег'
@@ -40,7 +41,8 @@ class Item(Core.models.PublishedWithNameBaseModel):
 
 
 class Category(
-    Core.models.PublishedWithNameBaseModel, Core.models.SluggedBaseModel,
+    Core.models.PublishedWithNameBaseModel,
+    Core.models.SluggedBaseModel,
 ):
     weight = django.db.models.IntegerField(
         'Вес',

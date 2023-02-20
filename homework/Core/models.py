@@ -10,7 +10,6 @@ class PublishedWithNameBaseModel(django.db.models.Model):
         validators=[
             django.core.validators.MaxLengthValidator(150),
         ],
-        unique=True,
     )
 
     class Meta:
