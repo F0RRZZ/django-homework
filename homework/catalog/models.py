@@ -10,8 +10,8 @@ class Tag(
     Core.models.SluggedBaseModel,
 ):
     class Meta:
-        verbose_name = 'Тег'
-        verbose_name_plural = 'Теги'
+        verbose_name = 'тег'
+        verbose_name_plural = 'теги'
 
 
 class Item(Core.models.PublishedWithNameBaseModel):
@@ -25,8 +25,7 @@ class Item(Core.models.PublishedWithNameBaseModel):
     text = django.db.models.TextField(
         'описание',
         help_text=(
-            'Описание должно быть больше, чем из 2-х слов и содержать '
-            'слова "превосходно" или "роскошно"'
+            'Описание должно содержать слова "превосходно" или "роскошно"'
         ),
         validators=[
             catalog.validators.luxury_words_validator,
@@ -35,8 +34,8 @@ class Item(Core.models.PublishedWithNameBaseModel):
     )
 
     class Meta:
-        verbose_name = 'Товар'
-        verbose_name_plural = 'Товары'
+        verbose_name = 'товар'
+        verbose_name_plural = 'товары'
 
     def __str__(self):
         return self.text[:15]
@@ -53,8 +52,11 @@ class Category(
             django.core.validators.MinValueValidator(0),
             django.core.validators.MaxValueValidator(32767),
         ],
+        help_text=(
+            'Укажите вес. Минимальное значение - 0, максимальное - 32767'
+        ),
     )
 
     class Meta:
-        verbose_name = 'Категория'
-        verbose_name_plural = 'Категории'
+        verbose_name = 'категория'
+        verbose_name_plural = 'категории'

@@ -9,7 +9,7 @@ class PublishedWithNameBaseModel(django.db.models.Model):
     )
     name = django.db.models.TextField(
         'название',
-        help_text='max 150 символов',
+        help_text='Максимум 150 символов',
         validators=[
             django.core.validators.MaxLengthValidator(150),
         ],
@@ -24,7 +24,7 @@ class PublishedWithNameBaseModel(django.db.models.Model):
 
 class SluggedBaseModel(django.db.models.Model):
     slug = django.db.models.SlugField(
-        help_text='max 200 символов',
+        help_text='Максимум 200 символов',
         validators=[
             django.core.validators.MaxLengthValidator(200),
         ],
