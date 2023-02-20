@@ -4,7 +4,7 @@
   "pk": 1,
   "fields": {
     "is_published": true,
-    "name": "тег 1",
+    "name": "С‚РµРі 1",
     "slug": "tag1"
   }
 },
@@ -13,7 +13,7 @@
   "pk": 2,
   "fields": {
     "is_published": true,
-    "name": "тег 2",
+    "name": "С‚РµРі 2",
     "slug": "tag2"
   }
 },
@@ -22,7 +22,7 @@
   "pk": 3,
   "fields": {
     "is_published": true,
-    "name": "тег 3",
+    "name": "С‚РµРі 3",
     "slug": "tag3"
   }
 },
@@ -31,7 +31,7 @@
   "pk": 4,
   "fields": {
     "is_published": true,
-    "name": "тег 4",
+    "name": "С‚РµРі 4",
     "slug": "tag4"
   }
 },
@@ -40,7 +40,7 @@
   "pk": 5,
   "fields": {
     "is_published": true,
-    "name": "тег 5",
+    "name": "С‚РµРі 5",
     "slug": "tag5"
   }
 },
@@ -49,9 +49,9 @@
   "pk": 1,
   "fields": {
     "is_published": true,
-    "name": "товар 1",
+    "name": "С‚РѕРІР°СЂ 1",
     "category": 1,
-    "text": "превосходно роскошно слово",
+    "text": "РїСЂРµРІРѕСЃС…РѕРґРЅРѕ СЂРѕСЃРєРѕС€РЅРѕ СЃР»РѕРІРѕ",
     "tags": [
       2,
       4
@@ -63,9 +63,9 @@
   "pk": 2,
   "fields": {
     "is_published": true,
-    "name": "товар 2",
+    "name": "С‚РѕРІР°СЂ 2",
     "category": 2,
-    "text": "роскошный товар 2",
+    "text": "СЂРѕСЃРєРѕС€РЅС‹Р№ С‚РѕРІР°СЂ 2",
     "tags": [
       5
     ]
@@ -76,9 +76,9 @@
   "pk": 3,
   "fields": {
     "is_published": true,
-    "name": "товар 3",
+    "name": "С‚РѕРІР°СЂ 3",
     "category": 1,
-    "text": "превосходный товар 3",
+    "text": "РїСЂРµРІРѕСЃС…РѕРґРЅС‹Р№ С‚РѕРІР°СЂ 3",
     "tags": [
       2
     ]
@@ -89,9 +89,9 @@
   "pk": 4,
   "fields": {
     "is_published": true,
-    "name": "товар 4",
+    "name": "С‚РѕРІР°СЂ 4",
     "category": 2,
-    "text": "не превосходный товар 4",
+    "text": "РЅРµ РїСЂРµРІРѕСЃС…РѕРґРЅС‹Р№ С‚РѕРІР°СЂ 4",
     "tags": [
       3
     ]
@@ -102,9 +102,9 @@
   "pk": 5,
   "fields": {
     "is_published": true,
-    "name": "товар 5",
+    "name": "С‚РѕРІР°СЂ 5",
     "category": 1,
-    "text": "совсем не роскошный товар",
+    "text": "СЃРѕРІСЃРµРј РЅРµ СЂРѕСЃРєРѕС€РЅС‹Р№ С‚РѕРІР°СЂ",
     "tags": [
       1
     ]
@@ -115,7 +115,7 @@
   "pk": 1,
   "fields": {
     "is_published": true,
-    "name": "категория 1",
+    "name": "РєР°С‚РµРіРѕСЂРёСЏ 1",
     "slug": "slug",
     "weight": 100
   }
@@ -125,7 +125,7 @@
   "pk": 2,
   "fields": {
     "is_published": true,
-    "name": "категория 2",
+    "name": "РєР°С‚РµРіРѕСЂРёСЏ 2",
     "slug": "slug2",
     "weight": 500
   }
