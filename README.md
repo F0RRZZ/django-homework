@@ -105,13 +105,62 @@ cp .env.example .env
 
 Чтобы перейти к следующему шагу, поднимитесь на уровень выше
 
+---
+
+5. Миграции
+Для миграции необходимо ввести следующие команды:
+
+Windows:
+
 ```shell
-cd ..
+python manage.py makemigrations
+python manage.py migrate
+```
+
+Linux/MacOS:
+
+```shell
+python3 manage.py makemigrations
+python3 manage.py migrate
+```
+
+Также можно загрузить в базу данных тестовые данные из фикстуры data.json:
+
+Windows:
+
+```shell
+python manage.py loaddata data.json
+```
+
+Linux/MacOS:
+
+```shell
+python3 manage.py loaddata data.json
 ```
 
 ---
 
-5. Запускаем сервер
+6. Создание пользователя с админским доступом
+
+Для того, чтобы создать суперпользователя, введите следующие команды:
+
+Windows:
+
+```shell
+python manage.py createsuperuser
+```
+
+Linux/MacOS:
+
+```shell
+python3 manage.py createsuperuser
+```
+
+Затем введите запрошенные данные.
+
+---
+
+7. Запускаем сервер
 
 Windows:
 ```shell
