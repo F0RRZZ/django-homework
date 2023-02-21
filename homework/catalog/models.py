@@ -2,19 +2,19 @@ import catalog.validators
 import django.core.exceptions
 import django.core.validators
 import django.db.models
-import сore.models
+import сore.base_models
 
 
 class Tag(
-    сore.models.PublishedWithNameBaseModel,
-    сore.models.SluggedBaseModel,
+    сore.base_models.PublishedWithNameBaseModel,
+    сore.base_models.SluggedBaseModel,
 ):
     class Meta:
         verbose_name = 'тег'
         verbose_name_plural = 'теги'
 
 
-class Item(сore.models.PublishedWithNameBaseModel):
+class Item(сore.base_models.PublishedWithNameBaseModel):
     category = django.db.models.ForeignKey(
         'category',
         on_delete=django.db.models.CASCADE,
@@ -41,8 +41,8 @@ class Item(сore.models.PublishedWithNameBaseModel):
 
 
 class Category(
-    сore.models.PublishedWithNameBaseModel,
-    сore.models.SluggedBaseModel,
+    сore.base_models.PublishedWithNameBaseModel,
+    сore.base_models.SluggedBaseModel,
 ):
     weight = django.db.models.PositiveSmallIntegerField(
         'вес',
