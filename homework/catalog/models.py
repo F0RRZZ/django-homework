@@ -5,6 +5,27 @@ import django.db.models
 import сore.base_models
 
 
+class Category(
+    сore.base_models.PublishedWithNameBaseModel,
+    сore.base_models.SluggedBaseModel,
+):
+    weight = django.db.models.PositiveSmallIntegerField(
+        'вес',
+        default=100,
+        validators=[
+            django.core.validators.MinValueValidator(0),
+            django.core.validators.MaxValueValidator(32767),
+        ],
+        help_text=(
+            'Укажите вес. Минимальное значение - 0, максимальное - 32767'
+        ),
+    )
+
+    class Meta:
+        verbose_name = 'категория'
+        verbose_name_plural = 'категории'
+
+
 class Tag(
     сore.base_models.PublishedWithNameBaseModel,
     сore.base_models.SluggedBaseModel,
@@ -39,24 +60,3 @@ class Item(сore.base_models.PublishedWithNameBaseModel):
 
     def __str__(self):
         return self.text[:15]
-
-
-class Category(
-    сore.base_models.PublishedWithNameBaseModel,
-    сore.base_models.SluggedBaseModel,
-):
-    weight = django.db.models.PositiveSmallIntegerField(
-        'вес',
-        default=100,
-        validators=[
-            django.core.validators.MinValueValidator(0),
-            django.core.validators.MaxValueValidator(32767),
-        ],
-        help_text=(
-            'Укажите вес. Минимальное значение - 0, максимальное - 32767'
-        ),
-    )
-
-    class Meta:
-        verbose_name = 'категория'
-        verbose_name_plural = 'категории'
