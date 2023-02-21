@@ -20,7 +20,7 @@ class Item(сore.base_models.PublishedWithNameBaseModel):
         on_delete=django.db.models.CASCADE,
         verbose_name='категория',
         related_name='catalog_items',
-        null=True
+        null=True,
     )
     tags = django.db.models.ManyToManyField(Tag, related_name='tags')
     text = django.db.models.TextField(
