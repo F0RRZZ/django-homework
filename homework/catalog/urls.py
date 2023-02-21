@@ -1,6 +1,5 @@
-import converters
-import views
 from django.urls import path, re_path, register_converter
+from catalog import converters, views
 
 register_converter(converters.PositiveInteger, 'posint')
 
