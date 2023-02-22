@@ -1,5 +1,5 @@
 [tool.black]
-exclude = '''
+force-exclude = '''
 (
   /(
       \.git
@@ -15,15 +15,3 @@ exclude = '''
 '''
 line-length = 79
 skip-string-normalization = true
-
-[tool.mypy]
-exclude = [
-    'venv',
-    'migrations',
-    '.git',
-    '.idea',
-    '.vs_code',
-    '.DS_Store'
-]
-ignore_missing_imports = true
-verbose = true

@@ -46,7 +46,10 @@ class Item(core.base_models.PublishedWithNameBaseModel):
             'Описание должно содержать слова "превосходно" или "роскошно"'
         ),
         validators=[
-            catalog.validators.luxury_words_validator,
+            catalog.validators.ValidateMustContain(
+                'роскошно',
+                'превосходно',
+            ),
         ],
     )
 
