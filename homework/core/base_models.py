@@ -3,7 +3,10 @@ import django.db.models
 
 
 class PublishedWithNameBaseModel(django.db.models.Model):
-    is_published = django.db.models.BooleanField('опубликовано', default=True)
+    is_published = django.db.models.BooleanField(
+        'опубликовано',
+        default=True,
+    )
     name = django.db.models.CharField(
         'название',
         help_text='Максимум 150 символов',

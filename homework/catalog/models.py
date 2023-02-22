@@ -26,24 +26,20 @@ class Category(
         verbose_name_plural = 'категории'
 
 
-class Tag(
-    core.base_models.PublishedWithNameBaseModel,
-    core.base_models.SluggedBaseModel,
-):
-    class Meta:
-        verbose_name = 'тег'
-        verbose_name_plural = 'теги'
-
-
 class Item(core.base_models.PublishedWithNameBaseModel):
     category = django.db.models.ForeignKey(
         'category',
         on_delete=django.db.models.CASCADE,
         verbose_name='категория',
-        related_name='catalog_items',
+        related_name='items',
+        related_query_name='item',
         null=True,
     )
-    tags = django.db.models.ManyToManyField(Tag, related_name='tags')
+    tags = django.db.models.ManyToManyField(
+        'tag',
+        related_name='tags',
+        related_query_name='tag',
+    )
     text = django.db.models.TextField(
         'описание',
         help_text=(
@@ -60,3 +56,12 @@ class Item(core.base_models.PublishedWithNameBaseModel):
 
     def __str__(self):
         return self.text[:15]
+
+
+class Tag(
+    core.base_models.PublishedWithNameBaseModel,
+    core.base_models.SluggedBaseModel,
+):
+    class Meta:
+        verbose_name = 'тег'
+        verbose_name_plural = 'теги'
