@@ -28,7 +28,7 @@ class Category(
 
 class Item(core.base_models.PublishedWithNameBaseModel):
     category = django.db.models.ForeignKey(
-        'category',
+        Category,
         on_delete=django.db.models.CASCADE,
         verbose_name='категория',
         related_name='items',
