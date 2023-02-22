@@ -8,7 +8,7 @@ class PublishedWithNameBaseModel(django.db.models.Model):
         'название',
         help_text='Максимум 150 символов',
         max_length=150,
-        unique=True,
+        unique=True
     )
 
     class Meta:

@@ -1,8 +1,17 @@
 import django.core.exceptions
+import string
 
 
 def luxury_words_validator(value: str):
-    if 'превосходн' not in value.lower() and 'роскошн' not in value.lower():
+    for symbol in string.punctuation:
+        value = value.replace(symbol, ' ')
+    value = value.split()
+    luxury_word_founded = False
+    for word in value:
+        if 'превосходно' == word.lower() or 'роскошно' == word.lower():
+            luxury_word_founded = True
+            break
+    if not luxury_word_founded:
         raise django.core.exceptions.ValidationError(
             'В тексте должны быть слова "превосходно" или "роскошно"'
         )
