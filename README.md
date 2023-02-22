@@ -138,6 +138,12 @@ Linux/MacOS:
 python3 manage.py loaddata data.json
 ```
 
+Схема получившейся базы данных:
+
+![database scheme](assets/db_scheme.png)
+
+Ссылка: https://app.quickdatabasediagrams.com/#/d/rHUr3u
+
 ---
 
 6. Создание пользователя с админским доступом
