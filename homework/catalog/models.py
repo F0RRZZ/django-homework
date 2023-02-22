@@ -22,6 +22,7 @@ class Category(
     )
 
     class Meta:
+        default_related_name = 'categories'
         verbose_name = 'категория'
         verbose_name_plural = 'категории'
 
@@ -54,6 +55,7 @@ class Item(core.base_models.PublishedWithNameBaseModel):
     )
 
     class Meta:
+        default_related_name = 'items'
         verbose_name = 'товар'
         verbose_name_plural = 'товары'
 
@@ -66,5 +68,6 @@ class Tag(
     core.base_models.SluggedBaseModel,
 ):
     class Meta:
+        default_related_name = 'tags'
         verbose_name = 'тег'
         verbose_name_plural = 'теги'
