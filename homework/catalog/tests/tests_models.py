@@ -15,7 +15,9 @@ class ModelsTests(TestCase):
             weight=100,
         )
         cls.tag = catalog.models.Tag.objects.create(
-            is_published=True, name='Тестовый тег', slug='test-tag-slug'
+            is_published=True,
+            name='Тестовый тег',
+            slug='test-tag-slug',
         )
 
     def tearDown(self) -> None:

@@ -1,10 +1,12 @@
 import string
 
 import django.core.exceptions
+import django.core.validators
 
 
-class ValidateMustContain:
+class ValidateMustContain(django.core.validators.BaseValidator):
     def __init__(self, *words):
+        super().__init__(*words)
         self.words = words
 
     def __call__(self, value):
