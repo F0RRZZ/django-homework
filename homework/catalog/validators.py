@@ -1,5 +1,6 @@
-import django.core.exceptions
 import string
+
+import django.core.exceptions
 
 
 def luxury_words_validator(value: str):
