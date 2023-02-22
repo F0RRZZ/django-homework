@@ -1,5 +1,6 @@
 import catalog.validators
 import core.base_models
+import string
 import django.core.exceptions
 import django.core.validators
 import django.db.models
@@ -25,6 +26,16 @@ class Category(
         default_related_name = 'categories'
         verbose_name = 'категория'
         verbose_name_plural = 'категории'
+
+    def clean(self):
+        formatted_name = self.name.lower()
+        for symbol in string.punctuation:
+            formatted_name = formatted_name.replace(symbol, '')
+        if self.__class__.objects.filter(name=formatted_name).exists():
+            raise django.core.validators.ValidationError(
+                'Название категории должно быть уникальным.'
+            )
+        return self.name
 
 
 class Item(core.base_models.PublishedWithNameBaseModel):
@@ -71,3 +82,13 @@ class Tag(
         default_related_name = 'tags'
         verbose_name = 'тег'
         verbose_name_plural = 'теги'
+
+    def clean(self):
+        formatted_name = self.name.lower()
+        for symbol in string.punctuation:
+            formatted_name = formatted_name.replace(symbol, '')
+        if self.__class__.objects.filter(name=formatted_name).exists():
+            raise django.core.validators.ValidationError(
+                'Название должно быть уникальным.'
+            )
+        return self.name

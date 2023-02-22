@@ -142,3 +142,36 @@ class ModelsTests(TestCase):
             )
             category.full_clean()
             category.save()
+
+    def test_tags_name_repeat_validator(self):
+        first_tag = catalog.models.Tag(
+            is_published=True,
+            name='тэг1',
+            slug='test-tag-slug1',
+        )
+        first_tag.full_clean()
+        first_tag.save()
+        second_tag = catalog.models.Tag(
+            is_published=True,
+            name='тэг2',
+            slug='test-tag-slug2',
+        )
+        second_tag.full_clean()
+        second_tag.save()
+
+    def test_negative_tags_name_repeat_validator(self):
+        with self.assertRaises(django.core.exceptions.ValidationError):
+            first_tag = catalog.models.Tag(
+                is_published=True,
+                name='тэг',
+                slug='test-tag-slug1',
+            )
+            first_tag.full_clean()
+            first_tag.save()
+            second_tag = catalog.models.Tag(
+                is_published=True,
+                name='тэг',
+                slug='test-tag-slug2',
+            )
+            second_tag.full_clean()
+            second_tag.save()
