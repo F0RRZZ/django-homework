@@ -1,7 +1,7 @@
 import catalog.models
 import django.core.exceptions
-from parameterized import parameterized
 from django.test import TestCase
+from parameterized import parameterized
 
 
 class ModelsTests(TestCase):
@@ -40,12 +40,14 @@ class ModelsTests(TestCase):
 
         self.assertEqual(catalog.models.Item.objects.count(), item_count + 1)
 
-    @parameterized.expand([
-        ('здесь тест не упадет(роскошно)', ),
-        ('роскошно, превосходно',),
-        ('Роскошно!', ),
-        ('#ПрЕвоСХодно.,', ),
-    ])
+    @parameterized.expand(
+        [
+            ('здесь тест не упадет(роскошно)',),
+            ('роскошно, превосходно',),
+            ('Роскошно!',),
+            ('#ПрЕвоСХодно.,',),
+        ]
+    )
     def test_luxury_words_validator(self, case):
         try:
             self.item = catalog.models.Item(
@@ -56,17 +58,17 @@ class ModelsTests(TestCase):
             self.item.full_clean()
             self.item.save()
         except django.core.exceptions.ValidationError:
-            raise Exception(
-                f'The test failed at the correct value: {case}'
-                )
+            raise Exception(f'The test failed at the correct value: {case}')
 
-    @parameterized.expand([
-        ('слово слово еще одно слово', ),
-        ('ыфдвлжыдвплжыдлвп', ),
-        ('здесь должен упасть тест', ),
-        ('роскошнопревосходно', ),
-        ('оченьроскошно', ),
-    ])
+    @parameterized.expand(
+        [
+            ('слово слово еще одно слово',),
+            ('ыфдвлжыдвплжыдлвп',),
+            ('здесь должен упасть тест',),
+            ('роскошнопревосходно',),
+            ('оченьроскошно',),
+        ]
+    )
     def test_luxury_words_negative_validator(self, case):
         with self.assertRaises(django.core.exceptions.ValidationError):
             self.item = catalog.models.Item(
@@ -77,12 +79,30 @@ class ModelsTests(TestCase):
             self.item.full_clean()
             self.item.save()
 
-    @parameterized.expand([
-        ('category', 'slug-slug', 300, ),
-        ('категория', 'slug___', 20, ),
-        ('categория', '_slug_', 0, ),
-        ('КатЕгория1', 'SLUG', 32767, ),
-    ])
+    @parameterized.expand(
+        [
+            (
+                'category',
+                'slug-slug',
+                300,
+            ),
+            (
+                'категория',
+                'slug___',
+                20,
+            ),
+            (
+                'categория',
+                '_slug_',
+                0,
+            ),
+            (
+                'КатЕгория1',
+                'SLUG',
+                32767,
+            ),
+        ]
+    )
     def test_category_validator(self, name, slug, weight):
         try:
             category = catalog.models.Category(
@@ -96,13 +116,23 @@ class ModelsTests(TestCase):
             raise Exception(
                 f'The test failed at the correct values: name={name},'
                 f' slug={slug}, weight: {weight}'
-                )
+            )
 
-    @parameterized.expand([
-        ('категория' * 150, 'slug', 777, ),
-        ('категория', '#', 666, ),
-        ('category', 'sluuugg', 27365827658235),
-    ])
+    @parameterized.expand(
+        [
+            (
+                'категория' * 150,
+                'slug',
+                777,
+            ),
+            (
+                'категория',
+                '#',
+                666,
+            ),
+            ('category', 'sluuugg', 27365827658235),
+        ]
+    )
     def test_category_negative_validator(self, name, slug, weight):
         with self.assertRaises(django.core.exceptions.ValidationError):
             category = catalog.models.Category(
@@ -112,4 +142,3 @@ class ModelsTests(TestCase):
             )
             category.full_clean()
             category.save()
-
