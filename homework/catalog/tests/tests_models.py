@@ -18,6 +18,12 @@ class ModelsTests(TestCase):
             is_published=True, name='Тестовый тег', slug='test-tag-slug'
         )
 
+    def tearDown(self) -> None:
+        super().tearDown()
+        catalog.models.Item.objects.all().delete()
+        catalog.models.Tag.objects.all().delete()
+        catalog.models.Category.objects.all().delete()
+
     def test_create(self):
         item_count = catalog.models.Item.objects.count()
         self.item = catalog.models.Item(
