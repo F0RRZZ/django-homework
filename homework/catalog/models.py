@@ -12,6 +12,12 @@ class Category(
     core.base_models.PublishedWithNameBaseModel,
     core.base_models.SluggedBaseModel,
 ):
+    formatted_name = django.db.models.CharField(
+        'форматированное имя',
+        max_length=150,
+        null=True,
+        editable=False,
+    )
     weight = django.db.models.PositiveSmallIntegerField(
         'вес',
         default=100,
@@ -29,12 +35,21 @@ class Category(
         verbose_name = 'категория'
         verbose_name_plural = 'категории'
 
+    def save(self, *args, **kwargs):
+        formatted_name = self.name.lower()
+        for symbol in string.punctuation:
+            formatted_name = formatted_name.replace(symbol, '')
+        self.formatted_name = formatted_name.replace(' ', '')
+        super().save(*args, **kwargs)
+
     def clean(self):
         formatted_name = self.name.lower()
         for symbol in string.punctuation:
             formatted_name = formatted_name.replace(symbol, '')
         formatted_name = formatted_name.replace(' ', '')
-        if self.__class__.objects.filter(name=formatted_name).exists():
+        if self.__class__.objects.filter(
+                formatted_name=formatted_name
+        ).exists():
             raise django.core.validators.ValidationError(
                 'Название категории должно быть уникальным.'
             )
@@ -81,17 +96,34 @@ class Tag(
     core.base_models.PublishedWithNameBaseModel,
     core.base_models.SluggedBaseModel,
 ):
+    formatted_name = django.db.models.CharField(
+        'форматированное имя',
+        max_length=150,
+        null=True,
+        editable=False,
+    )
+
     class Meta:
         default_related_name = 'tags'
         verbose_name = 'тег'
         verbose_name_plural = 'теги'
 
+    def save(self, *args, **kwargs):
+        formatted_name = self.name.lower()
+        for symbol in string.punctuation:
+            formatted_name = formatted_name.replace(symbol, '')
+        self.formatted_name = formatted_name.replace(' ', '')
+        super().save(*args, **kwargs)
+
     def clean(self):
         formatted_name = self.name.lower()
         for symbol in string.punctuation:
             formatted_name = formatted_name.replace(symbol, '')
-        if self.__class__.objects.filter(name=formatted_name).exists():
+        formatted_name = formatted_name.replace(' ', '')
+        if self.__class__.objects.filter(
+                formatted_name=formatted_name
+        ).exists():
             raise django.core.validators.ValidationError(
-                'Название должно быть уникальным.'
+                'Название категории должно быть уникальным.'
             )
         return self.name
