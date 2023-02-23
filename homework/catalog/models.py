@@ -33,6 +33,7 @@ class Category(
         formatted_name = self.name.lower()
         for symbol in string.punctuation:
             formatted_name = formatted_name.replace(symbol, '')
+        formatted_name = formatted_name.replace(' ', '')
         if self.__class__.objects.filter(name=formatted_name).exists():
             raise django.core.validators.ValidationError(
                 'Название категории должно быть уникальным.'
