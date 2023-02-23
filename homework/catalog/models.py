@@ -124,6 +124,6 @@ class Tag(
             formatted_name=formatted_name
         ).exists():
             raise django.core.validators.ValidationError(
-                'Название категории должно быть уникальным.'
+                'Название тэга должно быть уникальным.'
             )
         return self.name
