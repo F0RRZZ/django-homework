@@ -1,3 +1,5 @@
+import string
+
 import django.core.validators
 import django.db.models
 
@@ -32,3 +34,29 @@ class SluggedBaseModel(django.db.models.Model):
 
     class Meta:
         abstract = True
+
+
+class SaveAndCleanModifiedBaseMethod(django.db.models.Model):
+    class Meta:
+        abstract = True
+
+    def save(self, *args, **kwargs):
+        formatted_name = self.name.lower()
+        for symbol in string.punctuation:
+            formatted_name = formatted_name.replace(symbol, '')
+        self.formatted_name = formatted_name.replace(' ', '')
+        super().save(*args, **kwargs)
+
+    def clean(self):
+        formatted_name = self.name.lower()
+        for symbol in string.punctuation:
+            formatted_name = formatted_name.replace(symbol, '')
+        formatted_name = formatted_name.replace(' ', '')
+        if self.__class__.objects.filter(
+            formatted_name=formatted_name
+        ).exists():
+            raise django.core.validators.ValidationError(
+                'Название должно быть уникальным.'
+            )
+        return self.name
+
