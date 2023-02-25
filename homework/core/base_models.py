@@ -59,4 +59,3 @@ class SaveAndCleanModifiedBaseMethod(django.db.models.Model):
                 'Название должно быть уникальным.'
             )
         return self.name
-
