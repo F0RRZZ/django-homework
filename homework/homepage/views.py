@@ -1,12 +1,15 @@
 from http import HTTPStatus
 
 from django.http import HttpResponse
+from django.shortcuts import render
 
 homepage_title = 'Главная'
 
 
 def home(request):
-    return HttpResponse(homepage_title)
+    template = 'homepage/homepage.html'
+    context = {}
+    return render(request, template, context)
 
 
 def teapot_status_page(request):

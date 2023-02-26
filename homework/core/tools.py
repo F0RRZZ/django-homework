@@ -21,7 +21,7 @@ def name_formatter(name):
         'o': 'o',
         'p': '',
         'x': 'х',
-        'y': 'у'
+        'y': 'у',
     }
     formatted_name = name.lower()
     for symbol in string.punctuation:
