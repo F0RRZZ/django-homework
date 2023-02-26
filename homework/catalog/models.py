@@ -35,6 +35,17 @@ class Category(
         verbose_name_plural = 'категории'
 
 
+class GalleryImage(core.base_models.ImageBaseModel):
+    item = django.db.models.ForeignKey(
+        'Item',
+        on_delete=django.db.models.CASCADE,
+    )
+
+    class Meta:
+        verbose_name = 'дополнительное фото'
+        verbose_name_plural = 'дополнительные фото'
+
+
 class Item(core.base_models.PublishedWithNameBaseModel):
     category = django.db.models.ForeignKey(
         Category,
@@ -69,6 +80,16 @@ class Item(core.base_models.PublishedWithNameBaseModel):
 
     def __str__(self):
         return self.text[:15]
+
+
+class MainImage(core.base_models.ImageBaseModel):
+    item = django.db.models.OneToOneField(
+        Item,
+        on_delete=django.db.models.CASCADE,
+    )
+
+    class Meta:
+        verbose_name = 'главное фото'
 
 
 class Tag(

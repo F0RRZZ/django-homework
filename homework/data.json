@@ -1,47 +1,24 @@
 [
 {
-  "model": "catalog.tag",
+  "model": "catalog.category",
   "pk": 1,
   "fields": {
     "is_published": true,
-    "name": "тег 1",
-    "slug": "tag1"
+    "name": "Техника",
+    "slug": "technic",
+    "formatted_name": "техника",
+    "weight": 100
   }
 },
 {
-  "model": "catalog.tag",
-  "pk": 2,
-  "fields": {
-    "is_published": true,
-    "name": "тег 2",
-    "slug": "tag2"
-  }
-},
-{
-  "model": "catalog.tag",
+  "model": "catalog.category",
   "pk": 3,
   "fields": {
     "is_published": true,
-    "name": "тег 3",
-    "slug": "tag3"
-  }
-},
-{
-  "model": "catalog.tag",
-  "pk": 4,
-  "fields": {
-    "is_published": true,
-    "name": "тег 4",
-    "slug": "tag4"
-  }
-},
-{
-  "model": "catalog.tag",
-  "pk": 5,
-  "fields": {
-    "is_published": true,
-    "name": "тег 5",
-    "slug": "tag5"
+    "name": "Книги",
+    "slug": "books",
+    "formatted_name": "книги",
+    "weight": 100
   }
 },
 {
@@ -49,85 +26,126 @@
   "pk": 1,
   "fields": {
     "is_published": true,
-    "name": "товар 1",
+    "name": "Ноутбук Lenovo ThinkPad X1 Titanium Yoga Gen 1",
     "category": 1,
-    "text": "превосходно роскошно слово",
+    "text": "Ноутбук роскошно",
     "tags": [
       2,
-      4
-    ]
-  }
-},
-{
-  "model": "catalog.item",
-  "pk": 2,
-  "fields": {
-    "is_published": true,
-    "name": "товар 2",
-    "category": 2,
-    "text": "роскошно товар 2",
-    "tags": [
-      5
-    ]
-  }
-},
-{
-  "model": "catalog.item",
-  "pk": 3,
-  "fields": {
-    "is_published": true,
-    "name": "товар 3",
-    "category": 1,
-    "text": "превосходно товар 3",
-    "tags": [
-      2
-    ]
-  }
-},
-{
-  "model": "catalog.item",
-  "pk": 4,
-  "fields": {
-    "is_published": true,
-    "name": "товар 4",
-    "category": 2,
-    "text": "не превосходно товар 4",
-    "tags": [
       3
     ]
   }
 },
 {
   "model": "catalog.item",
-  "pk": 5,
+  "pk": 2,
   "fields": {
     "is_published": true,
-    "name": "товар 5",
+    "name": "16.2\" Ноутбук Apple MacBook Pro",
     "category": 1,
-    "text": "совсем не роскошно товар",
+    "text": "Превосходно",
     "tags": [
       1
     ]
   }
 },
 {
-  "model": "catalog.category",
-  "pk": 1,
+  "model": "catalog.item",
+  "pk": 3,
   "fields": {
     "is_published": true,
-    "name": "категория 1",
-    "slug": "slug",
-    "weight": 100
+    "name": "Чистый код. Мартин Роберт К.",
+    "category": 3,
+    "text": "Превосходно",
+    "tags": [
+      5,
+      6
+    ]
   }
 },
 {
-  "model": "catalog.category",
+  "model": "catalog.item",
+  "pk": 4,
+  "fields": {
+    "is_published": true,
+    "name": "1984 | Оруэлл Джордж",
+    "category": 3,
+    "text": "Превосходно",
+    "tags": [
+      4
+    ]
+  }
+},
+{
+  "model": "catalog.item",
+  "pk": 5,
+  "fields": {
+    "is_published": true,
+    "name": "Смартфон Apple iPhone 14 Pro",
+    "category": 1,
+    "text": "Превосходно (нет)",
+    "tags": [
+      1
+    ]
+  }
+},
+{
+  "model": "catalog.tag",
+  "pk": 1,
+  "fields": {
+    "is_published": true,
+    "name": "apple",
+    "slug": "apple",
+    "formatted_name": "apple"
+  }
+},
+{
+  "model": "catalog.tag",
   "pk": 2,
   "fields": {
     "is_published": true,
-    "name": "категория 2",
-    "slug": "slug2",
-    "weight": 500
+    "name": "lenovo",
+    "slug": "lenovo",
+    "formatted_name": "lenovo"
+  }
+},
+{
+  "model": "catalog.tag",
+  "pk": 3,
+  "fields": {
+    "is_published": true,
+    "name": "thinkpad",
+    "slug": "thinkpad",
+    "formatted_name": "thinkpad"
+  }
+},
+{
+  "model": "catalog.tag",
+  "pk": 4,
+  "fields": {
+    "is_published": true,
+    "name": "твердая обложка",
+    "slug": "hardcover",
+    "formatted_name": "твердаяобложка"
+  }
+},
+{
+  "model": "catalog.tag",
+  "pk": 5,
+  "fields": {
+    "is_published": true,
+    "name": "мягкая обложка",
+    "slug": "paperback",
+    "formatted_name": "мягкаяобложка"
+  }
+},
+{
+  "model": "catalog.tag",
+  "pk": 6,
+  "fields": {
+    "is_published": true,
+    "name": "программирование",
+    "slug": "programming",
+    "formatted_name": "программирование"
   }
 }
 ]

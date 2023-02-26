@@ -30,6 +30,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # installed apps
     'debug_toolbar',
+    'django_cleanup.apps.CleanupConfig',
+    'sorl.thumbnail',
     # created apps
     'about.apps.AboutConfig',
     'catalog.apps.CatalogConfig',
@@ -116,3 +118,6 @@ STATICFILES_DIRS = [
 ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
