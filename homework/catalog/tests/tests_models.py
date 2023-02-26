@@ -33,7 +33,7 @@ class ModelsTests(TestCase):
             name='Тестовый товар',
             category=self.category,
             text='слово слово роскошно',
-            main_image='1',
+            image='1',
         )
         self.item.full_clean()
         self.item.save()
@@ -55,7 +55,7 @@ class ModelsTests(TestCase):
                 name=case,
                 category=self.category,
                 text=case,
-                main_image='1',
+                image='1',
             )
             self.item.full_clean()
             self.item.save()
