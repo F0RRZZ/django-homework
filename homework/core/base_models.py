@@ -1,7 +1,7 @@
-import string
-
 import django.core.validators
 import django.db.models
+
+import core.tools
 
 
 class PublishedWithNameBaseModel(django.db.models.Model):
@@ -41,17 +41,11 @@ class SaveAndCleanModifiedBaseMethod(django.db.models.Model):
         abstract = True
 
     def save(self, *args, **kwargs):
-        formatted_name = self.name.lower()
-        for symbol in string.punctuation:
-            formatted_name = formatted_name.replace(symbol, '')
-        self.formatted_name = formatted_name.replace(' ', '')
+        self.formatted_name = core.tools.name_formatter(self.name)
         super().save(*args, **kwargs)
 
     def clean(self):
-        formatted_name = self.name.lower()
-        for symbol in string.punctuation:
-            formatted_name = formatted_name.replace(symbol, '')
-        formatted_name = formatted_name.replace(' ', '')
+        formatted_name = core.tools.name_formatter(self.name)
         if self.__class__.objects.filter(
             formatted_name=formatted_name
         ).exists():
