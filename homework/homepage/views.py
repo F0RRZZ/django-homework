@@ -3,12 +3,12 @@ from http import HTTPStatus
 from django.http import HttpResponse
 from django.shortcuts import render
 
-homepage_title = 'Главная'
+store_name = 'Some store'
 
 
 def home(request):
     template = 'homepage/homepage.html'
-    context = {}
+    context = {'store_name': store_name}
     return render(request, template, context)
 
 

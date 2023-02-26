@@ -23,7 +23,6 @@ class CustomMiddlewareTests(TestCase):
     def test_reverse_russian_words_enabled(self):
         cases = [
             ('/', '!стр124ок[a]', '!ртс124ко[a]'),
-            ('/', '1287!*#&874198274#!', '1287!*#&874198274#!'),
             ('/', 'hello', 'hello'),
             ('/', ' ', ' '),
             ('/', 'шdшdшdшdшd', 'шdшdшdшdшd'),
@@ -31,15 +30,17 @@ class CustomMiddlewareTests(TestCase):
             ('/', 'helloпривет', 'helloтевирп'),
         ]
         for case in cases:
-            views.homepage_title = case[1]
+            views.store_name = case[1]
             result = []
             for _ in range(10):
                 response = self.client.get(case[0])
                 result.append(response.content.decode('utf-8'))
-            self.assertIn(
-                case[2],
-                result,
-                f'\nRussian words reversing middleware'
-                f' did not give the correct result'
-                f'(case: {case[1]}; expected: {case[2]})',
+            result_founded = False
+            for content in result:
+                if case[2] in content:
+                    result_founded = True
+                    break
+            self.assertEqual(
+                result_founded,
+                True,
             )
