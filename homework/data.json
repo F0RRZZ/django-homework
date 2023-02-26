@@ -29,6 +29,7 @@
     "name": "Ноутбук Lenovo ThinkPad X1 Titanium Yoga Gen 1",
     "category": 1,
     "text": "Ноутбук роскошно",
+    "main_image": "catalog/cat.jpg",
     "tags": [
       2,
       3
@@ -43,6 +44,7 @@
     "name": "16.2\" Ноутбук Apple MacBook Pro",
     "category": 1,
     "text": "Превосходно",
+    "main_image": "",
     "tags": [
       1
     ]
@@ -56,6 +58,7 @@
     "name": "Чистый код. Мартин Роберт К.",
     "category": 3,
     "text": "Превосходно",
+    "main_image": "",
     "tags": [
       5,
       6
@@ -70,6 +73,7 @@
     "name": "1984 | Оруэлл Джордж",
     "category": 3,
     "text": "Превосходно",
+    "main_image": "",
     "tags": [
       4
     ]
@@ -83,6 +87,7 @@
     "name": "Смартфон Apple iPhone 14 Pro",
     "category": 1,
     "text": "Превосходно (нет)",
+    "main_image": "",
     "tags": [
       1
     ]

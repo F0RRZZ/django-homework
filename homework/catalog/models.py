@@ -1,6 +1,8 @@
 import django.core.exceptions
 import django.core.validators
 import django.db.models
+from django.utils.safestring import mark_safe
+from sorl.thumbnail import get_thumbnail
 
 import catalog.validators
 import core.base_models
@@ -73,6 +75,12 @@ class Item(core.base_models.PublishedWithNameBaseModel):
         ],
     )
 
+    main_image = django.db.models.ImageField(
+        'Будет приведено к ширине 300x300',
+        upload_to='catalog/',
+        null=True,
+    )
+
     class Meta:
         default_related_name = 'items'
         verbose_name = 'товар'
@@ -81,15 +89,21 @@ class Item(core.base_models.PublishedWithNameBaseModel):
     def __str__(self):
         return self.text[:15]
 
+    def get_image(self):
+        return get_thumbnail(
+            self.image,
+            '300x300',
+            crop='center',
+            quality=51,
+        )
 
-class MainImage(core.base_models.ImageBaseModel):
-    item = django.db.models.OneToOneField(
-        Item,
-        on_delete=django.db.models.CASCADE,
-    )
+    def image_thumbnail(self):
+        if self.main_image:
+            return mark_safe(f'<img src="{self.main_image.url}" width="50">')
+        return 'Нет изображения'
 
-    class Meta:
-        verbose_name = 'главное фото'
+    image_thumbnail.short_description = 'превью'
+    image_thumbnail.allow_tags = True
 
 
 class Tag(

@@ -1,6 +1,5 @@
 import django.core.validators
 import django.db.models
-from django.utils.safestring import mark_safe
 from sorl.thumbnail import get_thumbnail
 
 import core.tools
@@ -74,13 +73,3 @@ class ImageBaseModel(django.db.models.Model):
             crop='center',
             quality=51,
         )
-
-    def image_thumbnail(self):
-        if self.image:
-            return mark_safe(
-                f'<img src="{self.image.url}" width="50">'
-            )
-        return 'Нет изображения'
-
-    image_thumbnail.short_description = 'превью'
-    image.allow_tags = True
