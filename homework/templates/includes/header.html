@@ -1,27 +1,18 @@
 <header>
   {% load static %}
-  <nav class="navbar navbar-dark bg-dark" aria-label="First navbar example">
-      <div class="container-fluid">
-        <div>
-          <a href="{% url 'index:index' %}"><img src="{% static 'img/logo/logo.png' %}" width="30" alt="logo"></a>
-          <a class="navbar-brand" href="{% url 'index:index' %}" data-toggle="false">Some store</a>
-        </div>
-        <button class="navbar-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse collapse" id="navbarsExample01" style="">
-          <ul class="navbar-nav me-auto mb-2">
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'index:index' %}">На главную</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'catalog:item-list' %}">Список товаров</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="{% url 'about:description' %}">О проекте</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+  <div class="container">
+    <li class="nav-item">
+      <a href="{% url 'index:index' %}" style="text-align: center; display:block;" class="nav-link tab">
+        <img src="{% static 'img/logo/logo.png' %}" width="50">
+      </a>
+    </li>
+    <header class="d-flex justify-content-center py-3">
+      <ul class="nav nav-pills">
+        <li class="nav-item"><a href="{% url 'index:index' %}" class="nav-link tab" data-toggle="tab">На главную</a></li>
+        <li class="nav-item"><a href="{% url 'catalog:item-list' %}" class="nav-link tab" data-toggle="tab">Список товаров</a></li>
+        <li class="nav-item"><a href="{% url 'about:description' %}" class="nav-link tab" data-toggle="tab">О проекте</a></li>
+      </ul>
+    </header>
+  </div>
+  <script src="{% static 'js/homepage_link_activate.js' %}"></script>
 </header>
