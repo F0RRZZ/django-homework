@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css">
     <link rel="icon" href="{% static 'favicon/fav.ico' %}">
-
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
     {% block title %}{% endblock %}
   </head>
   <body>
@@ -17,4 +15,5 @@
     </main>
     {% include 'includes/footer.html' %}
   </body>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
 </html>
