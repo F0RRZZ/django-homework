@@ -8,37 +8,39 @@
 
 {% block content %}
 <h1 class="display-5 fw-bold" style="padding-left: 20px;">Some store</h1>
-<div style="display: flex; flex-direction: row; justify-content: space-around;">
-  <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="{% static 'img/dummy_image.png' %}"  alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title 1</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="{% url 'catalog:item-detail' 1%}" class="btn btn-primary">Go somewhere</a>
+<div class="container-fluid px-5">
+  <div class="row gx-3">
+    <div class="m-3 card col-12 col-md-6 col-xl-3" style="width: 18rem;">
+      <img class="card-img-top" src="{% static 'img/dummy_image.png' %}"  alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Card title 1</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="{% url 'catalog:item-detail' 1%}" class="btn btn-primary">Go somewhere</a>
+      </div>
     </div>
-  </div>
-  <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="{% static 'img/dummy_image.png' %}"  alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="{% url 'catalog:item-detail' 2%}" class="btn btn-primary">Go somewhere</a>
+    <div class="m-3 card col-12 col-md-6 col-xl-3" style="width: 18rem;">
+      <img class="card-img-top" src="{% static 'img/dummy_image.png' %}"  alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="{% url 'catalog:item-detail' 2%}" class="btn btn-primary">Go somewhere</a>
+      </div>
     </div>
-  </div>
-  <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="{% static 'img/dummy_image.png' %}"  alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title 3</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="{% url 'catalog:item-detail' 3%}" class="btn btn-primary">Go somewhere</a>
+    <div class="m-3 card col-12 col-md-6 col-xl-3" style="width: 18rem;">
+      <img class="card-img-top" src="{% static 'img/dummy_image.png' %}"  alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Card title 3</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="{% url 'catalog:item-detail' 3%}" class="btn btn-primary">Go somewhere</a>
+      </div>
     </div>
-  </div>
-  <div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="{% static 'img/dummy_image.png' %}"  alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">Card title 4</h5>
-      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-      <a href="{% url 'catalog:item-detail' 4%}" class="btn btn-primary">Go somewhere</a>
+    <div class="m-3 card col-12 col-md-6 col-xl-3" style="width: 18rem;">
+      <img class="card-img-top" src="{% static 'img/dummy_image.png' %}"  alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title">Card title 4</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a href="{% url 'catalog:item-detail' 4%}" class="btn btn-primary">Go somewhere</a>
+      </div>
     </div>
   </div>
 </div>
