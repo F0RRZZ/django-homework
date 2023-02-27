@@ -1,11 +1,9 @@
 <header>
   {% load static %}
   <div class="container">
-    <li class="nav-item">
-      <a href="{% url 'index:index' %}" style="text-align: center; display:block;" class="nav-link tab">
-        <img src="{% static 'img/logo/logo.png' %}" width="50">
-      </a>
-    </li>
+    <a href="{% url 'index:index' %}" style="text-align: center; display:block;" class="nav-link tab">
+      <img src="{% static 'img/logo/logo.png' %}" width="50">
+    </a>
     <header class="d-flex justify-content-center py-3">
       <ul class="nav nav-pills">
         <li class="nav-item"><a href="{% url 'index:index' %}" class="nav-link tab" data-toggle="tab">На главную</a></li>
