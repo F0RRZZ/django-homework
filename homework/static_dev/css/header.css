@@ -1,0 +1,8 @@
+.change-lang {
+    padding: 8px;
+    border: 1px solid #2f60fc;
+    border-radius: 5px;
+    color: white;
+    background-color: #2f60fc;
+    transition: 0.5ms;
+}
