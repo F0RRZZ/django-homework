@@ -1,0 +1,25 @@
+img {
+  animation-name: Appearance;
+  animation-duration: 1s;
+  animation-timing-function: cubic-bezier(.1,-.6,.2,0);
+}
+
+@-webkit-keyframes Appearance {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@-o-keyframes Appearance {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@-moz-keyframes Appearance {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+@keyframes Appearance {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
