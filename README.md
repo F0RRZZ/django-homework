@@ -172,7 +172,7 @@ python3 manage.py createsuperuser
 Для этого вам нужно скопировать db_example.splite3
 
 ```shell
-cp db_example.splite3 db.sqlite3
+cp db_example.sqlite3 db.sqlite3
 ```
 
 В базе данных присутствует тестовый суперпользователь
