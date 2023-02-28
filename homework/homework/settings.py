@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # installed apps
+    'ckeditor',
     'debug_toolbar',
     'django_cleanup.apps.CleanupConfig',
     'sorl.thumbnail',

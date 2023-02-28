@@ -1,3 +1,4 @@
+from ckeditor.fields import RichTextField
 import django.core.exceptions
 import django.core.validators
 import django.db.models
@@ -64,8 +65,10 @@ class Item(
         related_name='tags',
         related_query_name='tag',
     )
-    text = django.db.models.TextField(
-        'описание',
+    text = RichTextField(
+        verbose_name='описание',
+        blank=True,
+        null=True,
         help_text=(
             'Описание должно содержать слова "превосходно" или "роскошно"'
         ),
