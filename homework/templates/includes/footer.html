@@ -4,7 +4,46 @@
       <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
         <div class="col-md-4 d-flex align-items-center">
           <script>
-            document.write("Copyright &copy; "+ new Date().getFullYear()+ ". All rights reserved.");
+            var xmlHttp;
+            function getServerTime(){
+                try {
+                    xmlHttp = new XMLHttpRequest();
+                }
+                catch (err1) {
+                    try {
+                        xmlHttp = new ActiveXObject('Msxml2.XMLHTTP');
+                    }
+                    catch (err2) {
+                        try {
+                            xmlHttp = new ActiveXObject('Microsoft.XMLHTTP');
+                        }
+                        catch (eerr3) {
+                            alert("AJAX not supported");
+                        }
+                    }
+                }
+                xmlHttp.open('HEAD',window.location.href.toString(),false);
+                xmlHttp.setRequestHeader("Content-Type", "text/html");
+                xmlHttp.send('');
+                return xmlHttp.getResponseHeader("Date");
+            }
+
+            let serverTime = new Date(getServerTime());
+
+            let currentDate = new Date();
+
+            let difference = currentDate.getTime() - serverTime.getTime();
+
+            let delta = Math.abs(difference / (1000 * 60 * 60 * 24));
+
+            let year = null;
+
+            if (delta < 24) {
+                year = currentDate.getFullYear();
+            } else {
+                year = serverTime.getFullYear();
+            }
+            document.write("Copyright &copy; " + year + ". All rights reserved.");
           </script>
         </div>
 
