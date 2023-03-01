@@ -54,22 +54,3 @@ class SaveAndCleanModifiedBaseMethod(django.db.models.Model):
                 'Название должно быть уникальным.'
             )
         return self.name
-
-
-class ImageBaseModel(django.db.models.Model):
-    image = django.db.models.ImageField(
-        'Будет приведено к ширине 300x300',
-        upload_to='catalog/',
-        null=True,
-    )
-
-    class Meta:
-        abstract = True
-
-    def get_image(self):
-        return get_thumbnail(
-            self.image,
-            '300x300',
-            crop='center',
-            quality=51,
-        )

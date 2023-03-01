@@ -1,7 +1,7 @@
 [
 {
   "model": "catalog.category",
-  "pk": 1,
+  "pk": 2,
   "fields": {
     "is_published": true,
     "name": "Техника",
@@ -23,30 +23,14 @@
 },
 {
   "model": "catalog.item",
-  "pk": 1,
-  "fields": {
-    "is_published": true,
-    "name": "Ноутбук Lenovo ThinkPad X1 Titanium Yoga Gen 1",
-    "image": "catalog/profile_img.jpg",
-    "category": 1,
-    "text": "Ноутбук роскошно",
-    "tags": [
-      2,
-      3
-    ]
-  }
-},
-{
-  "model": "catalog.item",
   "pk": 2,
   "fields": {
     "is_published": true,
-    "name": "16.2\" Ноутбук Apple MacBook Pro",
-    "image": "",
-    "category": 1,
-    "text": "Превосходно",
+    "name": "Ноутбук Lenovo ThinkPad X1 Titanium Yoga Gen 1",
+    "category": 2,
+    "text": "<p>превосходно</p>",
     "tags": [
-      1
+      4
     ]
   }
 },
@@ -55,13 +39,11 @@
   "pk": 3,
   "fields": {
     "is_published": true,
-    "name": "Чистый код. Мартин Роберт К.",
-    "image": "",
-    "category": 3,
-    "text": "Превосходно",
+    "name": "16.2\" Ноутбук Apple MacBook Pro",
+    "category": 2,
+    "text": "<p>превосходно</p>",
     "tags": [
-      5,
-      6
+      2
     ]
   }
 },
@@ -70,12 +52,12 @@
   "pk": 4,
   "fields": {
     "is_published": true,
-    "name": "1984 | Оруэлл Джордж",
-    "image": "",
+    "name": "Чистый код. Мартин Роберт К.",
     "category": 3,
-    "text": "Превосходно",
+    "text": "<p>превосходно</p>",
     "tags": [
-      4
+      6,
+      7
     ]
   }
 },
@@ -84,18 +66,70 @@
   "pk": 5,
   "fields": {
     "is_published": true,
-    "name": "Смартфон Apple iPhone 14 Pro",
-    "image": "",
-    "category": 1,
-    "text": "Превосходно (нет)",
+    "name": "1984 | Оруэлл Джордж",
+    "category": 3,
+    "text": "<p>превосходно</p>",
     "tags": [
-      1
+      5
     ]
   }
 },
 {
+  "model": "catalog.item",
+  "pk": 6,
+  "fields": {
+    "is_published": true,
+    "name": "Смартфон Apple iPhone 14 Pro",
+    "category": 2,
+    "text": "<p>превосходно</p>",
+    "tags": [
+      2
+    ]
+  }
+},
+{
+  "model": "catalog.mainimage",
+  "pk": 2,
+  "fields": {
+    "item": 2,
+    "image": "catalog/thinkpad_x1.jpeg"
+  }
+},
+{
+  "model": "catalog.mainimage",
+  "pk": 3,
+  "fields": {
+    "item": 3,
+    "image": "catalog/apple_macbook_pro.png"
+  }
+},
+{
+  "model": "catalog.mainimage",
+  "pk": 4,
+  "fields": {
+    "item": 4,
+    "image": "catalog/clean_code.jpg"
+  }
+},
+{
+  "model": "catalog.mainimage",
+  "pk": 5,
+  "fields": {
+    "item": 5,
+    "image": "catalog/1984.jpg"
+  }
+},
+{
+  "model": "catalog.mainimage",
+  "pk": 6,
+  "fields": {
+    "item": 6,
+    "image": "catalog/iphone_14_pro.jpg"
+  }
+},
+{
   "model": "catalog.tag",
-  "pk": 1,
+  "pk": 2,
   "fields": {
     "is_published": true,
     "name": "apple",
@@ -105,7 +139,7 @@
 },
 {
   "model": "catalog.tag",
-  "pk": 2,
+  "pk": 3,
   "fields": {
     "is_published": true,
     "name": "lenovo",
@@ -115,7 +149,7 @@
 },
 {
   "model": "catalog.tag",
-  "pk": 3,
+  "pk": 4,
   "fields": {
     "is_published": true,
     "name": "thinkpad",
@@ -125,7 +159,7 @@
 },
 {
   "model": "catalog.tag",
-  "pk": 4,
+  "pk": 5,
   "fields": {
     "is_published": true,
     "name": "твердая обложка",
@@ -135,7 +169,7 @@
 },
 {
   "model": "catalog.tag",
-  "pk": 5,
+  "pk": 6,
   "fields": {
     "is_published": true,
     "name": "мягкая обложка",
@@ -145,7 +179,7 @@
 },
 {
   "model": "catalog.tag",
-  "pk": 6,
+  "pk": 7,
   "fields": {
     "is_published": true,
     "name": "программирование",

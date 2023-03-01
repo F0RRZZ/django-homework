@@ -1,8 +1,9 @@
-from ckeditor.fields import RichTextField
+import ckeditor.fields
 import django.core.exceptions
 import django.core.validators
 import django.db.models
 from django.utils.safestring import mark_safe
+from sorl.thumbnail import get_thumbnail
 
 import catalog.validators
 import core.base_models
@@ -37,21 +38,32 @@ class Category(
         verbose_name_plural = 'категории'
 
 
-class GalleryImage(core.base_models.ImageBaseModel):
+class GalleryImage(django.db.models.Model):
     item = django.db.models.ForeignKey(
         'Item',
         on_delete=django.db.models.CASCADE,
+    )
+
+    image = django.db.models.ImageField(
+        'Галерея',
+        upload_to='catalog/',
+        null=True,
     )
 
     class Meta:
         verbose_name = 'дополнительное фото'
         verbose_name_plural = 'дополнительные фото'
 
+    def get_image(self):
+        return get_thumbnail(
+            self.image,
+            '300x300',
+            crop='center',
+            quality=51,
+        )
 
-class Item(
-    core.base_models.PublishedWithNameBaseModel,
-    core.base_models.ImageBaseModel,
-):
+
+class Item(core.base_models.PublishedWithNameBaseModel):
     category = django.db.models.ForeignKey(
         Category,
         on_delete=django.db.models.CASCADE,
@@ -60,12 +72,14 @@ class Item(
         related_query_name='item',
         null=True,
     )
+
     tags = django.db.models.ManyToManyField(
         'tag',
         related_name='tags',
         related_query_name='tag',
     )
-    text = RichTextField(
+
+    text = ckeditor.fields.RichTextField(
         verbose_name='описание',
         blank=True,
         null=True,
@@ -88,6 +102,28 @@ class Item(
     def __str__(self):
         return self.text[:15]
 
+
+class MainImage(django.db.models.Model):
+    item = django.db.models.OneToOneField(
+        Item,
+        on_delete=django.db.models.CASCADE,
+        null=True,
+    )
+
+    image = django.db.models.ImageField(
+        'Главное изображение',
+        upload_to='catalog/',
+        null=True,
+    )
+
+    def get_image(self):
+        return get_thumbnail(
+            self.image,
+            '300x300',
+            crop='center',
+            quality=51,
+        )
+
     def image_thumbnail(self):
         if self.image:
             return mark_safe(f'<img src="{self.image.url}" width="50">')
@@ -95,6 +131,10 @@ class Item(
 
     image_thumbnail.short_description = 'превью'
     image_thumbnail.allow_tags = True
+
+    class Meta:
+        default_related_name = 'main_image'
+        verbose_name = 'главное изображение'
 
 
 class Tag(
