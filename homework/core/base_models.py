@@ -1,6 +1,5 @@
 import django.core.validators
 import django.db.models
-from sorl.thumbnail import get_thumbnail
 
 import core.tools
 
