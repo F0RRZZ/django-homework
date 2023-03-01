@@ -16,11 +16,14 @@ const langArr = {
 const allLang = ['en', 'ru']
 const select = document.querySelector('select');
 
+let currentLang = localStorage.getItem('language') || 'ru';
+
 select.addEventListener('change', changeURLLanguage);
 
 function changeURLLanguage() {
-    let language = select.value;
-    location.href = window.location.pathname + '#' + language;
+    currentLang = select.value;
+    localStorage.setItem('language', currentLang);
+    location.href = window.location.pathname + '#' + currentLang;
     location.reload();
 }
 
@@ -28,13 +31,13 @@ function changeLanguage() {
     let hash = window.location.hash;
     hash = hash.substr(1);
     if (!allLang.includes(hash)) {
-        location.href = window.location.pathname + '#ru';
+        location.href = window.location.pathname + '#' + currentLang;
         location.reload();
     }
     select.value = hash;
-    document.querySelector('.lng-home').innerHTML = langArr['home'][hash];
-    document.querySelector('.lng-catalog').innerHTML = langArr['catalog'][hash];
-    document.querySelector('.lng-about').innerHTML = langArr['about'][hash];
+    for (let key in langArr) {
+        document.querySelector('.lng-' + key).innerHTML = langArr[key][hash];
+    }
 }
 
 changeLanguage();
