@@ -1,57 +1,55 @@
 {% load static %}
-<footer>
-    <div class="container">
-      <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <div class="col-md-4 d-flex align-items-center">
-          <script>
-            var xmlHttp;
-            function getServerTime(){
-                try {
-                    xmlHttp = new XMLHttpRequest();
-                }
-                catch (err1) {
-                    try {
-                        xmlHttp = new ActiveXObject('Msxml2.XMLHTTP');
-                    }
-                    catch (err2) {
-                        try {
-                            xmlHttp = new ActiveXObject('Microsoft.XMLHTTP');
-                        }
-                        catch (eerr3) {
-                            alert("AJAX not supported");
-                        }
-                    }
-                }
-                xmlHttp.open('HEAD',window.location.href.toString(),false);
-                xmlHttp.setRequestHeader("Content-Type", "text/html");
-                xmlHttp.send('');
-                return xmlHttp.getResponseHeader("Date");
-            }
+  <div class="container">
+    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+      <div class="col-md-4 d-flex align-items-center">
+        <script>
+          var xmlHttp;
+          function getServerTime(){
+              try {
+                  xmlHttp = new XMLHttpRequest();
+              }
+              catch (err1) {
+                  try {
+                      xmlHttp = new ActiveXObject('Msxml2.XMLHTTP');
+                  }
+                  catch (err2) {
+                      try {
+                          xmlHttp = new ActiveXObject('Microsoft.XMLHTTP');
+                      }
+                      catch (eerr3) {
+                          alert("AJAX not supported");
+                      }
+                  }
+              }
+              xmlHttp.open('HEAD',window.location.href.toString(),false);
+              xmlHttp.setRequestHeader("Content-Type", "text/html");
+              xmlHttp.send('');
+              return xmlHttp.getResponseHeader("Date");
+          }
 
-            let serverTime = new Date(getServerTime());
+          let serverTime = new Date(getServerTime());
 
-            let currentDate = new Date();
+          let currentDate = new Date();
 
-            let difference = currentDate.getTime() - serverTime.getTime();
+          let difference = currentDate.getTime() - serverTime.getTime();
 
-            let delta = Math.abs(difference / (1000 * 60 * 60 * 24));
+          let delta = Math.abs(difference / (1000 * 60 * 60 * 24));
 
-            let year = null;
+          let year = null;
 
-            if (delta < 24) {
-                year = currentDate.getFullYear();
-            } else {
-                year = serverTime.getFullYear();
-            }
-            document.write("Copyright &copy; " + year + ". All rights reserved.");
-          </script>
-        </div>
+          if (delta < 24) {
+              year = currentDate.getFullYear();
+          } else {
+              year = serverTime.getFullYear();
+          }
+          document.write("Copyright &copy; " + year + ". All rights reserved.");
+        </script>
+      </div>
 
-        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-          <li class="ms-3"><a class="text-muted" href="#"><img src="{% static 'img/footer/twitter.svg' %}" alt="twitter"></a></li>
-          <li class="ms-3"><a class="text-muted" href="#"><img src="{% static 'img/footer/instagram.svg' %}" alt="instagram"></a></li>
-          <li class="ms-3"><a class="text-muted" href="#"><img src="{% static 'img/footer/facebook.svg' %}" alt="facebook"></a></li>
-        </ul>
-      </footer>
-    </div>
-</footer>
+      <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+        <li class="ms-3"><a class="text-muted" href="#"><img src="{% static 'img/footer/twitter.svg' %}" alt="twitter"></a></li>
+        <li class="ms-3"><a class="text-muted" href="#"><img src="{% static 'img/footer/instagram.svg' %}" alt="instagram"></a></li>
+        <li class="ms-3"><a class="text-muted" href="#"><img src="{% static 'img/footer/facebook.svg' %}" alt="facebook"></a></li>
+      </ul>
+    </footer>
+  </div>
