@@ -1,25 +1,60 @@
 from http import HTTPStatus
 
 from django.test import Client, TestCase
+import django.urls
 
 import catalog.models
 
 
 class CatalogPageTests(TestCase):
     def setUp(self) -> None:
-        category = catalog.models.Category.objects.create(
-            name='category',
-            slug='category',
+        published_category = catalog.models.Category.objects.create(
+            name='published_category',
+            slug='published_category',
         )
-        catalog.models.Tag.objects.create(
-            name='tag',
-            slug='tag',
+        unpublished_category = catalog.models.Category.objects.create(
+            name='unpublished_category',
+            slug='unpublished_category',
+            is_published=False,
         )
-        catalog.models.Item.objects.create(
-            name='item',
+        published_tag = catalog.models.Tag.objects.create(
+            name='published_tag',
+            slug='published_tag',
+        )
+        unpublished_tag = catalog.models.Tag.objects.create(
+            name='unpublished_tag',
+            slug='unpublished_tag',
+            is_published=False,
+        )
+        published_item_on_main = catalog.models.Item.objects.create(
+            name='published_item_on_main',
             text='роскошно',
-            category=category,
+            category=published_category,
+            is_on_main=True,
         )
+        published_item_not_on_main = catalog.models.Item.objects.create(
+            name='published_item_not_on_main',
+            text='роскошно',
+            category=published_category,
+        )
+        unpublished_item = catalog.models.Item.objects.create(
+            name='unpublished_item',
+            text='роскошно',
+            category=unpublished_category,
+        )
+
+        published_category.save()
+        unpublished_category.save()
+
+        published_tag.save()
+        unpublished_tag.save()
+
+        published_item_on_main.clean()
+        published_item_on_main.save()
+        published_item_not_on_main.clean()
+        published_item_not_on_main.save()
+        unpublished_item.clean()
+        unpublished_item.save()
 
     def test_catalog_endpoint(self):
         response = Client().get('/catalog/')
@@ -59,3 +94,25 @@ class CatalogPageTests(TestCase):
                 self.assertEqual(
                     response.status_code, case[1], f'(URL: {test_url})'
                 )
+
+    def test_home_page_show_correct_context(self):
+        response = Client().get(
+            django.urls.reverse('homepage:index')
+        )
+        self.assertIn('items', response.context)
+
+    def test_home_count_item(self):
+        response = Client().get(
+            django.urls.reverse('homepage:index')
+        )
+        items = response.context['items']
+        self.assertEqual(items.count(), 1)
+
+    def test_catalog_show_correct_context(self):
+        response = Client().get('/catalog/')
+        self.assertIn('items', response.context)
+
+    def test_catalog_count_item(self):
+        response = Client().get('/catalog/')
+        items = response.context['items']
+        self.assertEqual(items.count(), 2)
