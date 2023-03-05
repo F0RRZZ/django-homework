@@ -29,6 +29,7 @@ class ItemAdmin(admin.ModelAdmin):
         MainImageInline,
         GalleryImageInline,
     ]
+    readonly_fields = ('get_image',)
     filter_horizontal = ('tags',)
     list_display = (
         catalog.models.Item.name.field.name,
@@ -38,7 +39,7 @@ class ItemAdmin(admin.ModelAdmin):
     list_editable = (catalog.models.Item.is_published.field.name,)
     list_display_links = (catalog.models.Item.name.field.name,)
 
-    @admin.display(ordering='main_image', description='Главное фото')
+    @admin.display(ordering='main_image', description='Главное изображение')
     def get_image(self, obj):
         return obj.main_image.image_thumbnail()
 
