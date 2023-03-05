@@ -96,15 +96,11 @@ class CatalogPageTests(TestCase):
                 )
 
     def test_home_page_show_correct_context(self):
-        response = Client().get(
-            django.urls.reverse('homepage:index')
-        )
+        response = Client().get(django.urls.reverse('homepage:index'))
         self.assertIn('items', response.context)
 
     def test_home_count_item(self):
-        response = Client().get(
-            django.urls.reverse('homepage:index')
-        )
+        response = Client().get(django.urls.reverse('homepage:index'))
         items = response.context['items']
         self.assertEqual(items.count(), 1)
 
