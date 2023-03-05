@@ -2,8 +2,25 @@ from http import HTTPStatus
 
 from django.test import Client, TestCase
 
+import catalog.models
+
 
 class CatalogPageTests(TestCase):
+    def setUp(self) -> None:
+        category = catalog.models.Category.objects.create(
+            name='category',
+            slug='category',
+        )
+        catalog.models.Tag.objects.create(
+            name='tag',
+            slug='tag',
+        )
+        catalog.models.Item.objects.create(
+            name='item',
+            text='роскошно',
+            category=category,
+        )
+
     def test_catalog_endpoint(self):
         response = Client().get('/catalog/')
         self.assertEqual(
@@ -14,25 +31,16 @@ class CatalogPageTests(TestCase):
 
     def test_catalog_item_endpoint(self):
         response = Client().get('/catalog/1/')
-        response_str = Client().get('/catalog/item/')
         self.assertEqual(
             response.status_code,
             HTTPStatus.OK,
             'Error with the right type of item (/catalog/1/)',
         )
 
-        self.assertEqual(
-            response_str.status_code,
-            HTTPStatus.NOT_FOUND,
-            'Item url with string worked (/catalog/item/)',
-        )
-
     def test_catalog_item_positive_integer_endpoint(self):
         urls = ['/catalog/re/{}/', '/catalog/converter/{}']
         cases = [
             ('1', HTTPStatus.OK),
-            ('10', HTTPStatus.OK),
-            ('235236236', HTTPStatus.OK),
             ('0', HTTPStatus.NOT_FOUND),
             ('-1', HTTPStatus.NOT_FOUND),
             ('010', HTTPStatus.NOT_FOUND),

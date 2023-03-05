@@ -5,5 +5,27 @@
 {% endblock %}
 
 {% block content %}
-<h1>Описание товара {{ item_num }} </h1>
+<div style="margin-left: 20px;">
+  <h1> {{ item.name }} </h1>
+  <img src="{{ MEDIA_URL }}{{ item.main_image.image }}" width="500" alt="item">
+  <hr>
+  <div width="30%">
+    <p>Описание: {{ item.text|safe }}</p>
+  </div>
+  <hr>
+  <p>Категория: {{ item.category.name }}</p>
+  <hr>
+  <div width="30%">
+    <p>Теги</p>
+    {% for tag in item.tags.all %}
+      <span class="badge rounded-pill text-bg-primary">{{ tag.name }}</span>
+    {% endfor %}
+  </div>
+  <hr>
+  <div width="30%">
+    {% for gal_image in item.galleryimage_set.all %}
+      <img src="{{ MEDIA_URL }}{{ gal_image.image }}" width="300">
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}

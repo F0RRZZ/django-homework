@@ -5,6 +5,7 @@ import django.db.models
 from django.utils.safestring import mark_safe
 from sorl.thumbnail import get_thumbnail
 
+import catalog.managers
 import catalog.validators
 import core.base_models
 
@@ -64,6 +65,8 @@ class GalleryImage(django.db.models.Model):
 
 
 class Item(core.base_models.PublishedWithNameBaseModel):
+    objects = catalog.managers.ItemManager()
+
     category = django.db.models.ForeignKey(
         Category,
         on_delete=django.db.models.CASCADE,
@@ -92,6 +95,10 @@ class Item(core.base_models.PublishedWithNameBaseModel):
                 'превосходно',
             ),
         ],
+    )
+    is_on_main = django.db.models.BooleanField(
+        'на главной',
+        default=False,
     )
 
     class Meta:

@@ -1,15 +1,22 @@
 from http import HTTPStatus
 
 from django.http import HttpResponse
-from django.shortcuts import render
+
+import django.shortcuts
+
+import catalog.models
 
 store_name = 'Some store'
 
 
 def home(request):
     template = 'homepage/homepage.html'
-    context = {'store_name': store_name}
-    return render(request, template, context)
+    items = catalog.models.Item.objects.on_main()
+    context = {
+        'store_name': store_name,
+        'items': items,
+    }
+    return django.shortcuts.render(request, template, context)
 
 
 def teapot_status_page(request):

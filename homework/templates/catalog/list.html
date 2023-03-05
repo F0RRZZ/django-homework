@@ -7,31 +7,5 @@
 {% endblock %}
 
 {% block content %}
-<h1 class="display-5 fw-bold" style="padding-left: 20px;">Some store</h1>
-<div class="container-fluid px-5 mx-auto">
-  <div class="row gx-3">
-    <div class="m-3 card col-12 col-md-6 col-xl-3" style="width: 18rem;">
-      <img class="card-img-top" src="{% static 'img/thinkpad_x1.jpeg' %}"  alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Thinkpad X1</h5>
-        <p class="card-text">Непревзойденное качество. Продуманная конструкция.
-          Инновационные устройства «2-в-1». Отмеченная наградами клавиатура.
-          Надежная система безопасности. Высочайшая производительность.
-          Впечатляющее время работы от аккумулятора.
-          Поддержка международного стандарта связи LTE-A. Wi-Fi 6.</p>
-        <a href="{% url 'catalog:item-detail' 1%}" class="btn btn-primary">Перейти к товару</a>
-      </div>
-    </div>
-    <div class="m-3 card col-12 col-md-6 col-xl-3" style="width: 18rem;">
-      <img class="card-img-top" src="{% static 'img/apple_macbook_pro.png' %}"  alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">MacBook Pro </h5>
-        <p class="card-text">Его легко использовать. Он невероятно мощный.
-          Mac открывает совершенно новые возможности для работы, игр и творчества.
-          На нём предустановлено множество приложений, которыми можно пользоваться без предварительной настройки.</p>
-        <a href="{% url 'catalog:item-detail' 2%}" class="btn btn-primary">Перейти к товару</a>
-      </div>
-    </div>
-  </div>
-</div>
+{% include 'includes/items_list.html' %}
 {% endblock %}
