@@ -2,7 +2,10 @@
 <div class="card">
   <h5 class="card-header">{{ item_name }}</h5>
   <div class="card-body">
-    <h5 class="card-title">Категория: {{ category_name }}</h5>
+    {% if category_name %}
+      <h5 class="card-title">Категория: {{ category_name }}</h5>
+    {% endif %}
+    <h5>Описание:</h5>
     <p class="card-text">{{ item_text|safe|truncatewords:10 }}</p>
     <div class="tags" style="margin-bottom: 5px;">
       {% for tag in item_tags.all %}

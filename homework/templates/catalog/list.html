@@ -8,6 +8,6 @@
 
 {% block content %}
 {% for item in items %}
-  {% include 'includes/item_card.html' with item_name=item.name category_name=item.category.name item_text=item.text item_tags=item.tags item_id=item.id %}
+  {% include 'includes/item_card.html' with item_name=item.name item_text=item.text item_tags=item.tags item_id=item.id %}
 {% endfor %}
 {% endblock %}
