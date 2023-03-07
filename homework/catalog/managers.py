@@ -3,12 +3,24 @@ import django.db.models
 import catalog.models
 
 
+class CategoryManager(django.db.models.Manager):
+    def published(self):
+        return (
+            self.get_queryset()
+            .filter(
+                is_published=True,
+            )
+        )
+
+
 class ItemManager(django.db.models.Manager):
     def on_main(self):
         return (
             self.get_queryset()
             .filter(
-                is_published=True, is_on_main=True, category__is_published=True
+                is_published=True,
+                is_on_main=True,
+                category__is_published=True,
             )
             .select_related(
                 'category',

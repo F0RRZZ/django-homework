@@ -6,9 +6,9 @@ import catalog.models
 
 def item_list(request):
     template = 'catalog/list.html'
-    items = catalog.models.Item.objects.published()
+    categories = catalog.models.Category.objects.published()
     context = {
-        'items': items,
+        'categories': categories,
     }
     return django.shortcuts.render(request, template, context)
 

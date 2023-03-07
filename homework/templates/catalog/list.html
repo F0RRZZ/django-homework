@@ -7,7 +7,11 @@
 {% endblock %}
 
 {% block content %}
-{% for item in items %}
-  {% include 'includes/item_card.html' with item_name=item.name item_text=item.text item_tags=item.tags item_id=item.id %}
+{% for category in categories %}
+  <h1>{{ category.name }}</h1>
+  {% for item in category.items.published %}
+    {% include 'includes/item_card.html' with item_name=item.name item_text=item.text item_tags=item.tags item_id=item.id %}
+  {% endfor %}
+  <hr>
 {% endfor %}
 {% endblock %}

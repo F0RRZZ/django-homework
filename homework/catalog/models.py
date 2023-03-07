@@ -15,6 +15,8 @@ class Category(
     core.base_models.SluggedBaseModel,
     core.base_models.SaveAndCleanModifiedBaseMethod,
 ):
+    objects = catalog.managers.CategoryManager()
+
     formatted_name = django.db.models.CharField(
         'форматированное имя',
         max_length=150,

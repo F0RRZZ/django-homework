@@ -61,13 +61,13 @@ class CatalogViewsTests(TestCase):
     def test_home_count_item(self):
         response = Client().get(django.urls.reverse('homepage:index'))
         items = response.context['items']
-        self.assertEqual(items.count(), 1)
+        self.assertEqual(len(items), 1)
 
     def test_catalog_show_correct_context(self):
         response = Client().get('/catalog/')
-        self.assertIn('items', response.context)
+        self.assertIn('categories', response.context)
 
-    def test_catalog_count_item(self):
+    def test_catalog_count_categories(self):
         response = Client().get('/catalog/')
-        items = response.context['items']
-        self.assertEqual(items.count(), 2)
+        categories = response.context['categories']
+        self.assertEqual(len(categories), 1)
