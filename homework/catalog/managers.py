@@ -5,11 +5,8 @@ import catalog.models
 
 class CategoryManager(django.db.models.Manager):
     def published(self):
-        return (
-            self.get_queryset()
-            .filter(
-                is_published=True,
-            )
+        return self.get_queryset().filter(
+            is_published=True,
         )
 
 
