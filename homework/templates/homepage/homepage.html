@@ -19,6 +19,8 @@
   </div>
 </div>
 {% for item in items %}
-  {% include 'includes/items_list.html' with item_name=item.name category_name=item.category.name item_text=item.text item_tags=item.tags item_id=item.id %}
+{% block category_name %}
+{% endblock %}
+  {% include 'includes/item_card.html' with item_name=item.name category_name=item.category.name item_text=item.text item_tags=item.tags item_id=item.id %}
 {% endfor %}
 {% endblock %}

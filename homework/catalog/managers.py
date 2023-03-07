@@ -60,12 +60,9 @@ class ItemManager(django.db.models.Manager):
         return (
             self.get_queryset()
             .filter(
+                pk=pk,
                 is_published=True,
                 category__is_published=True,
-                pk=pk,
-            )
-            .select_related(
-                'category',
             )
             .prefetch_related(
                 django.db.models.Prefetch(
@@ -76,7 +73,6 @@ class ItemManager(django.db.models.Manager):
                 ),
                 django.db.models.Prefetch(
                     'galleryimage_set',
-                    queryset=catalog.models.GalleryImage.objects.only('image'),
                 ),
             )
             .only(
