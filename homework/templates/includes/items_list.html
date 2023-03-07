@@ -1,20 +1,14 @@
 {% load static %}
-<div class="container-fluid px-5 mx-auto">
-  <div class="row gx-3">
-    {% for item in items %}
-      <div class="card">
-        <h5 class="card-header">{{ item.name }}</h5>
-        <div class="card-body">
-          <h5 class="card-title">Категория: {{ item.category.name }}</h5>
-          <p class="card-text">{{ item.text|safe|truncatewords:10 }}</p>
-          <div class="tags" style="margin-bottom: 5px;">
-            {% for tag in item.tags.all %}
-              <span class="badge rounded-pill text-bg-primary">{{ tag.name }}</span>
-            {% endfor %}
-          </div>
-          <a href="{% url 'catalog:item-detail' item.id %}" class="btn btn-primary">Перейти к описанию</a>
-        </div>
-      </div>
-    {% endfor %}
+<div class="card">
+  <h5 class="card-header">{{ item_name }}</h5>
+  <div class="card-body">
+    <h5 class="card-title">Категория: {{ category_name }}</h5>
+    <p class="card-text">{{ item_text|safe|truncatewords:10 }}</p>
+    <div class="tags" style="margin-bottom: 5px;">
+      {% for tag in item_tags.all %}
+        <span class="badge rounded-pill text-bg-primary">{{ tag }}</span>
+      {% endfor %}
+    </div>
+    <a href="{% url 'catalog:item-detail' item_id %}" class="btn btn-primary">Перейти к описанию</a>
   </div>
 </div>

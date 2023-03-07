@@ -7,5 +7,7 @@
 {% endblock %}
 
 {% block content %}
-{% include 'includes/items_list.html' %}
+{% for item in items %}
+  {% include 'includes/items_list.html' with item_name=item.name category_name=item.category.name item_text=item.text item_tags=item.tags item_id=item.id %}
+{% endfor %}
 {% endblock %}
