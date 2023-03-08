@@ -1,8 +1,6 @@
 from django.test import Client, TestCase
 import django.urls
 
-import catalog.models
-
 
 class CatalogViewsTests(TestCase):
     fixtures = ['data.json']
