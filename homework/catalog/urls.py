@@ -6,16 +6,8 @@ register_converter(converters.PositiveInteger, 'posint')
 
 app_name = 'catalog'
 urlpatterns = [
-    path(
-        '',
-        views.item_list,
-        name='item-list'
-    ),
-    path(
-        '<int:pk>/',
-        views.item_detail,
-        name='item-detail'
-    ),
+    path('', views.item_list, name='item-list'),
+    path('<int:pk>/', views.item_detail, name='item-detail'),
     path(
         'converter/<posint:pk>',
         views.item_detail,
