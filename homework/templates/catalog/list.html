@@ -9,9 +9,13 @@
 {% block content %}
 {% for category in categories %}
   <h1>{{ category.name }}</h1>
-  {% for item in category.items.published %}
-    {% include 'includes/item_card.html' with item_name=item.name item_text=item.text item_tags=item.tags item_id=item.id %}
-  {% endfor %}
+<div class="container">
+  <div class="row">
+    {% for item in category.items.published %}
+      {% include 'includes/item_card.html' with item_name=item.name item_text=item.text item_tags=item.tags item_id=item.id image=item.main_image.image %}
+    {% endfor %}
+  </div>
+</div>
   <hr>
 {% endfor %}
 {% endblock %}

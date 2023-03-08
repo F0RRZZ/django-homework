@@ -18,9 +18,11 @@
     </p>
   </div>
 </div>
-{% for item in items %}
-{% block category_name %}
-{% endblock %}
-  {% include 'includes/item_card.html' with item_name=item.name category_name=item.category.name item_text=item.text item_tags=item.tags item_id=item.id %}
-{% endfor %}
+<div class="container">
+  <div class="row">
+    {% for item in items %}
+      {% include 'includes/item_card.html' with item_name=item.name category_name=item.category.name item_text=item.text item_tags=item.tags item_id=item.id image=item.main_image.image %}
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}

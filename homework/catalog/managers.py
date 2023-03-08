@@ -5,8 +5,14 @@ import catalog.models
 
 class CategoryManager(django.db.models.Manager):
     def published(self):
-        return self.get_queryset().filter(
-            is_published=True,
+        return (
+            self.get_queryset()
+            .filter(
+                is_published=True,
+            )
+            .order_by(
+                'name',
+            )
         )
 
 
@@ -62,6 +68,7 @@ class ItemManager(django.db.models.Manager):
             )
             .order_by(
                 'category__name',
+                'name',
             )
         )
 

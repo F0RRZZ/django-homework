@@ -1,17 +1,19 @@
-{% load static %}
-<div class="card">
-  <h5 class="card-header">{{ item_name }}</h5>
+<div class="col-xl-3">
+<div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="{{ MEDIA_URL }}{{ image }}" alt="Card image cap" width="300" height="200">
   <div class="card-body">
+    <h5 class="card-header">{{ item_name }}</h5>
     {% if category_name %}
-      <h5 class="card-title">Категория: {{ category_name }}</h5>
+      <h6 class="card-title">Категория: {{ category_name }}</h6>
     {% endif %}
-    <h5>Описание:</h5>
     <p class="card-text">{{ item_text|safe|truncatewords:10 }}</p>
-    <div class="tags" style="margin-bottom: 5px;">
-      {% for tag in item_tags.all %}
-        <span class="badge rounded-pill text-bg-primary">{{ tag }}</span>
-      {% endfor %}
+    {% for tag in item_tags.all %}
+    <div style="padding-bottom: 5px">
+      <span class="badge rounded-pill text-bg-primary">{{ tag }}</span>
     </div>
+    {% endfor %}
+    <br>
     <a href="{% url 'catalog:item-detail' item_id %}" class="btn btn-primary">Перейти к описанию</a>
   </div>
+</div>
 </div>
