@@ -2,6 +2,7 @@ import ckeditor.fields
 import django.core.exceptions
 import django.core.validators
 import django.db.models
+from django.utils import timezone
 from django.utils.safestring import mark_safe
 from sorl.thumbnail import get_thumbnail
 
@@ -102,6 +103,12 @@ class Item(core.base_models.PublishedWithNameBaseModel):
         'на главной',
         default=False,
     )
+    created_at = django.db.models.DateTimeField(
+        auto_now_add=True,
+    )
+    updated_at = django.db.models.DateTimeField(
+        auto_now=True,
+    )
 
     class Meta:
         default_related_name = 'items'
@@ -110,6 +117,12 @@ class Item(core.base_models.PublishedWithNameBaseModel):
 
     def __str__(self):
         return self.text[:15]
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.created_at = timezone.now()
+        self.updated_at = timezone.now()
+        return super().save(*args, **kwargs)
 
 
 class MainImage(django.db.models.Model):

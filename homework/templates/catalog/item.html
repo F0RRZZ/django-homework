@@ -8,6 +8,8 @@
 <div style="margin-left: 20px;">
   <h1> {{ item.name }} </h1>
   <img src="{{ MEDIA_URL }}{{ item.main_image.image }}" width="500" alt="item">
+  <br>
+  <a href="{% url 'catalog:download-main-image' item.id %}">Скачать изображение</a>
   <hr>
   <div width="30%">
     <p>Описание: {{ item.text|safe }}</p>
@@ -23,9 +25,15 @@
   </div>
   <hr>
   <div width="30%">
-    {% for gal_image in item.galleryimage_set.all %}
-      <img src="{{ MEDIA_URL }}{{ gal_image.image }}" width="300">
-    {% endfor %}
+    <div class="container">
+      <div class="row gx-5">
+      {% for gal_image in item.galleryimage_set.all %}
+      <div class="col-xl-3">
+        <img src="{{ MEDIA_URL }}{{ gal_image.image }}" width="300">
+        <a href="{% url 'catalog:download-gallery-image' gal_image.id %}">Скачать картинку</a>
+      </div>
+      {% endfor %}
+    </div>
   </div>
 </div>
 {% endblock %}

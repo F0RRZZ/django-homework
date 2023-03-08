@@ -10,6 +10,22 @@ const langArr = {
     'about': {
         'ru': 'О проекте',
         'en': 'About',
+    },
+    'new': {
+        'ru': 'Новинки',
+        'en': 'New items',
+    },
+    'friday': {
+        'ru': 'Пятница',
+        'en': 'Friday',
+    },
+    'unchanged': {
+        'ru': 'Непроверенное',
+        'en': 'Unchanged',
+    },
+    'admin': {
+        'ru': 'Админка',
+        'en': 'Admin',
     }
 }
 

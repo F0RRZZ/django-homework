@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}<title>{{ sort_type }}</title>{% endblock %}
+
+{% block content %}
+<h1>{{ sort_type }}</h1>
+<div class="container">
+  <div class="row">
+    {% for item in items %}
+      {% include 'includes/item_card.html' with item_name=item.name item_text=item.text item_tags=item.tags item_id=item.id %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
