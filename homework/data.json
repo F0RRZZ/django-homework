@@ -22,13 +22,38 @@
   }
 },
 {
+  "model": "catalog.galleryimage",
+  "pk": 2,
+  "fields": {
+    "item": 2,
+    "image": "catalog/thinkpad_x1_top.jpg"
+  }
+},
+{
+  "model": "catalog.galleryimage",
+  "pk": 3,
+  "fields": {
+    "item": 3,
+    "image": "catalog/macbook_front.jpeg"
+  }
+},
+{
+  "model": "catalog.galleryimage",
+  "pk": 4,
+  "fields": {
+    "item": 3,
+    "image": "catalog/macbook_fron_back.jpg"
+  }
+},
+{
   "model": "catalog.item",
   "pk": 2,
   "fields": {
     "is_published": true,
     "name": "Ноутбук Lenovo ThinkPad X1 Titanium Yoga Gen 1",
     "category": 2,
-    "text": "<p>превосходно</p>",
+    "text": "<p>превосходно</p>\r\n\r\n<p><em><strong><u>Текст с эффектами</u></strong></em></p>",
+    "is_on_main": true,
     "tags": [
       4
     ]
@@ -42,6 +67,7 @@
     "name": "16.2\" Ноутбук Apple MacBook Pro",
     "category": 2,
     "text": "<p>превосходно</p>",
+    "is_on_main": true,
     "tags": [
       2
     ]
@@ -55,6 +81,7 @@
     "name": "Чистый код. Мартин Роберт К.",
     "category": 3,
     "text": "<p>превосходно</p>",
+    "is_on_main": false,
     "tags": [
       6,
       7
@@ -69,6 +96,7 @@
     "name": "1984 | Оруэлл Джордж",
     "category": 3,
     "text": "<p>превосходно</p>",
+    "is_on_main": false,
     "tags": [
       5
     ]
@@ -82,6 +110,7 @@
     "name": "Смартфон Apple iPhone 14 Pro",
     "category": 2,
     "text": "<p>превосходно</p>",
+    "is_on_main": false,
     "tags": [
       2
     ]
