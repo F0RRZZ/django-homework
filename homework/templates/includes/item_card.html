@@ -1,6 +1,6 @@
 <div class="col-xl-3">
 <div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="{{ MEDIA_URL }}{{ image }}" alt="Card image cap" width="300" height="200">
+  <img class="card-img-top" src="{{ MEDIA_URL }}{{ item.main_image.image }}" alt="Card image cap" width="300" height="200">
   <div class="card-body">
     <h5 class="card-header">{{ item_name }}</h5>
     {% if category_name %}

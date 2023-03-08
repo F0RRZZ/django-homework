@@ -11,7 +11,7 @@ class CategoryManager(django.db.models.Manager):
                 is_published=True,
             )
             .order_by(
-                'name',
+                catalog.models.Category.name.field.name,
             )
         )
 
@@ -33,17 +33,17 @@ class ItemManager(django.db.models.Manager):
                     'tags',
                     queryset=catalog.models.Tag.objects.filter(
                         is_published=True,
-                    ).only('name'),
+                    ).only(catalog.models.Tag.name.field.name),
                 )
             )
             .only(
                 'id',
-                'name',
+                catalog.models.Item.name.field.name,
                 'category__name',
-                'text',
+                catalog.models.Item.text.field.name,
             )
             .order_by(
-                'name',
+                catalog.models.Item.text.field.name,
             )
         )
 
@@ -57,18 +57,18 @@ class ItemManager(django.db.models.Manager):
                     'tags',
                     queryset=catalog.models.Tag.objects.filter(
                         is_published=True,
-                    ).only('name'),
+                    ).only(catalog.models.Tag.name.field.name),
                 )
             )
             .only(
                 'id',
-                'name',
+                catalog.models.Item.name.field.name,
                 'category__name',
-                'text',
+                catalog.models.Item.text.field.name,
             )
             .order_by(
                 'category__name',
-                'name',
+                catalog.models.Item.name.field.name,
             )
         )
 
@@ -85,15 +85,15 @@ class ItemManager(django.db.models.Manager):
                     'tags',
                     queryset=catalog.models.Tag.objects.filter(
                         is_published=True,
-                    ).only('name'),
+                    ).only(catalog.models.Tag.name.field.name),
                 ),
                 django.db.models.Prefetch(
                     'galleryimage_set',
                 ),
             )
             .only(
-                'name',
+                catalog.models.Item.name.field.name,
                 'category__name',
-                'text',
+                catalog.models.Item.text.field.name,
             )
         )
