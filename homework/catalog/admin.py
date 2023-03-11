@@ -29,7 +29,11 @@ class ItemAdmin(admin.ModelAdmin):
         MainImageInline,
         GalleryImageInline,
     ]
-    readonly_fields = ('get_image',)
+    readonly_fields = (
+        'get_image',
+        catalog.models.Item.created_at.field.name,
+        catalog.models.Item.updated_at.field.name,
+    )
     filter_horizontal = ('tags',)
     list_display = (
         catalog.models.Item.name.field.name,

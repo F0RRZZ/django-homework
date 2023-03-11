@@ -102,12 +102,17 @@ class Item(core.base_models.PublishedWithNameBaseModel):
     is_on_main = django.db.models.BooleanField(
         'на главной',
         default=False,
+        help_text='отображение товара на главной странице'
     )
     created_at = django.db.models.DateTimeField(
+        'время создания',
         auto_now_add=True,
+        help_text='время создания',
     )
     updated_at = django.db.models.DateTimeField(
+        'последнее изменение',
         auto_now=True,
+        help_text='последнее изменение',
     )
 
     class Meta:
