@@ -41,7 +41,8 @@ class ItemManager(django.db.models.Manager):
             .only(
                 'id',
                 catalog.models.Item.name.field.name,
-                'category__name',
+                f'{catalog.models.Item.category.field.name}__'
+                f'{catalog.models.Category.name.field.name}',
                 catalog.models.Item.text.field.name,
             )
             .order_by(
@@ -65,11 +66,13 @@ class ItemManager(django.db.models.Manager):
             .only(
                 'id',
                 catalog.models.Item.name.field.name,
-                'category__name',
+                f'{catalog.models.Item.category.field.name}__'
+                f'{catalog.models.Category.name.field.name}',
                 catalog.models.Item.text.field.name,
             )
             .order_by(
-                'category__name',
+                f'{catalog.models.Item.category.field.name}__'
+                f'{catalog.models.Category.name.field.name}',
                 catalog.models.Item.name.field.name,
             )
         )
@@ -95,7 +98,8 @@ class ItemManager(django.db.models.Manager):
             )
             .only(
                 catalog.models.Item.name.field.name,
-                'category__name',
+                f'{catalog.models.Item.category.field.name}__'
+                f'{catalog.models.Category.name.field.name}',
                 catalog.models.Item.text.field.name,
             )
         )
