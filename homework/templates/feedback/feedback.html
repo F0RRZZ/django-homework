@@ -12,9 +12,10 @@
       <form method="POST">
         {% csrf_token %}
         {% for element in forms %}
-          <div class="form-group">
+          <div class="form-group" style="padding-bottom: 20px">
             {{ element.label }}
             {{ element }}
+            {{ element.help_text }}
           </div>
         {% endfor %}
         <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Отправить</button>

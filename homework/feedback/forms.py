@@ -25,7 +25,3 @@ class FeedbackForm(django.forms.ModelForm):
                 attrs={'placeholder': 'example@example.com'}
             ),
         }
-        help_texts = {
-            feedback.models.Feedback.text.field.name: '',
-            feedback.models.Feedback.email.field.name: '',
-        }

@@ -19,6 +19,17 @@ class FormTests(TestCase):
         email_label = FormTests.form.fields['email'].label
         self.assertEqual(email_label, 'Ваша почта')
 
+    def test_text_help_text(self):
+        text_help_text = FormTests.form.fields['text'].help_text
+        self.assertEqual(text_help_text, 'содержание письма')
+
+    def test_email_help_text(self):
+        email_help_text = FormTests.form.fields['email'].help_text
+        self.assertEqual(
+            email_help_text,
+            'введите почту, на которую будет отправлен ответ'
+        )
+
     def test_create_feedback(self):
         feedbacks_count = feedback.models.Feedback.objects.count()
         form_data = {'text': 'text', 'email': 'ex@ex.com'}
