@@ -12,6 +12,8 @@ def feedback_form(request):
     if form.is_valid():
         text = form.cleaned_data.get('text')
         email = form.cleaned_data.get('email')
+        new_feedback = form.save()
+        new_feedback.save()
         send_mail(
             'Subject',
             text,
