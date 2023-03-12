@@ -24,5 +24,5 @@ class Feedback(django.db.models.Model):
             ('processing', 'в обработке'),
             ('answered', 'ответ дан'),
         ],
-        default='получено',
+        default='received',
     )
