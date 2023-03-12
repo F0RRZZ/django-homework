@@ -16,3 +16,13 @@ class Feedback(django.db.models.Model):
         'почта',
         help_text='введите почту, на которую будет отправлен ответ',
     )
+    status = django.db.models.CharField(
+        'статус',
+        max_length=20,
+        choices=[
+            ('received', 'получено'),
+            ('processing', 'в обработке'),
+            ('answered', 'ответ дан'),
+        ],
+        default='получено',
+    )
