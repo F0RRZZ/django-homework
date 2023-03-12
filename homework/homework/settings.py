@@ -6,20 +6,22 @@ import environ
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env(
-    DEBUG=(bool, True),
-    SECRET_KEY=(str, 'dummy-key'),
     ALLOWED_HOSTS=(list, ['*']),
+    DEBUG=(bool, True),
+    EMAIL=(str, 'example@example.com'),
     RUSSIAN_WORDS_REVERSING_MIDDLEWARE_ENABLED=(bool, False),
+    SECRET_KEY=(str, 'dummy-key'),
 )
 
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
-SECRET_KEY = env('SECRET_KEY')
-DEBUG = env('DEBUG')
 ALLOWED_HOSTS = env('ALLOWED_HOSTS')
+DEBUG = env('DEBUG')
+EMAIL = env('EMAIL')
 RUSSIAN_WORDS_REVERSING_MIDDLEWARE_ENABLED = env(
     'RUSSIAN_WORDS_REVERSING_MIDDLEWARE_ENABLED'
 )
+SECRET_KEY = env('SECRET_KEY')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -37,6 +39,7 @@ INSTALLED_APPS = [
     'about.apps.AboutConfig',
     'catalog.apps.CatalogConfig',
     'core.apps.CoreConfig',
+    'feedback.apps.FeedbackConfig',
     'homepage.apps.HomepageConfig',
 ]
 
@@ -110,7 +113,6 @@ CACHES = {
     }
 }
 
-
 LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
@@ -131,3 +133,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'

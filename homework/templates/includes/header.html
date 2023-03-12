@@ -11,6 +11,7 @@
       <li class="nav-item"><a href="{% url 'catalog:new-items' %}" class="nav-link tab lng-new" data-toggle="tab">Новинки</a></li>
       <li class="nav-item"><a href="{% url 'catalog:friday-items' %}" class="nav-link tab lng-friday" data-toggle="tab">Пятница</a></li>
       <li class="nav-item"><a href="{% url 'catalog:unchanged-items' %}" class="nav-link tab lng-unchanged" data-toggle="tab">Непроверенное</a></li>
+      <li class="nav-item"><a href="{% url 'feedback:feedback' %}" class="nav-link tab lng-feedback" data-toggle="tab">Обратная связь</a></li>
       <li class="nav-item"><a href="{% url 'about:description' %}" class="nav-link tab lng-about" data-toggle="tab">О проекте</a></li>
       {% if user.is_superuser %}
         <li class="nav-item"><a href="http://127.0.0.1:8000/admin/" class="nav-link tab lng-admin" data-toggle="tab">Админка</a></li>

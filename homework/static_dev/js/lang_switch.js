@@ -23,6 +23,10 @@ const langArr = {
         'ru': 'Непроверенное',
         'en': 'Unchanged',
     },
+    'feedback': {
+        'ru': 'Обратная связь',
+        'en': 'Feedback',
+    },
     'admin': {
         'ru': 'Админка',
         'en': 'Admin',
