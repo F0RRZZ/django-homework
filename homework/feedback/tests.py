@@ -11,6 +11,10 @@ class FormTests(TestCase):
         super().setUpClass()
         cls.form = feedback.forms.FeedbackForm()
 
+    def test_feedback_context(self):
+        response = Client().get(reverse('feedback:feedback'))
+        self.assertIn('forms', response.context)
+
     def test_text_label(self):
         text_label = FormTests.form.fields['text'].label
         self.assertEqual(text_label, 'Текст')
