@@ -26,8 +26,7 @@ class FormTests(TestCase):
     def test_email_help_text(self):
         email_help_text = FormTests.form.fields['email'].help_text
         self.assertEqual(
-            email_help_text,
-            'введите почту, на которую будет отправлен ответ'
+            email_help_text, 'введите почту, на которую будет отправлен ответ'
         )
 
     def test_create_feedback(self):
