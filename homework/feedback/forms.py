@@ -20,8 +20,10 @@ class FeedbackForm(django.forms.ModelForm):
             feedback.models.Feedback.email.field.name: 'Ваша почта',
         }
         widgets = {
-            'text': django.forms.Textarea(attrs={'rows': 5}),
-            'email': django.forms.EmailInput(
+            feedback.models.Feedback.text.field.name: django.forms.Textarea(
+                attrs={'rows': 5}
+            ),
+            feedback.models.Feedback.email.field.name: django.forms.EmailInput(
                 attrs={'placeholder': 'example@example.com'}
             ),
         }
