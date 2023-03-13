@@ -14,6 +14,7 @@ class Feedback(django.db.models.Model):
     )
     email = django.db.models.EmailField(
         'почта',
+        max_length=254,
         help_text='введите почту, на которую будет отправлен ответ',
     )
     status = django.db.models.CharField(
