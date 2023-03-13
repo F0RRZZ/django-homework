@@ -1,5 +1,4 @@
 import django.db.models
-from django.utils import timezone
 
 
 class Feedback(django.db.models.Model):
@@ -9,7 +8,7 @@ class Feedback(django.db.models.Model):
     )
     created_on = django.db.models.DateTimeField(
         'время создания',
-        default=timezone.now,
+        auto_now_add=True,
         help_text='время создания письма',
     )
     email = django.db.models.EmailField(
