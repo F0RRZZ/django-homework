@@ -1,7 +1,8 @@
-import catalog.models
 import django.core.exceptions
 from django.test import TestCase
 from parameterized import parameterized
+
+import catalog.models
 
 
 class ModelsTests(TestCase):
