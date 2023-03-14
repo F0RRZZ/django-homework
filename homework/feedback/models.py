@@ -26,3 +26,7 @@ class Feedback(django.db.models.Model):
         ],
         default='received',
     )
+
+    class Meta:
+        verbose_name = 'сообщение'
+        verbose_name_plural = 'сообщения'
