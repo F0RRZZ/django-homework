@@ -10,12 +10,10 @@ class FeedbackForm(django.forms.ModelForm):
         ),
         label='Ваша почта',
         error_messages={'reqired': ''},
-        help_text='введите почту, на которую будет отправлен ответ'
+        help_text='введите почту, на которую будет отправлен ответ',
     )
     files = django.forms.FileField(
-        widget=django.forms.ClearableFileInput(
-            attrs={'multiple': True}
-        ),
+        widget=django.forms.ClearableFileInput(attrs={'multiple': True}),
         required=False,
         label='Файлы',
     )
@@ -27,9 +25,7 @@ class FeedbackForm(django.forms.ModelForm):
 
     class Meta:
         model = feedback.models.Feedback
-        fields = (
-            feedback.models.Feedback.text.field.name,
-        )
+        fields = (feedback.models.Feedback.text.field.name,)
         labels = {
             feedback.models.Feedback.text.field.name: 'Текст',
         }

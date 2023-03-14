@@ -9,5 +9,5 @@ class FeedbackPageTests(TestCase):
         self.assertEqual(
             response.status_code,
             HTTPStatus.OK,
-            'Error when going to the page "feedback"'
+            'Error when going to the page "feedback"',
         )

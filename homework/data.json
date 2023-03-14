@@ -225,5 +225,85 @@
     "slug": "programming",
     "formatted_name": "программирование"
   }
+},
+{
+  "model": "feedback.feedback",
+  "pk": 1,
+  "fields": {
+    "text": "text",
+    "created_on": "2023-03-12T10:07:59.532Z",
+    "personal_data": null,
+    "status": "recieved"
+  }
+},
+{
+  "model": "feedback.feedback",
+  "pk": 2,
+  "fields": {
+    "text": "text",
+    "created_on": "2023-03-12T10:26:47.289Z",
+    "personal_data": null,
+    "status": "recieved"
+  }
+},
+{
+  "model": "feedback.feedback",
+  "pk": 3,
+  "fields": {
+    "text": "Test text",
+    "created_on": "2023-03-13T19:11:31.380Z",
+    "personal_data": null,
+    "status": "received"
+  }
+},
+{
+  "model": "feedback.feedback",
+  "pk": 4,
+  "fields": {
+    "text": "test file form 1",
+    "created_on": "2023-03-14T19:29:54.842Z",
+    "personal_data": 1,
+    "status": "received"
+  }
+},
+{
+  "model": "feedback.feedback",
+  "pk": 5,
+  "fields": {
+    "text": "test file form 1",
+    "created_on": "2023-03-14T19:30:22.519Z",
+    "personal_data": 2,
+    "status": "received"
+  }
+},
+{
+  "model": "feedback.feedbackfile",
+  "pk": 1,
+  "fields": {
+    "file": "IMG_1423.MP4",
+    "feedback": 5
+  }
+},
+{
+  "model": "feedback.feedbackfile",
+  "pk": 2,
+  "fields": {
+    "file": "photo_2023-02-05_15-19-03.jpg",
+    "feedback": 5
+  }
+},
+{
+  "model": "feedback.personaldata",
+  "pk": 1,
+  "fields": {
+    "email": "marathagazeev@gmail.com"
+  }
+},
+{
+  "model": "feedback.personaldata",
+  "pk": 2,
+  "fields": {
+    "email": "marathagazeev@gmail.com"
+  }
 }
 ]
