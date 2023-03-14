@@ -4,6 +4,22 @@ import feedback.models
 
 
 class FeedbackForm(django.forms.ModelForm):
+    email = django.forms.EmailField(
+        widget=django.forms.EmailInput(
+            attrs={'placeholder': 'example@example.com'},
+        ),
+        label='Ваша почта',
+        error_messages={'reqired': ''},
+        help_text='введите почту, на которую будет отправлен ответ'
+    )
+    files = django.forms.FileField(
+        widget=django.forms.ClearableFileInput(
+            attrs={'multiple': True}
+        ),
+        required=False,
+        label='Файлы',
+    )
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for field in self.visible_fields():
@@ -13,17 +29,16 @@ class FeedbackForm(django.forms.ModelForm):
         model = feedback.models.Feedback
         fields = (
             feedback.models.Feedback.text.field.name,
-            feedback.models.Feedback.email.field.name,
         )
         labels = {
             feedback.models.Feedback.text.field.name: 'Текст',
-            feedback.models.Feedback.email.field.name: 'Ваша почта',
         }
         widgets = {
             feedback.models.Feedback.text.field.name: django.forms.Textarea(
-                attrs={'rows': 5}
-            ),
-            feedback.models.Feedback.email.field.name: django.forms.EmailInput(
-                attrs={'placeholder': 'example@example.com'}
+                attrs={'rows': 5},
             ),
         }
+
+    def clean_text(self):
+        text = self.cleaned_data['text']
+        return text.strip()

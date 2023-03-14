@@ -9,16 +9,12 @@
   <div class="row justify-content-center">
     <div class="col-md-6">
       <h2 class="text-center mb-4">Форма обратной связи</h2>
-      <form method="POST">
+      <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {% for element in forms %}
-          <div class="form-group" style="padding-bottom: 20px">
-            {{ element.label }}
-            {{ element }}
-            {{ element.help_text }}
-          </div>
-        {% endfor %}
-        <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Отправить</button>
+        {{ forms.as_p }}
+        <button type="submit" class="btn btn-primary"
+                style="margin-top: 20px;">Отправить
+        </button>
       </form>
     </div>
   </div>

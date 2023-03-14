@@ -7,7 +7,6 @@ import feedback.models
 class FeedbackAdmin(admin.ModelAdmin):
     list_display = (
         'short_text',
-        feedback.models.Feedback.email.field.name,
         feedback.models.Feedback.status.field.name,
     )
     readonly_fields = (feedback.models.Feedback.created_on.field.name,)

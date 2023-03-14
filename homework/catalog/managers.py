@@ -54,14 +54,19 @@ class ItemManager(django.db.models.Manager):
         return (
             self.get_queryset()
             .filter(is_published=True, category__is_published=True)
-            .select_related('category')
             .prefetch_related(
                 django.db.models.Prefetch(
                     'tags',
                     queryset=catalog.models.Tag.objects.filter(
                         is_published=True,
                     ).only(catalog.models.Tag.name.field.name),
-                )
+                ),
+                django.db.models.Prefetch(
+                    'main_image',
+                    queryset=catalog.models.MainImage.objects.only(
+                        catalog.models.MainImage.image.field.name
+                    ),
+                ),
             )
             .only(
                 'id',
