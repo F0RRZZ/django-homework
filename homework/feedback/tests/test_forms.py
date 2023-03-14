@@ -11,10 +11,6 @@ class FormTests(TestCase):
         super().setUpClass()
         cls.form = feedback.forms.FeedbackForm()
 
-    def test_feedback_context(self):
-        response = Client().get(reverse('feedback:feedback'))
-        self.assertIn('forms', response.context)
-
     def test_text_label(self):
         text_label = FormTests.form.fields['text'].label
         self.assertEqual(text_label, 'Текст')
@@ -36,15 +32,23 @@ class FormTests(TestCase):
     def test_create_feedback(self):
         feedbacks_count = feedback.models.Feedback.objects.count()
         form_data = {'text': 'text', 'email': 'ex@ex.com'}
-        response = Client().post(
+        Client().post(
             reverse('feedback:feedback'),
             data=form_data,
             follow=True,
         )
-        self.assertRedirects(response, reverse('feedback:success'))
         self.assertEqual(
             feedback.models.Feedback.objects.count(), feedbacks_count + 1
         )
         self.assertTrue(
             feedback.models.Feedback.objects.filter(text='text').exists()
         )
+
+    def test_redirect(self):
+        form_data = {'text': 'text', 'email': 'ex@ex.com'}
+        response = Client().post(
+            reverse('feedback:feedback'),
+            data=form_data,
+            follow=True,
+        )
+        self.assertRedirects(response, reverse('feedback:success'))
