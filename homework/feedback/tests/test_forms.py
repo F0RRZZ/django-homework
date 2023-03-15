@@ -1,3 +1,6 @@
+import os
+
+from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import Client, TestCase
 from django.urls import reverse
 
@@ -52,3 +55,22 @@ class FormTests(TestCase):
             follow=True,
         )
         self.assertRedirects(response, reverse('feedback:success'))
+
+    def test_file_upload(self):
+        with open('test_file.txt', 'w') as f:
+            f.write('test')
+        with open('test_file.txt', 'rb') as f:
+            form_data = {
+                'text': 'text',
+                'email': 'ex@ex.com',
+                'files': SimpleUploadedFile(f.name, f.read())
+            }
+            Client().post(
+                reverse('feedback:feedback'),
+                data=form_data,
+                follow=True,
+            )
+            self.assertTrue(os.path.exists('uploads/1/test_file.txt'))
+        os.remove('uploads/1/test_file.txt')
+        os.remove('test_file.txt')
+        os.rmdir('uploads/1/')
