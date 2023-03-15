@@ -34,7 +34,3 @@ class FeedbackForm(django.forms.ModelForm):
                 attrs={'rows': 5},
             ),
         }
-
-    def clean_text(self):
-        text = self.cleaned_data['text']
-        return text.strip()

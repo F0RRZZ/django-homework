@@ -11,8 +11,8 @@ import feedback.models
 
 def feedback_form(request):
     template = 'feedback/feedback.html'
+    form = feedback.forms.FeedbackForm(request.POST, request.FILES)
     if request.method == 'POST':
-        form = feedback.forms.FeedbackForm(request.POST, request.FILES)
         if form.is_valid():
             text = form.cleaned_data.get('text')
             email = form.cleaned_data.get('email')
@@ -42,7 +42,6 @@ def feedback_form(request):
                 fail_silently=False,
             )
             return django.shortcuts.redirect('feedback:success')
-    form = feedback.forms.FeedbackForm()
     context = {
         'forms': form,
     }
