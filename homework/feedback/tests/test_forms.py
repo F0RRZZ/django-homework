@@ -63,7 +63,7 @@ class FormTests(TestCase):
             form_data = {
                 'text': 'text',
                 'email': 'ex@ex.com',
-                'files': SimpleUploadedFile(f.name, f.read())
+                'files': SimpleUploadedFile(f.name, f.read()),
             }
             Client().post(
                 reverse('feedback:feedback'),
