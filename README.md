@@ -141,7 +141,7 @@ python3 manage.py loaddata data.json
 
 ![database scheme](assets/db_scheme.png)
 
-Ссылка: https://app.quickdatabasediagrams.com/#/d/rHUr3u
+Ссылка: https://lucid.app/lucidchart/ab3a9b1e-eebe-435a-a6ec-1b93c61f332e/edit?viewport_loc=13%2C-132%2C2663%2C1348%2C0_0&invitationId=inv_b50f7bd1-76d0-4f80-bfe8-f136843089f3
 
 ---
 
