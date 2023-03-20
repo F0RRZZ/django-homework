@@ -44,13 +44,13 @@ source venv/bin/activate
 Windows:
 
 ```shell
-pip install -r prod.txt
+pip install -r requirements/prod.txt
 ```
 
 Linux/MacOS:
 
 ```shell
-pip3 install -r prod.txt
+pip3 install -r requirements/prod.txt
 ```
 
 ---
@@ -59,13 +59,13 @@ pip3 install -r prod.txt
 Windows:
 
 ```shell
-pip install -r dev.txt
+pip install -r requirements/dev.txt
 ```
 
 Linux/MacOS:
 
 ```shell
-pip3 install -r dev.txt
+pip3 install -r requirements/dev.txt
 ```
 
 ---
@@ -74,13 +74,13 @@ pip3 install -r dev.txt
 Windows:
 
 ```shell
-pip install -r test.txt
+pip install -r requirements/test.txt
 ```
 
 Linux/MacOS:
 
 ```shell
-pip3 install -r test.txt
+pip3 install -r requirements/test.txt
 ```
 
 ---
