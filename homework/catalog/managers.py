@@ -12,6 +12,9 @@ class CategoryManager(django.db.models.Manager):
             .filter(
                 is_published=True,
             )
+            .only(
+                catalog.models.Category.name.field.name,
+            )
             .order_by(
                 catalog.models.Category.name.field.name,
             )
@@ -36,7 +39,13 @@ class ItemManager(django.db.models.Manager):
                     queryset=catalog.models.Tag.objects.filter(
                         is_published=True,
                     ).only(catalog.models.Tag.name.field.name),
-                )
+                ),
+                django.db.models.Prefetch(
+                    'main_image',
+                    queryset=catalog.models.MainImage.objects.only(
+                        catalog.models.MainImage.image.field.name
+                    ),
+                ),
             )
             .only(
                 'id',

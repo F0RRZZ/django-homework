@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="container mt-4">
+    <div class="row">
+      <h1>Мой профиль</h1>
+      <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h3>Аватарка</h3>
+        {% if image %}
+        <img src="{{ image.url }}" alt="avatar" width="500"
+             style="border: 2px solid black">
+        {% else %}
+        <p>Нет аватарки</p>
+        {% endif %}
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        <button type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container mt-4">
+    <div class="row">
+    <h1>Профиль пользователя</h1>
+      <div class="col-md-4">
+        {% if image %}
+          <img src="{{ MEDIA_URL }}{{ image }}" alt="Аватарка пользователя" width="500" style="border: 2px solid black">
+        {% else %}
+          <p>Аватарка не загружена</p>
+        {% endif %}
+      </div>
+
+      <p><strong>Email:</strong> {{ email }}</p>
+      <p><strong>First Name:</strong> {{ first_name }}</p>
+      <p><strong>Last Name:</strong> {{ last_name }}</p>
+      <p><strong>Birthday:</strong> {{ birthday }}</p>
+      <p><strong>Coffee Count:</strong> {{ coffee_count }}</p>
+    </div>
+  </div>
+{% endblock %}
