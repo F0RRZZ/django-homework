@@ -41,6 +41,8 @@ def feedback_form(request):
             fail_silently=False,
         )
         return django.shortcuts.redirect('feedback:success')
+    elif request.method == 'GET':
+        form = feedback.forms.FeedbackForm()
     context = {
         'forms': form,
     }
