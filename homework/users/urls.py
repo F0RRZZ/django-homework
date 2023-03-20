@@ -68,6 +68,11 @@ urlpatterns = [
         name='activate',
     ),
     django.urls.path(
+        'activate/done',
+        views.activation_done,
+        name='activation_done',
+    ),
+    django.urls.path(
         'user_list/', views.UserListView.as_view(), name='user_list'
     ),
     django.urls.path(

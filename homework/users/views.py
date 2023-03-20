@@ -16,7 +16,7 @@ from users.forms import CustomUserCreationForm, UserForm, UserProfileForm
 class SignUpView(CreateView):
     form_class = CustomUserCreationForm
     template_name = 'users/signup.html'
-    success_url = reverse_lazy('index:index')
+    success_url = reverse_lazy('users:activation_done')
 
     def form_valid(self, form):
         if not settings.DEBUG:
@@ -69,6 +69,12 @@ class UserListView(ListView):
 
     def get_queryset(self):
         return User.objects.filter(is_active=True)
+
+
+@login_required
+def activation_done(request):
+    template = 'users/activate_link_sends.html'
+    return render(request, template)
 
 
 @login_required
