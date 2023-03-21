@@ -42,12 +42,21 @@ class ItemManager(django.db.models.Manager):
             .order_by(
                 catalog.models.Item.text.field.name,
             )
+            .only(
+                'id',
+                catalog.models.Item.name.field.name,
+                f'{catalog.models.Item.category.field.name}__'
+                f'{catalog.models.Category.name.field.name}',
+                catalog.models.Item.text.field.name,
+                'main_image__image',
+            )
         )
 
     def published(self):
         return (
             self.get_queryset()
             .filter(is_published=True, category__is_published=True)
+            .select_related('category', 'main_image')
             .prefetch_related(
                 django.db.models.Prefetch(
                     'tags',
@@ -55,14 +64,8 @@ class ItemManager(django.db.models.Manager):
                         is_published=True,
                     ).only(catalog.models.Tag.name.field.name),
                 ),
-                django.db.models.Prefetch(
-                    'main_image',
-                    queryset=catalog.models.MainImage.objects.only(
-                        catalog.models.MainImage.image.field.name
-                    ),
-                ),
             )
-            .values(
+            .only(
                 'id',
                 catalog.models.Item.name.field.name,
                 f'{catalog.models.Item.category.field.name}__'
@@ -139,4 +142,11 @@ class ItemManager(django.db.models.Manager):
                 created=F('updated'),
             )
             .order_by('created_at')
+            .only(
+                'id',
+                catalog.models.Item.name.field.name,
+                catalog.models.Item.text.field.name,
+                'main_image__image',
+                'category_id',
+            )
         )

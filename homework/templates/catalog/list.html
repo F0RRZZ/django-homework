@@ -12,7 +12,7 @@
 <div class="container">
   <div class="row">
     {% for item in category.items.published %}
-      {% include 'includes/item_card.html' with item_name=item.name item_text=item.text item_tags=item.tags item_id=item.id image=item.main_image.image %}
+      {% include 'includes/item_card.html' %}
     {% endfor %}
   </div>
 </div>
