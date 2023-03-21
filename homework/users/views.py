@@ -16,11 +16,15 @@ from users.forms import CustomUserCreationForm, UserForm, UserProfileForm
 class SignUpView(CreateView):
     form_class = CustomUserCreationForm
     template_name = 'users/signup.html'
-    success_url = reverse_lazy('users:activation_done')
+    success_url = (
+        reverse_lazy('users:activation_done')
+        if not settings.DEBUG
+        else reverse_lazy('index:index')
+    )
 
     def form_valid(self, form):
+        user = form.save(commit=False)
         if not settings.DEBUG:
-            user = form.save(commit=False)
             user.is_active = False
             user.save()
 
@@ -40,6 +44,10 @@ class SignUpView(CreateView):
                 [user.email],
                 fail_silently=False,
             )
+        else:
+            user.is_active = True
+            user.save()
+            UserProfile.objects.create(user=user)
         return super().form_valid(form)
 
 
