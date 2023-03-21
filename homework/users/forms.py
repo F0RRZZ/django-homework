@@ -30,7 +30,7 @@ class UserForm(forms.ModelForm):
         fields = [
             User.email.field.name,
             User.first_name.field.name,
-            User.last_name.name.field.name,
+            User.last_name.field.name,
         ]
 
 
