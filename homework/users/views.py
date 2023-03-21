@@ -121,15 +121,14 @@ def profile_view(request):
             'user_form': user_form,
             'profile_form': profile_form,
             'image': request.user.profile.image,
+            'coffee_count': request.user.profile.coffee_count,
         },
     )
 
 
 @login_required
 def drink_coffee(request):
-    if request.method == 'POST':
-        profile = request.user.profile
-        profile.coffee_count += 1
-        profile.save()
-        return redirect('index:index')
-    return render(request, '404.html')
+    profile = request.user.profile
+    profile.coffee_count += 1
+    profile.save()
+    return redirect('users:profile')
