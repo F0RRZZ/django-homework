@@ -27,7 +27,11 @@ class UserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['email', 'first_name', 'last_name']
+        fields = [
+            User.email.field.name,
+            User.first_name.field.name,
+            User.last_name.name.field.name,
+        ]
 
 
 class UserProfileForm(forms.ModelForm):
@@ -38,4 +42,7 @@ class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        fields = ['birthday', 'image']
+        fields = [
+            UserProfile.birthday.field.name,
+            UserProfile.image.field.name,
+        ]
