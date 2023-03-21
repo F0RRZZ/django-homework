@@ -767,6 +767,45 @@
   }
 },
 {
+  "model": "admin.logentry",
+  "pk": 60,
+  "fields": {
+    "action_time": "2023-03-21T20:26:22.096Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "14",
+    "object_repr": "asd",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 61,
+  "fields": {
+    "action_time": "2023-03-21T20:26:26.128Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "15",
+    "object_repr": "sdfsdf",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 62,
+  "fields": {
+    "action_time": "2023-03-21T20:30:55.715Z",
+    "user": 1,
+    "content_type": 4,
+    "object_id": "16",
+    "object_repr": "ghj",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
   "model": "auth.permission",
   "pk": 1,
   "fields": {
@@ -1854,7 +1893,7 @@
     "user": 1,
     "birthday": "2005-09-04T00:00:00Z",
     "image": "avatars/photo_2023-02-05_15-19-03.jpg",
-    "coffee_count": 0
+    "coffee_count": 3
   }
 }
 ]
