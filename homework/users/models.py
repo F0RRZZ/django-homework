@@ -1,3 +1,5 @@
+import os
+
 import django.contrib.auth.models
 from django.db import models
 from django.utils.translation import gettext_lazy as _
@@ -43,7 +45,10 @@ class UserProfile(
         _('день рождения'), null=True, blank=True, help_text='День рождения'
     )
     image = models.ImageField(
-        _('аватарка'), null=True, blank=True, help_text='Аватарка'
+        _('аватарка'),
+        null=True,
+        blank=True,
+        help_text='Аватарка',
     )
     coffee_count = models.IntegerField(
         _('выпито кофе'), default=0, help_text='Кофе выпито'
@@ -60,3 +65,22 @@ class UserProfile(
 
     def natural_key(self):
         return self.username
+
+    def save(self, *args, **kwargs):
+        super(UserProfile, self).save(*args, **kwargs)
+
+        if self.image:
+            from django.core.files.storage import default_storage
+            from django.core.files.base import ContentFile
+
+            if not os.path.exists(f'avatars/{self.id}'):
+                os.makedirs(f'avatars/{self.id}')
+
+            filename = self.image.name
+            path = f'avatars/{self.id}/{filename}'
+
+            if default_storage.exists(path):
+                default_storage.delete(path)
+            default_storage.save(path, ContentFile(self.image.read()))
+            self.image = path
+            super(UserProfile, self).save(*args, **kwargs)
