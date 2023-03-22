@@ -30,6 +30,26 @@ const langArr = {
     'admin': {
         'ru': 'Админка',
         'en': 'Admin',
+    },
+    'userlist': {
+        'ru': 'Список пользователей',
+        'en': 'Userlist'
+    },
+    'logout': {
+        'ru': 'Выйти',
+        'en': 'Logout'
+    },
+    'login': {
+        'ru': 'Войти',
+        'en': 'Login'
+    },
+    'signup': {
+        'ru': 'Зарегистрироваться',
+        'en': 'Sign up'
+    },
+    'profile': {
+        'ru': 'Профиль',
+        'en': 'Profile'
     }
 }
 

@@ -1,23 +1,60 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/header.css' %}">
 <div class="container">
-  <a href="{% url 'index:index' %}" style="text-align: center; display:block;" class="nav-link tab">
+  <a href="{% url 'index:index' %}" style="text-align: center; display:block;"
+     class="nav-link tab">
     <img src="{% static 'img/logo/logo.png' %}" width="50" alt="Home">
   </a>
-  <header class="d-flex justify-content-center py-3">
+  <header class="d-flex justify-content-start py-3">
     <ul class="nav nav-pills">
-      <li class="nav-item"><a href="{% url 'index:index' %}" class="nav-link tab lng-home" data-toggle="tab">На главную</a></li>
-      <li class="nav-item"><a href="{% url 'catalog:item-list' %}" class="nav-link tab lng-catalog" data-toggle="tab">Список товаров</a></li>
-      <li class="nav-item"><a href="{% url 'catalog:new-items' %}" class="nav-link tab lng-new" data-toggle="tab">Новинки</a></li>
-      <li class="nav-item"><a href="{% url 'catalog:friday-items' %}" class="nav-link tab lng-friday" data-toggle="tab">Пятница</a></li>
-      <li class="nav-item"><a href="{% url 'catalog:unchanged-items' %}" class="nav-link tab lng-unchanged" data-toggle="tab">Непроверенное</a></li>
-      <li class="nav-item"><a href="{% url 'feedback:feedback' %}" class="nav-link tab lng-feedback" data-toggle="tab">Обратная связь</a></li>
-      <li class="nav-item"><a href="{% url 'about:description' %}" class="nav-link tab lng-about" data-toggle="tab">О проекте</a></li>
+      <li class="nav-item"><a href="{% url 'index:index' %}"
+                              class="nav-link tab lng-home" data-toggle="tab">На
+        главную</a></li>
+      <li class="nav-item"><a href="{% url 'catalog:item-list' %}"
+                              class="nav-link tab lng-catalog"
+                              data-toggle="tab">Список товаров</a></li>
+      <li class="nav-item"><a href="{% url 'catalog:new-items' %}"
+                              class="nav-link tab lng-new" data-toggle="tab">Новинки</a>
+      </li>
+      <li class="nav-item"><a href="{% url 'catalog:friday-items' %}"
+                              class="nav-link tab lng-friday"
+                              data-toggle="tab">Пятница</a></li>
+      <li class="nav-item"><a href="{% url 'catalog:unchanged-items' %}"
+                              class="nav-link tab lng-unchanged"
+                              data-toggle="tab">Непроверенное</a></li>
+      <li class="nav-item"><a href="{% url 'users:user_list' %}"
+                              class="nav-link tab lng-userlist" data-toggle="tab">
+        Список пользователей
+      </a></li>
+      <li class="nav-item"><a href="{% url 'feedback:feedback' %}"
+                              class="nav-link tab lng-feedback"
+                              data-toggle="tab">Обратная связь</a></li>
+      <li class="nav-item"><a href="{% url 'about:description' %}"
+                              class="nav-link tab lng-about" data-toggle="tab">О
+        проекте</a></li>
       {% if user.is_superuser %}
-        <li class="nav-item"><a href="http://127.0.0.1:8000/admin/" class="nav-link tab lng-admin" data-toggle="tab">Админка</a></li>
+        <li class="nav-item"><a href="http://127.0.0.1:8000/admin/"
+                                class="nav-link tab lng-admin"
+                                data-toggle="tab">Админка</a></li>
       {% endif %}
     </ul>
-    <select class="change-lang" style="position: absolute; right: 100px; top: 58px;">
+    {% if request.user.is_authenticated %}
+      <div class="col-md-3 text-end">
+        <a type="button" class="btn btn-outline-primary me-2 lng-logout"
+           href="{% url 'users:logout' %}">Logout</a>
+        <a type="button" class="btn btn-primary me-2 lng-profile"
+           href="{% url 'users:profile' %}">Profile</a>
+      </div>
+    {% else %}
+      <div class="col-md-3 text-end">
+        <a type="button" class="btn btn-outline-primary me-2 lng-login"
+           href="{% url 'users:login' %}">Login</a>
+        <a type="button" class="btn btn-primary me-2 lng-signup"
+           href="{% url 'users:signup' %}">Sign up</a>
+      </div>
+    {% endif %}
+    <select class="change-lang"
+            style="position: absolute; right: 100px; top: 58px;">
       <option value="ru">Русский</option>
       <option value="en">English</option>
     </select>
