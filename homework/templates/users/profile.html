@@ -13,8 +13,15 @@
         {% else %}
           <p>Нет аватарки</p>
         {% endif %}
-        {{ user_form.as_p }}
-        {{ profile_form.as_p }}
+      <br>
+      {% for field in profile_form %}
+        {{ field.label_tag }}
+        {% if field.value or field.name == 'image' %}
+        {{ field }}
+        {% else %}
+          <h3 style="font-style: italic">Не указано</h3>
+        {% endif %}
+      {% endfor %}
         <p>Кофе выпито</p>
         <h1>{{ coffee_count }}</h1><br>
         <a class="btn btn-dark" href={% url 'users:drink_coffee' %}>Выпить

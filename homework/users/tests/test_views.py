@@ -1,10 +1,11 @@
 from http import HTTPStatus
 
-from django.contrib.auth.models import User
 from django.shortcuts import reverse
 from django.test import Client, TestCase, override_settings
 from django.utils import timezone
 from unittest.mock import patch
+
+from users.forms import UserProfile
 
 
 class SignUpTests(TestCase):
@@ -21,14 +22,18 @@ class SignUpTests(TestCase):
     def test_signup_with_debug_true(self):
         response = Client().post(self.url, data=self.test_user_data)
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
-        user = User.objects.get(username=self.test_user_data.get('username'))
+        user = UserProfile.objects.get(
+            username=self.test_user_data.get('username')
+        )
         self.assertTrue(user.is_active)
 
     @override_settings(DEBUG=False)
     def test_signup_with_debug_false(self):
         response = Client().post(self.url, data=self.test_user_data)
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
-        user = User.objects.get(username=self.test_user_data.get('username'))
+        user = UserProfile.objects.get(
+            username=self.test_user_data.get('username')
+        )
         self.assertFalse(user.is_active)
 
     @override_settings(DEBUG=False)
@@ -39,7 +44,9 @@ class SignUpTests(TestCase):
         )
         activation_response = Client().get(activation_url)
         self.assertEqual(activation_response.status_code, HTTPStatus.OK)
-        user = User.objects.get(username=self.test_user_data['username'])
+        user = UserProfile.objects.get(
+            username=self.test_user_data['username']
+        )
         self.assertTrue(user.is_active)
 
     @override_settings(DEBUG=False)
@@ -57,5 +64,7 @@ class SignUpTests(TestCase):
             self.assertEqual(
                 activation_response.status_code, HTTPStatus.NOT_FOUND
             )
-            user = User.objects.get(username=self.test_user_data['username'])
+            user = UserProfile.objects.get(
+                username=self.test_user_data['username']
+            )
             self.assertFalse(user.is_active)

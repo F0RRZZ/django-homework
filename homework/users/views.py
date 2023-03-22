@@ -1,6 +1,5 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
@@ -10,7 +9,7 @@ from django.views.generic import CreateView, DetailView, ListView
 
 from users.models import UserProfile
 
-from users.forms import CustomUserCreationForm, UserForm, UserProfileForm
+from users.forms import CustomUserCreationForm, UserProfileForm
 
 
 class SignUpView(CreateView):
@@ -27,8 +26,6 @@ class SignUpView(CreateView):
         if not settings.DEBUG:
             user.is_active = False
             user.save()
-
-            UserProfile.objects.create(user=user)
 
             absolute_url = self.request.build_absolute_uri(
                 reverse_lazy(
@@ -47,7 +44,6 @@ class SignUpView(CreateView):
         else:
             user.is_active = True
             user.save()
-            UserProfile.objects.create(user=user)
         return super().form_valid(form)
 
 
@@ -56,27 +52,23 @@ class ActivateUserView(DetailView):
     template_name = 'users/confirm_email.html'
 
     def get_object(self, queryset=None):
-        user_profile = get_object_or_404(
-            User, username=self.kwargs['username']
-        )
+        user = get_object_or_404(UserProfile, username=self.kwargs['username'])
 
-        if timezone.now() - user_profile.date_joined > timezone.timedelta(
-            hours=12
-        ):
+        if timezone.now() - user.date_joined > timezone.timedelta(hours=12):
             raise Http404
 
-        user_profile.is_active = True
-        user_profile.save()
+        user.is_active = True
+        user.save()
 
-        return user_profile
+        return user
 
 
 class UserListView(ListView):
-    model = User
+    model = UserProfile
     template_name = 'users/user_list.html'
 
     def get_queryset(self):
-        return User.objects.filter(is_active=True)
+        return UserProfile.objects.filter(is_active=True)
 
 
 @login_required
@@ -87,17 +79,14 @@ def activation_done(request):
 
 @login_required
 def user_detail(request, pk):
-    user = get_object_or_404(User, id=pk)
-    profile = user.profile
+    user = get_object_or_404(UserProfile, id=pk)
     first_name = user.first_name if user.first_name else 'не указано'
     last_name = user.last_name if user.last_name else 'не указано'
     birthday = (
-        profile.birthday.strftime('%d.%m.%Y')
-        if profile.birthday
-        else 'не указано'
+        user.birthday.strftime('%d.%m.%Y') if user.birthday else 'не указано'
     )
-    image = profile.image if profile.image else None
-    coffee_count = profile.coffee_count
+    image = user.image if user.image else None
+    coffee_count = user.coffee_count
     context = {
         'email': user.email,
         'first_name': first_name,
@@ -111,32 +100,28 @@ def user_detail(request, pk):
 
 @login_required
 def profile_view(request):
-    user_form = UserForm(instance=request.user)
-    profile_form = UserProfileForm(instance=request.user.profile)
+    profile_form = UserProfileForm(instance=request.user)
     if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=request.user)
         profile_form = UserProfileForm(
-            request.POST, request.FILES, instance=request.user.profile
+            request.POST, request.FILES, instance=request.user
         )
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
+        if profile_form.is_valid():
             profile_form.save()
             return redirect('users:profile')
     return render(
         request,
         'users/profile.html',
         {
-            'user_form': user_form,
             'profile_form': profile_form,
-            'image': request.user.profile.image,
-            'coffee_count': request.user.profile.coffee_count,
+            'image': request.user.image,
+            'coffee_count': request.user.coffee_count,
         },
     )
 
 
 @login_required
 def drink_coffee(request):
-    profile = request.user.profile
+    profile = request.user
     profile.coffee_count += 1
     profile.save()
     return redirect('users:profile')
