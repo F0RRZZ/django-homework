@@ -23,7 +23,7 @@ class SignUpView(CreateView):
 
     def form_valid(self, form):
         user = form.save(commit=False)
-        if not settings.DEBUG:
+        if not settings.USERS_AUTOACTIVATE:
             user.is_active = False
             user.save()
 

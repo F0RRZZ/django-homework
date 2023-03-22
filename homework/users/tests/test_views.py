@@ -19,7 +19,7 @@ class SignUpTests(TestCase):
             'password2': 'fF5bo0zTVN',
         }
 
-    @override_settings(DEBUG=True)
+    @override_settings(USERS_AUTOACTIVATE=True)
     def test_signup_with_debug_true(self):
         response = Client().post(self.url, data=self.test_user_data)
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
@@ -28,7 +28,7 @@ class SignUpTests(TestCase):
         )
         self.assertTrue(user.is_active)
 
-    @override_settings(DEBUG=False)
+    @override_settings(USERS_AUTOACTIVATE=False)
     def test_signup_with_debug_false(self):
         response = Client().post(self.url, data=self.test_user_data)
         self.assertEqual(response.status_code, HTTPStatus.FOUND)
@@ -37,7 +37,7 @@ class SignUpTests(TestCase):
         )
         self.assertFalse(user.is_active)
 
-    @override_settings(DEBUG=False)
+    @override_settings(USERS_AUTOACTIVATE=False)
     def test_activate_user_within_12_hours(self):
         Client().post(self.url, data=self.test_user_data)
         activation_url = reverse(
@@ -50,7 +50,7 @@ class SignUpTests(TestCase):
         )
         self.assertTrue(user.is_active)
 
-    @override_settings(DEBUG=False)
+    @override_settings(USERS_AUTOACTIVATE=False)
     def test_activate_user_after_12_hours(self):
         Client().post(self.url, data=self.test_user_data)
         activation_url = reverse(
@@ -70,7 +70,7 @@ class SignUpTests(TestCase):
             )
             self.assertFalse(user.is_active)
 
-    @override_settings(DEBUG=True)
+    @override_settings(USERS_AUTOACTIVATE=True)
     def test_yandex_email_formatting(self):
         Client().post(
             self.url,
@@ -84,7 +84,7 @@ class SignUpTests(TestCase):
         user = UserProfile.objects.get(username='test')
         self.assertEqual(user.normalized_email, 'yandex-test@yandex.ru')
 
-    @override_settings(DEBUG=True)
+    @override_settings(USERS_AUTOACTIVATE=True)
     def test_google_email_formatting(self):
         Client().post(
             self.url,
@@ -98,7 +98,7 @@ class SignUpTests(TestCase):
         user = UserProfile.objects.get(username='test')
         self.assertEqual(user.normalized_email, 'googletest@gmail.com')
 
-    @override_settings(DEBUG=True)
+    @override_settings(USERS_AUTOACTIVATE=True)
     def test_with_similar_emails(self):
         Client().post(
             self.url,

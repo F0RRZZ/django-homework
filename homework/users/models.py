@@ -21,9 +21,8 @@ class NormalizedEmailField(models.EmailField):
                 value = value.split('@')[0] + '@yandex.ru'
             if '+' in value:
                 value = (
-                    value.split('@')[0].split('+')[0]
-                    + '@'
-                    + value.split('@')[-1]
+                    f'{value.split("@")[0].split("+")[0]}@'
+                    f'{value.split("@")[-1]}'
                 )
 
             value = value.lower()
