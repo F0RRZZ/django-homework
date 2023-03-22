@@ -1,5 +1,6 @@
 from http import HTTPStatus
 
+from django.db.utils import IntegrityError
 from django.shortcuts import reverse
 from django.test import Client, TestCase, override_settings
 from django.utils import timezone
@@ -68,3 +69,53 @@ class SignUpTests(TestCase):
                 username=self.test_user_data['username']
             )
             self.assertFalse(user.is_active)
+
+    @override_settings(DEBUG=True)
+    def test_yandex_email_formatting(self):
+        Client().post(
+            self.url,
+            {
+                'username': 'test',
+                'email': 'yandex.test@ya.ru',
+                'password1': 'fF5bo0zTVN',
+                'password2': 'fF5bo0zTVN',
+            },
+        )
+        user = UserProfile.objects.get(username='test')
+        self.assertEqual(user.normalized_email, 'yandex-test@yandex.ru')
+
+    @override_settings(DEBUG=True)
+    def test_google_email_formatting(self):
+        Client().post(
+            self.url,
+            {
+                'username': 'test',
+                'email': 'google.test+test@gmail.com',
+                'password1': 'fF5bo0zTVN',
+                'password2': 'fF5bo0zTVN',
+            },
+        )
+        user = UserProfile.objects.get(username='test')
+        self.assertEqual(user.normalized_email, 'googletest@gmail.com')
+
+    @override_settings(DEBUG=True)
+    def test_with_similar_emails(self):
+        Client().post(
+            self.url,
+            {
+                'username': 'test1',
+                'email': 'yandex.test@ya.ru',
+                'password1': 'fF5bo0zTVN',
+                'password2': 'fF5bo0zTVN',
+            },
+        )
+        with self.assertRaises(IntegrityError):
+            Client().post(
+                self.url,
+                {
+                    'username': 'test2',
+                    'email': 'yandex-test@yandex.ru',
+                    'password1': 'fF5bo0zTVN',
+                    'password2': 'fF5bo0zTVN',
+                },
+            )

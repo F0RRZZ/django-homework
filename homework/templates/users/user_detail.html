@@ -11,12 +11,27 @@
           <p>Аватарка не загружена</p>
         {% endif %}
       </div>
-
-      <p><strong>Email:</strong> {{ email }}</p>
+      {% if email == 'не указано' %}
+        <p><strong>Email:</strong> <span style="font-style: italic; font-family: 'Monaco'">{{ email }}</span></p>
+      {% else %}
+        <p><strong>Email:</strong> {{ email }}</p>
+    {% endif %}
+    {% if first_name == 'не указано' %}
+      <p><strong>First Name:</strong> <span style="font-style: italic; font-family: 'Monaco'">{{ first_name }}</span></p>
+    {% else %}
       <p><strong>First Name:</strong> {{ first_name }}</p>
+    {% endif %}
+    {% if last_name == 'не указано' %}
+      <p><strong>Last Name:</strong> <span style="font-style: italic; font-family: 'Monaco'">{{ last_name }}</span></p>
+    {% else %}
       <p><strong>Last Name:</strong> {{ last_name }}</p>
+    {% endif %}
+    {% if birthday == 'не указано' %}
+      <p><strong>Birthday:</strong> <span style="font-style: italic; font-family: 'Monaco'">{{ birthday }}</span></p>
+    {% else %}
       <p><strong>Birthday:</strong> {{ birthday }}</p>
-      <p><strong>Coffee Count:</strong> {{ coffee_count }}</p>
+    {% endif %}
+      <p><strong>Coffee Count:</strong> <span style="font-style: italic; font-family: 'Monaco'">{{ coffee_count }}</span></p>
     </div>
   </div>
 {% endblock %}

@@ -23,6 +23,8 @@ RUSSIAN_WORDS_REVERSING_MIDDLEWARE_ENABLED = env(
 )
 SECRET_KEY = env('SECRET_KEY')
 
+MAX_FAILED_ATTEMPTS = 3
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -140,6 +142,10 @@ EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'
 
 LOGIN_URL = '/auth/login/'
 LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/auth/login/'
+LOGOUT_REDIRECT_URL = '/'
 
 AUTH_USER_MODEL = 'users.UserProfile'
+AUTHENTICATION_BACKENDS = [
+    'users.backend.NormalizedEmailAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]

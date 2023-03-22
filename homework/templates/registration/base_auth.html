@@ -55,8 +55,10 @@
             </small><br>
           {% endif %}
         {% endfor %}
-        <button style="margin-top: 10px" type="submit" class="btn btn-primary">{% block button_text %}{% endblock %}</button><br>
-        <a href="http://127.0.0.1:8000/auth/password_reset/">Забыли пароль?</a>
+        <button style="margin-top: 10px" type="submit" class="btn btn-primary">{% block button_text %}{% endblock %}</button>
+        <a href="http://127.0.0.1:8000/auth/password_reset/" style="margin-left: 50px;">Забыли пароль?</a><br>
+      {% block more_elements %}
+      {% endblock %}
       </form>
     </div>
   </div>

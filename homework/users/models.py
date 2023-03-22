@@ -1,10 +1,44 @@
 import os
+import re
 
 import django.contrib.auth.models
+from django.core.mail import send_mail
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from users.managers import UserProfileManager
+
+
+class NormalizedEmailField(models.EmailField):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    def get_prep_value(self, value):
+        if value:
+            value = re.sub(r'(?i)(\<.*?\>)', '', value)
+
+            if '@ya.ru' in value:
+                value = value.split('@')[0] + '@yandex.ru'
+            if '+' in value:
+                value = (
+                    value.split('@')[0].split('+')[0]
+                    + '@'
+                    + value.split('@')[-1]
+                )
+
+            value = value.lower()
+
+            if '@gmail.com' in value:
+                username, domain = value.split('@')
+                username = username.replace('.', '')
+                value = f'{username}@{domain}'
+
+            if '@yandex.ru' in value:
+                username, domain = value.split('@')
+                username = username.replace('.', '-')
+                value = f'{username}@{domain}'
+
+        return value
 
 
 class UserProfile(
@@ -29,6 +63,13 @@ class UserProfile(
         unique=True,
         help_text='Электронная почта',
     )
+    normalized_email = NormalizedEmailField(
+        _('нормализованная электронная почта'),
+        null=True,
+        blank=True,
+        unique=True,
+        help_text='Нормализованная электронная почта',
+    )
     date_joined = models.DateTimeField(
         _('date joined'), auto_now=True, help_text='Дата регистрации'
     )
@@ -52,6 +93,9 @@ class UserProfile(
     )
     coffee_count = models.IntegerField(
         _('выпито кофе'), default=0, help_text='Кофе выпито'
+    )
+    failed_attempts = models.IntegerField(
+        _('неудачные попытки'), default=0, help_text='Неудачные попытки'
     )
 
     USERNAME_FIELD = 'username'
@@ -84,3 +128,8 @@ class UserProfile(
             default_storage.save(path, ContentFile(self.image.read()))
             self.image = path
             super(UserProfile, self).save(*args, **kwargs)
+        self.normalized_email = self.normalized_email or self.email
+        super().save(*args, **kwargs)
+
+    def email_user(self, subject, message, from_email=None, **kwargs):
+        send_mail(subject, message, from_email, [self.email], **kwargs)
