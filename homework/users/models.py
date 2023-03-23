@@ -129,6 +129,3 @@ class UserProfile(
             super(UserProfile, self).save(*args, **kwargs)
         self.normalized_email = self.normalized_email or self.email
         super().save(*args, **kwargs)
-
-    def email_user(self, subject, message, from_email=None, **kwargs):
-        send_mail(subject, message, from_email, [self.email], **kwargs)

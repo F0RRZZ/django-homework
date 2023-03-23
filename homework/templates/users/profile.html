@@ -13,11 +13,13 @@
         {% else %}
           <p>Нет аватарки</p>
         {% endif %}
-        {{  profile_form.as_p }}
+        {{ profile_form.as_p }}
         <p>Кофе выпито</p>
         <h1>{{ coffee_count }}</h1><br>
         <a class="btn btn-dark" href={% url 'users:drink_coffee' %}>Выпить
           кофе</a><br><br>
+        <a class="btn btn-primary" href={% url 'users:password_change' %}>Изменить пароль</a>
+        <a class="btn btn-primary" href={% url 'users:password_reset' %}>Сбросить пароль</a><br><br>
         <button type="submit" class="btn btn-primary">Сохранить</button>
       </form>
     </div>

@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.contrib.auth.signals import user_login_failed
+from django.core.mail import send_mail
 from django.dispatch import receiver
 
 from users.models import UserProfile
@@ -16,10 +17,12 @@ def handle_login_failed(sender, credentials, **kwargs):
     if user.failed_attempts == settings.MAX_FAILED_ATTEMPTS:
         user.is_active = False
         user.failed_attempts = 0
-        user.email_user(
+        send_mail(
             'Активация аккаунта',
             f'Ссылка для активации:'
             f' http://127.0.0.1:8000/auth/activate/{user.username}/',
             settings.EMAIL,
+            [user.email],
+            fail_silently=False,
         )
     user.save()
