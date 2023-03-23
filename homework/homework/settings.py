@@ -7,6 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env(
     ALLOWED_HOSTS=(list, ['*']),
+    USERS_AUTOACTIVATE=(bool, False),
     DEBUG=(bool, True),
     EMAIL=(str, 'example@example.com'),
     RUSSIAN_WORDS_REVERSING_MIDDLEWARE_ENABLED=(bool, False),
@@ -24,7 +25,7 @@ RUSSIAN_WORDS_REVERSING_MIDDLEWARE_ENABLED = env(
 SECRET_KEY = env('SECRET_KEY')
 
 MAX_FAILED_ATTEMPTS = 3
-USERS_AUTOACTIVATE = DEBUG
+USERS_AUTOACTIVATE = env('USERS_AUTOACTIVATE')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
