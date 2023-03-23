@@ -54,19 +54,14 @@ class ActivateUserView(DetailView):
     def get_object(self, queryset=None):
         user = get_object_or_404(UserProfile, username=self.kwargs['username'])
 
-        if not user.is_active:
-            if user.last_login is None:
-                if timezone.now() - user.date_joined > timezone.timedelta(
-                    hours=12
-                ):
-                    raise Http404
-            else:
-                if timezone.now() - user.date_joined > timezone.timedelta(
-                    weeks=1
-                ):
-                    raise Http404
+        if user.last_login is None:
+            if timezone.now() - user.date_joined > timezone.timedelta(
+                hours=12
+            ):
+                raise Http404
         else:
-            raise Http404
+            if timezone.now() - user.date_joined > timezone.timedelta(weeks=1):
+                raise Http404
 
         user.is_active = True
         user.save()
