@@ -5,12 +5,12 @@
 {% block title %}<title>{{ sort_type }}</title>{% endblock %}
 
 {% block content %}
-<h1>{{ sort_type }}</h1>
-<div class="container">
-  <div class="row">
-    {% for item in items %}
-      {% include 'includes/item_card.html' %}
-    {% endfor %}
+  <h1>{{ sort_type }}</h1>
+  <div class="container">
+    <div class="row">
+      {% for item in items %}
+        {% include 'includes/item_card.html' %}
+      {% endfor %}
+    </div>
   </div>
-</div>
 {% endblock %}

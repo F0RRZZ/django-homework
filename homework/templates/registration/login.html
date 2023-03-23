@@ -4,5 +4,6 @@
 {% block page_name %}Login {{ user.is_active }}{% endblock %}
 {% block button_text %}Войти{% endblock %}
 {% block more_elements %}
-<a style="margin-top: 10px" class="btn btn-primary" href="{% url 'index:index' %}">На главную</a>
+  <a style="margin-top: 10px" class="btn btn-primary"
+     href="{% url 'index:index' %}">На главную</a>
 {% endblock %}

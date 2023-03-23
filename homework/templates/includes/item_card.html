@@ -1,19 +1,21 @@
 <div class="col-xl-3">
-<div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="{{ MEDIA_URL }}{{ item.main_image.image }}" alt="Card image cap" width="300" height="200">
-  <div class="card-body">
-    <h5 class="card-header">{{ item.name }}</h5>
-    {% if item.category.name %}
-      <h6 class="card-title">Категория: {{ item.category.name }}</h6>
-    {% endif %}
-    <p class="card-text">{{ item.text|safe|truncatewords:10 }}</p>
-    {% for tag in item.tags.all %}
-    <div style="padding-bottom: 5px">
-      <span class="badge rounded-pill text-bg-primary">{{ tag }}</span>
+  <div class="card" style="width: 18rem;">
+    <img class="card-img-top" src="{{ MEDIA_URL }}{{ item.main_image.image }}"
+         alt="Card image cap" width="300" height="200">
+    <div class="card-body">
+      <h5 class="card-header">{{ item.name }}</h5>
+      {% if item.category.name %}
+        <h6 class="card-title">Категория: {{ item.category.name }}</h6>
+      {% endif %}
+      <p class="card-text">{{ item.text|safe|truncatewords:10 }}</p>
+      {% for tag in item.tags.all %}
+        <div style="padding-bottom: 5px">
+          <span class="badge rounded-pill text-bg-primary">{{ tag }}</span>
+        </div>
+      {% endfor %}
+      <br>
+      <a href="{% url 'catalog:item-detail' item.id %}"
+         class="btn btn-primary">Перейти к описанию</a>
     </div>
-    {% endfor %}
-    <br>
-    <a href="{% url 'catalog:item-detail' item.id %}" class="btn btn-primary">Перейти к описанию</a>
   </div>
-</div>
 </div>

@@ -3,19 +3,19 @@
 {% load static %}
 
 {% block title %}
-<title>Каталог товаров</title>
+  <title>Каталог товаров</title>
 {% endblock %}
 
 {% block content %}
-{% for category in categories %}
-  <h1>{{ category.name }}</h1>
-<div class="container">
-  <div class="row">
-    {% for item in category.items.published %}
-      {% include 'includes/item_card.html' %}
-    {% endfor %}
-  </div>
-</div>
-  <hr>
-{% endfor %}
+  {% for category in categories %}
+    <h1>{{ category.name }}</h1>
+    <div class="container">
+      <div class="row">
+        {% for item in category.items.published %}
+          {% include 'includes/item_card.html' %}
+        {% endfor %}
+      </div>
+    </div>
+    <hr>
+  {% endfor %}
 {% endblock %}

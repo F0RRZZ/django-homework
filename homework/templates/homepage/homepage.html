@@ -2,27 +2,28 @@
 {% load static %}
 
 {% block title %}
-<title>Главная страница</title>
+  <title>Главная страница</title>
 {% endblock %}
 
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/homepage.css' %}">
-<div class="px-4 py-5 my-5 text-center">
-  <img src="{% static 'img/cat.png' %}" alt="logo" width="300" height="300">
-  <h1 class="display-5 fw-bold">{{store_name}}</h1>
-  <div class="col-lg-6 mx-auto">
-    <p class="lead mb-4">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pharetra luctus viverra.
-      Maecenas eleifend pretium dui eu interdum.
-      Donec a ultricies odio.
-    </p>
+  <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+  <div class="px-4 py-5 my-5 text-center">
+    <img src="{% static 'img/cat.png' %}" alt="logo" width="300" height="300">
+    <h1 class="display-5 fw-bold">{{ store_name }}</h1>
+    <div class="col-lg-6 mx-auto">
+      <p class="lead mb-4">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean
+        pharetra luctus viverra.
+        Maecenas eleifend pretium dui eu interdum.
+        Donec a ultricies odio.
+      </p>
+    </div>
   </div>
-</div>
-<div class="container">
-  <div class="row">
-    {% for item in items %}
-      {% include 'includes/item_card.html' with item_name=item.name category_name=item.category.name item_text=item.text item_tags=item.tags item_id=item.id image=item.main_image.image %}
-    {% endfor %}
+  <div class="container">
+    <div class="row">
+      {% for item in items %}
+        {% include 'includes/item_card.html' with item_name=item.name category_name=item.category.name item_text=item.text item_tags=item.tags item_id=item.id image=item.main_image.image %}
+      {% endfor %}
+    </div>
   </div>
-</div>
 {% endblock %}
