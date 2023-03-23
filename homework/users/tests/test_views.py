@@ -123,10 +123,7 @@ class SignUpTests(TestCase):
 
     @override_settings(USERS_AUTOACTIVATE=False)
     def test_failed_authorization_for_the_maximum_number_of_attempts(self):
-        Client().post(
-            self.url,
-            self.test_user_data
-        )
+        Client().post(self.url, self.test_user_data)
         activation_url = reverse(
             'users:activate', args=[self.test_user_data['username']]
         )
@@ -142,7 +139,7 @@ class SignUpTests(TestCase):
                 {
                     'username': 'testuser',
                     'password': 'invalid',
-                }
+                },
             )
         user = UserProfile.objects.get(
             username=self.test_user_data['username']
@@ -151,10 +148,7 @@ class SignUpTests(TestCase):
 
     @override_settings(USERS_AUTOACTIVATE=False)
     def test_failed_authorization_activation_link_within_one_week(self):
-        Client().post(
-            self.url,
-            self.test_user_data
-        )
+        Client().post(self.url, self.test_user_data)
         activation_url = reverse(
             'users:activate', args=[self.test_user_data['username']]
         )
@@ -166,7 +160,7 @@ class SignUpTests(TestCase):
                 {
                     'username': 'testuser',
                     'password': 'invalid',
-                }
+                },
             )
         activation_url = reverse(
             'users:activate', args=[self.test_user_data['username']]
@@ -176,18 +170,12 @@ class SignUpTests(TestCase):
             username=self.test_user_data['username']
         )
         self.assertTrue(user.is_active)
-        response = Client().post(
-            self.url,
-            self.test_user_data
-        )
+        response = Client().post(self.url, self.test_user_data)
         self.assertEqual(response.status_code, HTTPStatus.OK)
 
     @override_settings(USERS_AUTOACTIVATE=False)
     def test_failed_authorization_activation_link_after_one_week(self):
-        Client().post(
-            self.url,
-            self.test_user_data
-        )
+        Client().post(self.url, self.test_user_data)
         activation_url = reverse(
             'users:activate', args=[self.test_user_data['username']]
         )
@@ -199,17 +187,15 @@ class SignUpTests(TestCase):
                 {
                     'username': 'testuser',
                     'password': 'invalid',
-                }
+                },
             )
         activation_url = reverse(
             'users:activate', args=[self.test_user_data['username']]
         )
         with patch.object(
-                timezone,
-                'now',
-                return_value=timezone.now() + timezone.timedelta(
-                    weeks=1, hours=1
-                ),
+            timezone,
+            'now',
+            return_value=timezone.now() + timezone.timedelta(weeks=1, hours=1),
         ):
             Client().get(activation_url)
             user = UserProfile.objects.get(

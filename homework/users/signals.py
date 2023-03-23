@@ -34,7 +34,6 @@ def handle_login_failed(sender, credentials, **kwargs):
 @receiver(user_logged_in)
 def handle_login_done(sender, user, **kwargs):
     username = user.username
-    print(username)
     try:
         user_profile = UserProfile.objects.get(username=username)
     except UserProfile.DoesNotExist:
