@@ -123,7 +123,7 @@ class ItemManager(django.db.models.Manager):
             self.get_queryset()
             .filter(
                 is_published=True,
-                updated_at__week_day=5,
+                updated_at__week_day=6,
             )
             .select_related('category', 'main_image')
             .order_by('-updated_at')[:5]

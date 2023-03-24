@@ -5,6 +5,11 @@
      class="nav-link tab">
     <img src="{% static 'img/logo/logo.png' %}" width="50" alt="Home">
   </a>
+  <select class="change-lang"
+          style="position: absolute; right: 100px; top: 10px;">
+    <option value="ru">Русский</option>
+    <option value="en">English</option>
+  </select>
   <header class="d-flex justify-content-start py-3">
     <ul class="nav nav-pills">
       <li class="nav-item"><a href="{% url 'index:index' %}"
@@ -54,11 +59,6 @@
            href="{% url 'users:signup' %}">Sign up</a>
       </div>
     {% endif %}
-    <select class="change-lang"
-            style="position: absolute; right: 100px; top: 58px;">
-      <option value="ru">Русский</option>
-      <option value="en">English</option>
-    </select>
   </header>
 </div>
 <script src="{% static 'js/links_activator.js' %}"></script>
