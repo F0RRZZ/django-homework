@@ -1,8 +1,8 @@
-import os
 import re
 
 import django.contrib.auth.models
-from django.core.mail import send_mail
+from django.core.files.base import ContentFile
+from django.core.files.storage import default_storage
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -111,21 +111,13 @@ class UserProfile(
 
     def save(self, *args, **kwargs):
         super(UserProfile, self).save(*args, **kwargs)
-
         if self.image:
-            from django.core.files.storage import default_storage
-            from django.core.files.base import ContentFile
-
-            if not os.path.exists(f'avatars/{self.id}'):
-                os.makedirs(f'avatars/{self.id}')
-
             filename = self.image.name
             path = f'avatars/{self.id}/{filename}'
 
-            if default_storage.exists(path):
-                default_storage.delete(path)
-            default_storage.save(path, ContentFile(self.image.read()))
+            if not default_storage.exists(path):
+                default_storage.save(path, ContentFile(self.image.read()))
             self.image = path
-            super(UserProfile, self).save(*args, **kwargs)
+
         self.normalized_email = self.normalized_email or self.email
-        super().save(*args, **kwargs)
+        super(UserProfile, self).save(*args, **kwargs)
