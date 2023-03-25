@@ -45,7 +45,7 @@ const langArr = {
     },
     'signup': {
         'ru': 'Зарегистрироваться',
-        'en': 'Sign up'
+        'en': 'Sign Up'
     },
     'profile': {
         'ru': 'Профиль',
