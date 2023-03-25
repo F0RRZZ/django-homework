@@ -118,7 +118,6 @@ class Item(core.base_models.PublishedWithNameBaseModel):
     rating = django.db.models.ManyToManyField(
         'rating.Rating',
         blank=True,
-        null=True,
         verbose_name='Оценка',
     )
 
