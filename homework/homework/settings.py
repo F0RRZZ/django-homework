@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'feedback.apps.FeedbackConfig',
     'homepage.apps.HomepageConfig',
+    'rating.apps.RatingConfig',
     'users.apps.UsersConfig',
 ]
 
