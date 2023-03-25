@@ -1,72 +1,67 @@
 from datetime import timedelta
 
-import django.db.models
 from django.http import HttpResponse
-import django.shortcuts
 from django.utils import timezone
+from django.views.generic import DetailView, ListView
 
 import catalog.models
+import core.rating.base_views
 
 
-def item_list(request):
-    template = 'catalog/list.html'
-    categories = catalog.models.Category.objects.published()
-    context = {
-        'categories': categories,
-    }
-    return django.shortcuts.render(request, template, context)
+class ItemListView(ListView):
+    template_name = 'catalog/list.html'
+    context_object_name = 'categories'
+    queryset = catalog.models.Category.objects.published()
 
 
-def item_detail(request, pk):
-    template = 'catalog/item.html'
-    item = django.shortcuts.get_object_or_404(
-        catalog.models.Item.objects.description(pk)
+class ItemDetailView(DetailView):
+    model = catalog.models.Item
+    template_name = 'catalog/item.html'
+    context_object_name = 'item'
+    pk_url_kwarg = 'pk'
+
+
+class DownloadMainImageView(DetailView):
+    model = catalog.models.Item
+    queryset = catalog.models.Item.objects.filter(is_published=True)
+    pk_url_kwarg = 'pk'
+
+    def render_to_response(self, context, **response_kwargs):
+        response = HttpResponse(
+            context['object'].main_image.image, content_type='image'
+        )
+        response[
+            'Content-Disposition'
+        ] = f'attachment; filename="{context["object"].main_image.image}"'
+        return response
+
+
+class DownloadGalleryImageView(DetailView):
+    model = catalog.models.GalleryImage
+    queryset = catalog.models.GalleryImage.objects.all()
+    pk_url_kwarg = 'pk'
+
+    def render_to_response(self, context, **response_kwargs):
+        image = context['object']
+        response = HttpResponse(image.image, content_type='image')
+        response[
+            'Content-Disposition'
+        ] = f'attachment; filename="{image.image}"'
+        return response
+
+
+class NewItemsView(core.rating.base_views.ItemListByDateBaseView):
+    queryset = catalog.models.Item.objects.new(
+        timezone.now() - timedelta(weeks=1)
     )
-    context = {
-        'item': item,
-    }
-    return django.shortcuts.render(request, template, context)
+    sort_type = 'Новинки'
 
 
-def download_main_image(request, item_pk):
-    item = django.shortcuts.get_object_or_404(
-        catalog.models.Item.objects.filter(pk=item_pk, is_published=True)
-    )
-    response = HttpResponse(item.main_image.image, content_type='image')
-    response['Content-Disposition'] = (
-        f'attachment;' f' filename="{item.main_image.image}"'
-    )
-    return response
+class FridayItemsView(core.rating.base_views.ItemListByDateBaseView):
+    queryset = catalog.models.Item.objects.updated_on_friday()
+    sort_type = 'Пятница'
 
 
-def download_gallery_image(request, image_pk):
-    image = django.shortcuts.get_object_or_404(
-        catalog.models.GalleryImage.objects.filter(pk=image_pk)
-    )
-    response = HttpResponse(image.image, content_type='image')
-    response['Content-Disposition'] = (
-        f'attachment; ' f'filename="{image.image}"'
-    )
-    return response
-
-
-def new_items(request):
-    template = 'catalog/items_list_by_date.html'
-    one_week_ago = timezone.now() - timedelta(weeks=1)
-    items = catalog.models.Item.objects.new(one_week_ago)
-    context = {'sort_type': 'Новинки', 'items': items}
-    return django.shortcuts.render(request, template, context)
-
-
-def friday_items(request):
-    template = 'catalog/items_list_by_date.html'
-    items = catalog.models.Item.objects.updated_on_friday()
-    context = {'sort_type': 'Пятница', 'items': items}
-    return django.shortcuts.render(request, template, context)
-
-
-def unchanged_items(request):
-    template = 'catalog/items_list_by_date.html'
-    items = catalog.models.Item.objects.unchanged()
-    context = {'sort_type': 'Непроверенное', 'items': items}
-    return django.shortcuts.render(request, template, context)
+class UnchangedItemsView(core.rating.base_views.ItemListByDateBaseView):
+    queryset = catalog.models.Item.objects.unchanged()
+    sort_type = 'Непроверенное'

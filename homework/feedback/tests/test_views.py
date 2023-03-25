@@ -10,7 +10,7 @@ import feedback.models
 class FeedbackViewTests(TestCase):
     def test_feedback_page_context(self):
         response = Client().get(reverse('feedback:feedback'))
-        self.assertIn('forms', response.context)
+        self.assertIn('form', response.context)
 
     def test_create_feedback(self):
         feedbacks_count = feedback.models.Feedback.objects.count()

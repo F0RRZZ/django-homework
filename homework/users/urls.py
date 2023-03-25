@@ -69,7 +69,7 @@ urlpatterns = [
     ),
     django.urls.path(
         'activate/done',
-        views.activation_done,
+        views.ActivationDoneView.as_view(),
         name='activation_done',
     ),
     django.urls.path(
@@ -77,9 +77,11 @@ urlpatterns = [
     ),
     django.urls.path(
         'user_detail/<int:pk>/',
-        views.user_detail,
+        views.UserDetailView.as_view(),
         name='user_detail',
     ),
-    django.urls.path('profile/', views.profile_view, name='profile'),
-    django.urls.path('drink_coffee/', views.drink_coffee, name='drink_coffee'),
+    django.urls.path('profile/', views.ProfileView.as_view(), name='profile'),
+    django.urls.path(
+        'drink_coffee/', views.DrinkCoffeeView.as_view(), name='drink_coffee'
+    ),
 ]
