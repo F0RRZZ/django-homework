@@ -1,11 +1,14 @@
 from datetime import timedelta
 
 from django.http import HttpResponse
+import django.shortcuts
 from django.utils import timezone
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, FormView, TemplateView
 
+import catalog.forms
 import catalog.models
 import core.rating.base_views
+import rating.models
 
 
 class ItemListView(ListView):
@@ -14,11 +17,52 @@ class ItemListView(ListView):
     queryset = catalog.models.Category.objects.published()
 
 
-class ItemDetailView(DetailView):
-    model = catalog.models.Item
+class ItemDetailView(FormView):
     template_name = 'catalog/item.html'
-    context_object_name = 'item'
+    form_class = catalog.forms.RatingForm
     pk_url_kwarg = 'pk'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['item'] = catalog.models.Item.objects.get_with_rating(
+            self.kwargs.get(self.pk_url_kwarg),
+        )
+        return context
+
+    def form_valid(self, form):
+        user_id = self.request.user.id
+        item_id = self.kwargs.get(self.pk_url_kwarg)
+        rat = form.cleaned_data[rating.models.Rating.rating.field.name]
+
+        rating_object = rating.models.Rating.objects.filter(
+            user_id=user_id, item_id=item_id
+        ).first()
+        if rating_object:
+            rating_object.rating = rat
+            rating_object.save()
+        else:
+            rating.models.Rating.objects.create(
+                rating=rat,
+                user_id=user_id,
+                item_id=item_id,
+            )
+        return super().form_valid(form)
+
+    def get_initial(self):
+        initial = super().get_initial()
+        if self.request.user.is_authenticated:
+            rating_object = rating.models.Rating.objects.filter(
+                user_id=self.request.user.id,
+                item_id=self.kwargs.get(self.pk_url_kwarg),
+            ).first()
+            if rating_object:
+                initial[
+                    rating.models.Rating.rating.field.name
+                ] = rating_object.rating
+        return initial
+
+    def get_success_url(self):
+        return '/catalog/{}/'.format(self.kwargs.get(self.pk_url_kwarg))
 
 
 class DownloadMainImageView(DetailView):

@@ -6,42 +6,52 @@
       <h1>Профиль пользователя</h1>
       <div class="col-md-4">
         {% if image %}
-          <img src="{{ MEDIA_URL }}{{ image }}" alt="Аватарка пользователя"
-               width="500" style="border: 2px solid black">
+          <img src="{{ MEDIA_URL }}{{ image }}"
+               alt="Аватарка пользователя"
+               width="500"
+               style="border: 2px solid black">
         {% else %}
           <p>Аватарка не загружена</p>
         {% endif %}
       </div>
       {% if email == 'не указано' %}
-        <p><strong>Email:</strong> <span
-                style="font-style: italic; font-family: 'Monaco'">{{ email }}</span>
+        <p>
+          <strong>Email:</strong> <span style="font-style: italic; font-family: 'Monaco'">{{ email }}</span>
         </p>
       {% else %}
-        <p><strong>Email:</strong> {{ email }}</p>
+        <p>
+          <strong>Email:</strong> {{ email }}
+        </p>
       {% endif %}
       {% if first_name == 'не указано' %}
-        <p><strong>First Name:</strong> <span
-                style="font-style: italic; font-family: 'Monaco'">{{ first_name }}</span>
+        <p>
+          <strong>First Name:</strong> <span style="font-style: italic; font-family: 'Monaco'">{{ first_name }}</span>
         </p>
       {% else %}
-        <p><strong>First Name:</strong> {{ first_name }}</p>
+        <p>
+          <strong>First Name:</strong> {{ first_name }}
+        </p>
       {% endif %}
       {% if last_name == 'не указано' %}
-        <p><strong>Last Name:</strong> <span
-                style="font-style: italic; font-family: 'Monaco'">{{ last_name }}</span>
+        <p>
+          <strong>Last Name:</strong> <span style="font-style: italic; font-family: 'Monaco'">{{ last_name }}</span>
         </p>
       {% else %}
-        <p><strong>Last Name:</strong> {{ last_name }}</p>
+        <p>
+          <strong>Last Name:</strong> {{ last_name }}
+        </p>
       {% endif %}
       {% if birthday == 'не указано' %}
-        <p><strong>Birthday:</strong> <span
-                style="font-style: italic; font-family: 'Monaco'">{{ birthday }}</span>
+        <p>
+          <strong>Birthday:</strong> <span style="font-style: italic; font-family: 'Monaco'">{{ birthday }}</span>
         </p>
       {% else %}
-        <p><strong>Birthday:</strong> {{ birthday }}</p>
+        <p>
+          <strong>Birthday:</strong> {{ birthday }}
+        </p>
       {% endif %}
-      <p><strong>Coffee Count:</strong> <span
-              style="font-style: italic; font-family: 'Monaco'">{{ coffee_count }}</span>
+      <p>
+        <strong>Coffee Count:</strong> <span style="font-style: italic; font-family: 'Monaco'">{{ coffee_count }}</span>
       </p>
     </div>
   </div>

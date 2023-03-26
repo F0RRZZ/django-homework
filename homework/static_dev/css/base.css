@@ -4,3 +4,7 @@ body {
     font-family: "Raleway", sans-serif;
     font-weight: 500;
 }
+
+.shop-table {
+    width: fit-content !important;
+}

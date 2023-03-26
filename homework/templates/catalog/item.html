@@ -2,40 +2,63 @@
 
 {% block title %}
   <title>{{ item.name }}</title>
-{% endblock %}
+{% endblock title %}
 
 {% block content %}
-  <div style="margin-left: 20px;">
-  <h1> {{ item.name }} </h1>
-  <img src="{{ MEDIA_URL }}{{ item.main_image.image }}" width="500" alt="item">
-  <br>
-  <a href="{% url 'catalog:download-main-image' item.id %}">Скачать
-    изображение</a>
-  <hr>
-  <div width="30%">
-    <p>Описание: {{ item.text|safe }}</p>
-  </div>
-  <hr>
-  <p>Категория: {{ item.category.name }}</p>
-  <hr>
-  <div width="30%">
-    <p>Теги</p>
-    {% for tag in item.tags.all %}
-      <span class="badge rounded-pill text-bg-primary">{{ tag.name }}</span>
-    {% endfor %}
-  </div>
-  <hr>
-  <div width="30%">
-    <div class="container">
-      <div class="row gx-5">
-        {% for gal_image in item.galleryimage_set.all %}
-          <div class="col-xl-3">
-            <img src="{{ MEDIA_URL }}{{ gal_image.image }}" width="300">
-            <a href="{% url 'catalog:download-gallery-image' gal_image.id %}">Скачать
-              картинку</a>
+  <div class="container">
+    <div class="ms-2">
+      <h1>{{ item.name }}</h1>
+      <img src="{{ MEDIA_URL }}{{ item.main_image.image }}"
+           width="500"
+           alt="item"/>
+      <br />
+      <a href="{% url 'catalog:download-main-image' item.id %}">Скачать
+      изображение</a>
+      <hr />
+      <div>
+        <p>Описание: {{ item.text|safe }}</p>
+      </div>
+      <hr />
+      <p>Категория: {{ item.category.name }}</p>
+      <hr />
+      <div>
+        <p>Теги</p>
+        {% for tag in item.tags.all %}<span class="badge rounded-pill text-bg-primary">{{ tag.name }}</span>{% endfor %}
+      </div>
+      <hr />
+      <div>
+        <table class="table shop-table">
+          <tbody>
+            <tr>
+              <td>Средняя оценка:</td>
+              <td>{{ item.average_rating }}</td>
+            </tr>
+            <tr>
+              <td>Количество оценок:</td>
+              <td>{{ item.ratings_number }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+        {% if user.is_authenticated %}
+
+          {% include "includes/form.html" %}
+
+        {% endif %}
+      </div>
+      <div width="30%">
+        <div class="container">
+          <div class="row gx-5">
+            {% for gal_image in item.galleryimage_set.all %}
+              <div class="col-xl-3">
+                <img src="{{ MEDIA_URL }}{{ gal_image.image }}" alt="image" width="300" />
+                <a href="{% url 'catalog:download-gallery-image' gal_image.id %}">Скачать
+                картинку</a>
+              </div>
+            {% endfor %}
           </div>
-        {% endfor %}
+        </div>
       </div>
     </div>
   </div>
-{% endblock %}
+{% endblock content %}

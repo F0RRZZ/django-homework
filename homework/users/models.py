@@ -1,3 +1,4 @@
+import os
 import re
 
 import django.contrib.auth.models
@@ -84,8 +85,14 @@ class UserProfile(
     birthday = models.DateTimeField(
         _('день рождения'), null=True, blank=True, help_text='День рождения'
     )
+
+    def get_image_filename(self, filename):
+        ext = os.path.splitext(filename)[-1]
+        return 'avatars/user_{}{}'.format(self.id, ext)
+
     image = models.ImageField(
         _('аватарка'),
+        upload_to=get_image_filename,
         null=True,
         blank=True,
         help_text='Аватарка',
@@ -110,14 +117,5 @@ class UserProfile(
         return self.username
 
     def save(self, *args, **kwargs):
-        super(UserProfile, self).save(*args, **kwargs)
-        if self.image:
-            filename = self.image.name
-            path = f'avatars/{self.id}/{filename}'
-
-            if not default_storage.exists(path):
-                default_storage.save(path, ContentFile(self.image.read()))
-            self.image = path
-
         self.normalized_email = self.normalized_email or self.email
         super(UserProfile, self).save(*args, **kwargs)

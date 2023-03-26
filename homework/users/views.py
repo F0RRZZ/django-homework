@@ -11,12 +11,10 @@ from django.views.generic import (
     DetailView,
     ListView,
     TemplateView,
-    FormView,
     UpdateView,
 )
 
 from users.models import UserProfile
-
 from users.forms import CustomUserCreationForm, UserProfileForm
 
 
@@ -133,9 +131,9 @@ class ProfileView(LoginRequiredMixin, UpdateView):
 
 
 class DrinkCoffeeView(TemplateView, LoginRequiredMixin):
-    success_url = reverse_lazy('users:profile')
-
     def get(self, request, *args, **kwargs):
         profile = request.user
         profile.coffee_count += 1
         profile.save()
+        # При указании success_url вылетала ошибка
+        return redirect('users:profile')
