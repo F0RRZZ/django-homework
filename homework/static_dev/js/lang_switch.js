@@ -78,7 +78,7 @@ function changeLanguage() {
         location.href = window.location.pathname + '#' + currentLang;
         location.reload();
     }
-    select.value = hash;
+    langSelect.value = hash;
     for (let key in langArr) {
         document.querySelector('.lng-' + key).innerHTML = langArr[key][hash];
     }

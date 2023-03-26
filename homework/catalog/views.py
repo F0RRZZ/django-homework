@@ -32,17 +32,20 @@ class ItemDetailView(FormView):
     def form_valid(self, form):
         user_id = self.request.user.id
         item_id = self.kwargs.get(self.pk_url_kwarg)
-        rat = form.cleaned_data[rating.models.Rating.rating.field.name]
+        rating_ = form.cleaned_data[rating.models.Rating.rating.field.name]
 
         rating_object = rating.models.Rating.objects.filter(
             user_id=user_id, item_id=item_id
         ).first()
         if rating_object:
-            rating_object.rating = rat
-            rating_object.save()
-        else:
+            if rating_ is None:
+                rating_object.delete()
+            else:
+                rating_object.rating = rating_
+                rating_object.save()
+        elif rating_ is not None:
             rating.models.Rating.objects.create(
-                rating=rat,
+                rating=rating_,
                 user_id=user_id,
                 item_id=item_id,
             )

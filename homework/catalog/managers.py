@@ -161,7 +161,8 @@ class ItemManager(django.db.models.Manager):
         item.ratings_number = len(ratings)
         sum_ = 0
         for rat in ratings:
-            sum_ += rat.rating
+            if rat.rating is not None:
+                sum_ += rat.rating
         if item.ratings_number == 0:
             item.average_rating = 0
         else:
