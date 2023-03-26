@@ -135,5 +135,6 @@ class DrinkCoffeeView(TemplateView, LoginRequiredMixin):
         profile = request.user
         profile.coffee_count += 1
         profile.save()
+        return redirect('users:profile')
         # При указании success_url вылетала ошибка
         return redirect('users:profile')
