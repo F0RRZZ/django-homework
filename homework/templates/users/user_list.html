@@ -2,32 +2,35 @@
 
 {% block title %}
   <title>Список пользователей</title>
-{% endblock %}
+{% endblock title %}
 
 {% block content %}
-  <h1>Список пользователей</h1>
-  <div class="table-responsive">
-    <table class="table table-striped table-hover">
-      <thead>
-      <tr>
-        <th>Username</th>
-        <th>Email</th>
-      </tr>
-      </thead>
-      <tbody>
-      {% for user in object_list %}
-        <tr>
-          <td>{{ user.username }}</td>
-          <td>{{ user.email }}</td>
-          <td><a class="btn btn-primary"
-                 href="{% url 'users:user_detail' user.id %}">Профиль</a></td>
-        </tr>
-      {% empty %}
-        <tr>
-          <td colspan="2">No users found.</td>
-        </tr>
-      {% endfor %}
-      </tbody>
-    </table>
+  <div class="container">
+    <h1>Список пользователей</h1>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in object_list %}
+            <tr>
+              <td>{{ user.username }}</td>
+              <td>{{ user.email }}</td>
+              <td>
+                <a class="btn btn-primary" href="{% url 'users:user_detail' user.id %}">Профиль</a>
+              </td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="2">No users found.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </div>
-{% endblock %}
+{% endblock content %}

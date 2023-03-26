@@ -27,6 +27,10 @@ const langArr = {
         'ru': 'Обратная связь',
         'en': 'Feedback',
     },
+    'ruling': {
+        'ru': 'Управление',
+        'en': 'Ruling',
+    },
     'admin': {
         'ru': 'Админка',
         'en': 'Admin',
@@ -54,14 +58,14 @@ const langArr = {
 }
 
 const allLang = ['en', 'ru']
-const select = document.querySelector('select');
+const langSelect = document.querySelector('.change-lang');
 
 let currentLang = localStorage.getItem('language') || 'ru';
 
-select.addEventListener('change', changeURLLanguage);
+langSelect.addEventListener('change', changeURLLanguage);
 
 function changeURLLanguage() {
-    currentLang = select.value;
+    currentLang = langSelect.value;
     localStorage.setItem('language', currentLang);
     location.href = window.location.pathname + '#' + currentLang;
     location.reload();
@@ -74,7 +78,7 @@ function changeLanguage() {
         location.href = window.location.pathname + '#' + currentLang;
         location.reload();
     }
-    select.value = hash;
+    langSelect.value = hash;
     for (let key in langArr) {
         document.querySelector('.lng-' + key).innerHTML = langArr[key][hash];
     }

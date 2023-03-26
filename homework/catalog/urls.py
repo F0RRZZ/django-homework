@@ -6,41 +6,41 @@ register_converter(converters.PositiveInteger, 'posint')
 
 app_name = 'catalog'
 urlpatterns = [
-    path('', views.item_list, name='item-list'),
-    path('<int:pk>/', views.item_detail, name='item-detail'),
+    path('', views.ItemListView.as_view(), name='item-list'),
+    path('<int:pk>/', views.ItemDetailView.as_view(), name='item-detail'),
     path(
         'converter/<posint:pk>',
-        views.item_detail,
+        views.ItemDetailView.as_view(),
         name='postitive-number-check',
     ),
     path(
-        'download-main-image/<posint:item_pk>',
-        views.download_main_image,
+        'download-main-image/<posint:pk>',
+        views.DownloadMainImageView.as_view(),
         name='download-main-image',
     ),
     path(
-        'download-gallery-image/<posint:image_pk>',
-        views.download_gallery_image,
+        'download-gallery-image/<posint:pk>',
+        views.DownloadGalleryImageView.as_view(),
         name='download-gallery-image',
     ),
     path(
         'new-items',
-        views.new_items,
+        views.NewItemsView.as_view(),
         name='new-items',
     ),
     path(
         'friday-items',
-        views.friday_items,
+        views.FridayItemsView.as_view(),
         name='friday-items',
     ),
     path(
         'unchanged-items',
-        views.unchanged_items,
+        views.UnchangedItemsView.as_view(),
         name='unchanged-items',
     ),
     re_path(
         r're/(?P<pk>[1-9]\d*)/$',
-        views.item_detail,
+        views.ItemDetailView.as_view(),
         name='re-positive-number-check',
     ),
 ]

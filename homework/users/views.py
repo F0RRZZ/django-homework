@@ -1,14 +1,20 @@
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import (
+    CreateView,
+    DetailView,
+    ListView,
+    TemplateView,
+    UpdateView,
+)
 
 from users.models import UserProfile
-
 from users.forms import CustomUserCreationForm, UserProfileForm
 
 
@@ -77,57 +83,58 @@ class UserListView(ListView):
         return UserProfile.objects.filter(is_active=True)
 
 
-@login_required
-def activation_done(request):
-    template = 'users/activate_link_sends.html'
-    return render(request, template)
+class ActivationDoneView(TemplateView, LoginRequiredMixin):
+    template_name = 'users/activate_link_sends.html'
 
 
-@login_required
-def user_detail(request, pk):
-    user = get_object_or_404(UserProfile, id=pk)
-    first_name = user.first_name if user.first_name else 'не указано'
-    last_name = user.last_name if user.last_name else 'не указано'
-    birthday = (
-        user.birthday.strftime('%d.%m.%Y') if user.birthday else 'не указано'
-    )
-    image = user.image if user.image else None
-    coffee_count = user.coffee_count
-    context = {
-        'email': user.email,
-        'first_name': first_name,
-        'last_name': last_name,
-        'birthday': birthday,
-        'image': image,
-        'coffee_count': coffee_count,
-    }
-    return render(request, 'users/user_detail.html', context)
+class UserDetailView(DetailView, LoginRequiredMixin):
+    template_name = 'users/user_detail.html'
+    queryset = UserProfile.objects.all()
+    pk_url_kwarg = 'pk'
 
-
-@login_required
-def profile_view(request):
-    profile_form = UserProfileForm(instance=request.user)
-    if request.method == 'POST':
-        profile_form = UserProfileForm(
-            request.POST, request.FILES, instance=request.user
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = self.object
+        first_name = user.first_name if user.first_name else 'не указано'
+        last_name = user.last_name if user.last_name else 'не указано'
+        email = user.email if user.email else 'не указано'
+        birthday = user.birthday if user.birthday else 'не указано'
+        image = user.image if user.image else 'не указано'
+        coffee_count = user.coffee_count if user.coffee_count else 'не указано'
+        context.update(
+            {
+                'email': email,
+                'first_name': first_name,
+                'last_name': last_name,
+                'birthday': birthday,
+                'image': image,
+                'coffee_count': coffee_count,
+            }
         )
-        if profile_form.is_valid():
-            profile_form.save()
-            return redirect('users:profile')
-    return render(
-        request,
-        'users/profile.html',
-        {
-            'profile_form': profile_form,
-            'image': request.user.image,
-            'coffee_count': request.user.coffee_count,
-        },
-    )
+        return context
 
 
-@login_required
-def drink_coffee(request):
-    profile = request.user
-    profile.coffee_count += 1
-    profile.save()
-    return redirect('users:profile')
+class ProfileView(LoginRequiredMixin, UpdateView):
+    model = UserProfile
+    form_class = UserProfileForm
+    template_name = 'users/profile.html'
+    success_url = reverse_lazy('users:profile')
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['image'] = self.request.user.image
+        context['coffee_count'] = self.request.user.coffee_count
+        return context
+
+
+class DrinkCoffeeView(TemplateView, LoginRequiredMixin):
+    def get(self, request, *args, **kwargs):
+        profile = request.user
+        profile.coffee_count += 1
+        profile.save()
+        return redirect('users:profile')
+        # При указании success_url вылетала ошибка
+        return redirect('users:profile')

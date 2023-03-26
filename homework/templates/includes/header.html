@@ -1,65 +1,104 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/header.css' %}">
-<div class="container">
-  <a href="{% url 'index:index' %}" style="text-align: center; display:block;"
-     class="nav-link tab">
-    <img src="{% static 'img/logo/logo.png' %}" width="50" alt="Home">
-  </a>
-  <select class="change-lang"
-          style="position: absolute; right: 100px; top: 10px;">
-    <option value="ru">Русский</option>
-    <option value="en">English</option>
-  </select>
-  <header class="d-flex justify-content-start py-3">
-    <ul class="nav nav-pills">
-      <li class="nav-item"><a href="{% url 'index:index' %}"
-                              class="nav-link tab lng-home" data-toggle="tab">На
-        главную</a></li>
-      <li class="nav-item"><a href="{% url 'catalog:item-list' %}"
-                              class="nav-link tab lng-catalog"
-                              data-toggle="tab">Список товаров</a></li>
-      <li class="nav-item"><a href="{% url 'catalog:new-items' %}"
-                              class="nav-link tab lng-new" data-toggle="tab">Новинки</a>
-      </li>
-      <li class="nav-item"><a href="{% url 'catalog:friday-items' %}"
-                              class="nav-link tab lng-friday"
-                              data-toggle="tab">Пятница</a></li>
-      <li class="nav-item"><a href="{% url 'catalog:unchanged-items' %}"
-                              class="nav-link tab lng-unchanged"
-                              data-toggle="tab">Непроверенное</a></li>
-      <li class="nav-item"><a href="{% url 'users:user_list' %}"
-                              class="nav-link tab lng-userlist"
-                              data-toggle="tab">
-        Список пользователей
-      </a></li>
-      <li class="nav-item"><a href="{% url 'feedback:feedback' %}"
-                              class="nav-link tab lng-feedback"
-                              data-toggle="tab">Обратная связь</a></li>
-      <li class="nav-item"><a href="{% url 'about:description' %}"
-                              class="nav-link tab lng-about" data-toggle="tab">О
-        проекте</a></li>
-      {% if user.is_superuser %}
-        <li class="nav-item"><a href="http://127.0.0.1:8000/admin/"
-                                class="nav-link tab lng-admin"
-                                data-toggle="tab">Админка</a></li>
-      {% endif %}
-    </ul>
-    {% if request.user.is_authenticated %}
-      <div class="col-md-3 text-end">
-        <a type="button" class="btn btn-outline-primary me-2 lng-logout"
-           href="{% url 'users:logout' %}">Logout</a>
-        <a type="button" class="btn btn-primary me-2 lng-profile"
-           href="{% url 'users:profile' %}">Profile</a>
-      </div>
-    {% else %}
-      <div class="col-md-3 text-end">
-        <a type="button" class="btn btn-outline-primary me-2 lng-login"
-           href="{% url 'users:login' %}">Login</a>
-        <a type="button" class="btn btn-primary me-2 lng-signup"
-           href="{% url 'users:signup' %}">Sign up</a>
-      </div>
-    {% endif %}
-  </header>
-</div>
+
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center justify-content-between"
+       href="{% url 'index:index' %}">
+      <img src="{% static 'favicon/favicon.ico' %}"
+           alt="Logo"
+           width="40px"
+           height="40px"
+           class="d-inline-block align-text-top"/>
+      <div class="liz-sh-logo-text">SomeStore</div>
+    </a>
+    <button class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      {% with request.resolver_match.view_name as view_name %}
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link lng-home {% if view_name == 'index:index' %} {{ 'active' }} {% endif %}"
+               href="{% url 'index:index' %}">На главную</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link lng-catalog dropdown-toggle {% if view_name == 'catalog:item-list' or view_name == 'catalog:new-items' or view_name == 'catalog:friday-items' or view_name == 'catalog:unchanged-items' %} {{ 'active' }} {% endif %}"
+               href="#"
+               role="button"
+               data-bs-toggle="dropdown"
+               aria-expanded="false">
+              Список товаров
+            </a>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item lng-catalog {% if view_name == 'catalog:item-list' %} {{ 'active' }} {% endif %}"
+                   href="{% url 'catalog:item-list' %}">Список товаров</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item lng-new {% if view_name == 'catalog:new-items' %} {{ 'active' }} {% endif %}"
+                   href="{% url 'catalog:new-items' %}">Новинки</a>
+              </li>
+              <li>
+                <a class="dropdown-item lng-friday {% if view_name == 'catalog:friday-items' %} {{ 'active' }} {% endif %}"
+                   href="{% url 'catalog:friday-items' %}">Пятница</a>
+              </li>
+              <li>
+                <a class="dropdown-item lng-unchanged {% if view_name == 'catalog:unchanged-items' %} {{ 'active' }} {% endif %}"
+                   href="{% url 'catalog:unchanged-items' %}">Непроверенное</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link lng-about {% if view_name == 'about:description' %} {{ 'active' }} {% endif %}"
+               href="{% url 'about:description' %}">О проекте</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link lng-feedback {% if view_name == 'feedback:feedback' %} {{ 'active' }} {% endif %}"
+               href="{% url 'feedback:feedback' %}">Обратная связь</a>
+          </li>
+          {% if user.is_superuser %}
+            <li class="nav-item dropdown">
+              <a class="nav-link lng-ruling dropdown-toggle {% if view_name == 'auth:user_list' or view_name == 'auth:user_detail' %} {{ 'active' }} {% endif %}"
+                 href="#"
+                 role="button"
+                 data-bs-toggle="dropdown"
+                 aria-expanded="false">
+                Управление
+              </a>
+              <ul class="dropdown-menu">
+                <li>
+                  <a class="dropdown-item lng-admin {% if view_name == 'admin:index' %} {{ 'active' }} {% endif %}"
+                     href="{% url 'admin:index' %}">Админка</a>
+                </li>
+                <li>
+                  <a class="dropdown-item lng-userlist {% if view_name == 'users:user_list' %} {{ 'active' }} {% endif %}"
+                     href="{% url 'users:user_list' %}">Список пользователей</a>
+                </li>
+              </ul>
+            </li>
+          {% endif %}
+        </ul>
+        <div class="d-flex">
+          {% if user.is_authenticated %}
+            <a class="btn lng-profile btn-info me-2"
+               href="{% url 'users:profile' %}">Профиль</a>
+            <a class="btn lng-logout btn-secondary" href="{% url 'users:logout' %}">Выйти</a>
+          {% else %}
+            <a class="btn lng-login btn-primary me-2" href="{% url 'users:login' %}">Войти</a>
+            <a class="btn lng-signup btn-success" href="{% url 'users:signup' %}">Регистрация</a>
+          {% endif %}
+        </div>
+      {% endwith %}
+    </div>
+  </div>
+</nav>
 <script src="{% static 'js/links_activator.js' %}"></script>
-<script src="{% static 'js/lang_switch.js' %}"></script>

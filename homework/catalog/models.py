@@ -8,13 +8,13 @@ from sorl.thumbnail import get_thumbnail
 
 import catalog.managers
 import catalog.validators
-import core.base_models
+import core.catalog.base_models
 
 
 class Category(
-    core.base_models.PublishedWithNameBaseModel,
-    core.base_models.SluggedBaseModel,
-    core.base_models.SaveAndCleanModifiedBaseMethod,
+    core.catalog.base_models.PublishedWithNameBaseModel,
+    core.catalog.base_models.SluggedBaseModel,
+    core.catalog.base_models.SaveAndCleanModifiedBaseMethod,
 ):
     objects = catalog.managers.CategoryManager()
 
@@ -67,7 +67,7 @@ class GalleryImage(django.db.models.Model):
         )
 
 
-class Item(core.base_models.PublishedWithNameBaseModel):
+class Item(core.catalog.base_models.PublishedWithNameBaseModel):
     objects = catalog.managers.ItemManager()
 
     category = django.db.models.ForeignKey(
@@ -171,9 +171,9 @@ class MainImage(django.db.models.Model):
 
 
 class Tag(
-    core.base_models.PublishedWithNameBaseModel,
-    core.base_models.SluggedBaseModel,
-    core.base_models.SaveAndCleanModifiedBaseMethod,
+    core.catalog.base_models.PublishedWithNameBaseModel,
+    core.catalog.base_models.SluggedBaseModel,
+    core.catalog.base_models.SaveAndCleanModifiedBaseMethod,
 ):
     formatted_name = django.db.models.CharField(
         'форматированное имя',

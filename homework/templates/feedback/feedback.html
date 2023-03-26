@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}
-  <title>Обратная связь</title>
-{% endblock %}
+{% block title %}<title>Обратная связь</title>{% endblock %}
 
 {% block content %}
   <div class="container">
@@ -11,10 +9,8 @@
         <h2 class="text-center mb-4">Форма обратной связи</h2>
         <form method="POST" enctype="multipart/form-data">
           {% csrf_token %}
-          {{ forms.as_p }}
-          <button type="submit" class="btn btn-primary"
-                  style="margin-top: 20px;">Отправить
-          </button>
+          {{ form.as_p }}
+          <button type="submit" class="btn btn-primary" style="margin-top: 20px;">Отправить</button>
         </form>
       </div>
     </div>

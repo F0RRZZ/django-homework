@@ -1,9 +1,8 @@
 {% extends "base.html" %}
+
 {% load static %}
 
-{% block title %}
-  <title>Главная страница</title>
-{% endblock %}
+{% block title %}<title>Главная страница</title>{% endblock %}
 
 {% block content %}
   <link rel="stylesheet" href="{% static 'css/homepage.css' %}">
@@ -22,7 +21,9 @@
   <div class="container">
     <div class="row">
       {% for item in items %}
+
         {% include 'includes/item_card.html' with item_name=item.name category_name=item.category.name item_text=item.text item_tags=item.tags item_id=item.id image=item.main_image.image %}
+
       {% endfor %}
     </div>
   </div>

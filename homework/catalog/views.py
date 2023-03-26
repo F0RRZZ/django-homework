@@ -1,72 +1,114 @@
 from datetime import timedelta
 
-import django.db.models
 from django.http import HttpResponse
 import django.shortcuts
 from django.utils import timezone
+from django.views.generic import DetailView, ListView, FormView, TemplateView
 
+import catalog.forms
 import catalog.models
+import core.rating.base_views
+import rating.models
 
 
-def item_list(request):
-    template = 'catalog/list.html'
-    categories = catalog.models.Category.objects.published()
-    context = {
-        'categories': categories,
-    }
-    return django.shortcuts.render(request, template, context)
+class ItemListView(ListView):
+    template_name = 'catalog/list.html'
+    context_object_name = 'categories'
+    queryset = catalog.models.Category.objects.published()
 
 
-def item_detail(request, pk):
-    template = 'catalog/item.html'
-    item = django.shortcuts.get_object_or_404(
-        catalog.models.Item.objects.description(pk)
+class ItemDetailView(FormView):
+    template_name = 'catalog/item.html'
+    form_class = catalog.forms.RatingForm
+    pk_url_kwarg = 'pk'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['item'] = catalog.models.Item.objects.get_with_rating(
+            self.kwargs.get(self.pk_url_kwarg),
+        )
+        return context
+
+    def form_valid(self, form):
+        user_id = self.request.user.id
+        item_id = self.kwargs.get(self.pk_url_kwarg)
+        rating_ = form.cleaned_data[rating.models.Rating.rating.field.name]
+
+        rating_object = rating.models.Rating.objects.filter(
+            user_id=user_id, item_id=item_id
+        ).first()
+        if rating_object:
+            if rating_ is None:
+                rating_object.delete()
+            else:
+                rating_object.rating = rating_
+                rating_object.save()
+        elif rating_ is not None:
+            rating.models.Rating.objects.create(
+                rating=rating_,
+                user_id=user_id,
+                item_id=item_id,
+            )
+        return super().form_valid(form)
+
+    def get_initial(self):
+        initial = super().get_initial()
+        if self.request.user.is_authenticated:
+            rating_object = rating.models.Rating.objects.filter(
+                user_id=self.request.user.id,
+                item_id=self.kwargs.get(self.pk_url_kwarg),
+            ).first()
+            if rating_object:
+                initial[
+                    rating.models.Rating.rating.field.name
+                ] = rating_object.rating
+        return initial
+
+    def get_success_url(self):
+        return '/catalog/{}/'.format(self.kwargs.get(self.pk_url_kwarg))
+
+
+class DownloadMainImageView(DetailView):
+    model = catalog.models.Item
+    queryset = catalog.models.Item.objects.filter(is_published=True)
+    pk_url_kwarg = 'pk'
+
+    def render_to_response(self, context, **response_kwargs):
+        response = HttpResponse(
+            context['object'].main_image.image, content_type='image'
+        )
+        response[
+            'Content-Disposition'
+        ] = f'attachment; filename="{context["object"].main_image.image}"'
+        return response
+
+
+class DownloadGalleryImageView(DetailView):
+    model = catalog.models.GalleryImage
+    queryset = catalog.models.GalleryImage.objects.all()
+    pk_url_kwarg = 'pk'
+
+    def render_to_response(self, context, **response_kwargs):
+        image = context['object']
+        response = HttpResponse(image.image, content_type='image')
+        response[
+            'Content-Disposition'
+        ] = f'attachment; filename="{image.image}"'
+        return response
+
+
+class NewItemsView(core.rating.base_views.ItemListByDateBaseView):
+    queryset = catalog.models.Item.objects.new(
+        timezone.now() - timedelta(weeks=1)
     )
-    context = {
-        'item': item,
-    }
-    return django.shortcuts.render(request, template, context)
+    sort_type = 'Новинки'
 
 
-def download_main_image(request, item_pk):
-    item = django.shortcuts.get_object_or_404(
-        catalog.models.Item.objects.filter(pk=item_pk, is_published=True)
-    )
-    response = HttpResponse(item.main_image.image, content_type='image')
-    response['Content-Disposition'] = (
-        f'attachment;' f' filename="{item.main_image.image}"'
-    )
-    return response
+class FridayItemsView(core.rating.base_views.ItemListByDateBaseView):
+    queryset = catalog.models.Item.objects.updated_on_friday()
+    sort_type = 'Пятница'
 
 
-def download_gallery_image(request, image_pk):
-    image = django.shortcuts.get_object_or_404(
-        catalog.models.GalleryImage.objects.filter(pk=image_pk)
-    )
-    response = HttpResponse(image.image, content_type='image')
-    response['Content-Disposition'] = (
-        f'attachment; ' f'filename="{image.image}"'
-    )
-    return response
-
-
-def new_items(request):
-    template = 'catalog/items_list_by_date.html'
-    one_week_ago = timezone.now() - timedelta(weeks=1)
-    items = catalog.models.Item.objects.new(one_week_ago)
-    context = {'sort_type': 'Новинки', 'items': items}
-    return django.shortcuts.render(request, template, context)
-
-
-def friday_items(request):
-    template = 'catalog/items_list_by_date.html'
-    items = catalog.models.Item.objects.updated_on_friday()
-    context = {'sort_type': 'Пятница', 'items': items}
-    return django.shortcuts.render(request, template, context)
-
-
-def unchanged_items(request):
-    template = 'catalog/items_list_by_date.html'
-    items = catalog.models.Item.objects.unchanged()
-    context = {'sort_type': 'Непроверенное', 'items': items}
-    return django.shortcuts.render(request, template, context)
+class UnchangedItemsView(core.rating.base_views.ItemListByDateBaseView):
+    queryset = catalog.models.Item.objects.unchanged()
+    sort_type = 'Непроверенное'

@@ -1,6 +1,7 @@
 import django.db.models
 from django.db.models import F
 from django.db.models.functions import Trunc
+import django.shortcuts
 
 import catalog.models
 
@@ -150,3 +151,20 @@ class ItemManager(django.db.models.Manager):
                 'category_id',
             )
         )
+
+    def get_with_rating(self, pk):
+        item = django.shortcuts.get_object_or_404(
+            self.prefetch_related('ratings'),
+            pk=pk,
+        )
+        ratings = item.ratings.all()
+        item.ratings_number = len(ratings)
+        sum_ = 0
+        for rat in ratings:
+            if rat.rating is not None:
+                sum_ += rat.rating
+        if item.ratings_number == 0:
+            item.average_rating = 0
+        else:
+            item.average_rating = round(sum_ / item.ratings_number, 1)
+        return item

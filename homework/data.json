@@ -282,6 +282,26 @@
   }
 },
 {
+  "model": "feedback.feedback",
+  "pk": 6,
+  "fields": {
+    "text": "цук",
+    "created_on": "2023-03-25T21:43:39.414Z",
+    "personal_data": 3,
+    "status": "received"
+  }
+},
+{
+  "model": "feedback.feedback",
+  "pk": 7,
+  "fields": {
+    "text": "цук",
+    "created_on": "2023-03-25T21:43:40.316Z",
+    "personal_data": null,
+    "status": "received"
+  }
+},
+{
   "model": "feedback.feedbackfile",
   "pk": 1,
   "fields": {
@@ -298,6 +318,14 @@
   }
 },
 {
+  "model": "feedback.feedbackfile",
+  "pk": 3,
+  "fields": {
+    "file": "registration.ui",
+    "feedback": 6
+  }
+},
+{
   "model": "feedback.personaldata",
   "pk": 1,
   "fields": {
@@ -309,6 +337,13 @@
   "pk": 2,
   "fields": {
     "email": "marathagazeev@gmail.com"
+  }
+},
+{
+  "model": "feedback.personaldata",
+  "pk": 3,
+  "fields": {
+    "email": "test.user@ya.ru"
   }
 }
 ]

@@ -1,14 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}
-  <title>Письмо отправлено</title>
-{% endblock %}
+{% block title %}<title>Письмо отправлено</title>{% endblock %}
 
 {% block content %}
   <html>
-  <head>
-  </head>
-  <style>
+    <head></head>
+    <style>
       body {
           text-align: center;
           padding: 40px 0;
@@ -33,14 +30,18 @@
           line-height: 200px;
           margin-left: -15px;
       }
-  </style>
-  <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
-    <i class="checkmark">✓</i>
-  </div>
-  <h1>Письмо успешно отправлено!</h1>
-  <p style="padding-bottom: 20px;">Мы ответим вам в скором времени.</p>
-  <a href="{% url 'index:index' %}">
-    <button class="btn btn-primary">На главную</button>
-  </a>
+    </style>
+    <div style="border-radius:200px;
+                height:200px;
+                width:200px;
+                background: #F8FAF5;
+                margin:0 auto">
+      <i class="checkmark">✓</i>
+    </div>
+    <h1>Письмо успешно отправлено!</h1>
+    <p style="padding-bottom: 20px;">Мы ответим вам в скором времени.</p>
+    <a href="{% url 'index:index' %}">
+      <button class="btn btn-primary">На главную</button>
+    </a>
   </html>
 {% endblock %}

@@ -22,6 +22,7 @@ class Rating(models.Model):
         related_name='ratings',
     )
     rating = models.PositiveSmallIntegerField(
+        'моя оценка',
         choices=RATING_CHOICES,
         null=True,
         blank=True,
