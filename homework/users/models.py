@@ -2,8 +2,6 @@ import os
 import re
 
 import django.contrib.auth.models
-from django.core.files.base import ContentFile
-from django.core.files.storage import default_storage
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
