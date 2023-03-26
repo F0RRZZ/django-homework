@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
-from django.http import Http404
+from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.utils import timezone
@@ -12,6 +12,7 @@ from django.views.generic import (
     ListView,
     TemplateView,
     FormView,
+    UpdateView,
 )
 
 from users.models import UserProfile
@@ -115,12 +116,14 @@ class UserDetailView(DetailView, LoginRequiredMixin):
         return context
 
 
-class ProfileView(FormView, LoginRequiredMixin):
-    # TODO: fix data display
+class ProfileView(LoginRequiredMixin, UpdateView):
     model = UserProfile
-    template_name = 'users/profile.html'
     form_class = UserProfileForm
+    template_name = 'users/profile.html'
     success_url = reverse_lazy('users:profile')
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
