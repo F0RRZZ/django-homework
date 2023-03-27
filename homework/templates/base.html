@@ -4,42 +4,46 @@
 
 <html lang="ru">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="{% static 'css/bootstrap.min.css' %}"
           rel="stylesheet"
-          type="text/css">
-    <link href="{% static 'css/base.css' %}" rel="stylesheet" type="text/css">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+          type="text/css"/>
+    <link href="{% static 'css/base.css' %}" rel="stylesheet" type="text/css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon"
           type="image/png"
           sizes="32x32"
-          href="{% static 'favicon/favicon-32x32.png' %}">
+          href="{% static 'favicon/favicon-32x32.png' %}"/>
     <link rel="icon"
           type="image/png"
           sizes="16x16"
-          href="{% static 'favicon/favicon-16x16.png' %}">
-    <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
+          href="{% static 'favicon/favicon-16x16.png' %}"/>
+    <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}" />
     <link rel="mask-icon"
           href="{% static 'favicon/safari-pinned-tab.svg' %}"
-          color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
-    {% block title %}{% endblock %}
+          color="#5bbad5"/>
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+    {% block title %}
+      <title>Page</title>
+    {% endblock title %}
   </head>
   <body>
 
-    {% include 'includes/header.html' %}
+    {% include "includes/header.html" %}
 
     <main>
-      {% block content %}здесь был контент :{% endblock %}
+      {% block content %}
+        здесь был контент :
+      {% endblock content %}
     </main>
 
-    {% include 'includes/footer.html' %}
+    {% include "includes/footer.html" %}
 
     <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/bootstrap/bootstrap.esm.min.js' %}"></script>
-    <script src="{% static 'js/lang_switch.js' %}"></script>
+    {% comment %} <script src="{% static 'js/lang_switch.js' %}"></script> {% endcomment %}
   </body>
 </html>

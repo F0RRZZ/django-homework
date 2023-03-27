@@ -1,9 +1,8 @@
 from datetime import timedelta
 
 from django.http import HttpResponse
-import django.shortcuts
 from django.utils import timezone
-from django.views.generic import DetailView, ListView, FormView, TemplateView
+from django.views.generic import DetailView, ListView, FormView
 
 import catalog.forms
 import catalog.models

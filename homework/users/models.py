@@ -2,8 +2,6 @@ import os
 import re
 
 import django.contrib.auth.models
-from django.core.files.base import ContentFile
-from django.core.files.storage import default_storage
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -110,8 +108,8 @@ class UserProfile(
     objects = UserProfileManager()
 
     class Meta:
-        verbose_name = 'Пользователь'
-        verbose_name_plural = 'Пользователи'
+        verbose_name = 'пользователь'
+        verbose_name_plural = 'пользователи'
 
     def natural_key(self):
         return self.username
