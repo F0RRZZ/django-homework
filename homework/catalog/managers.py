@@ -153,7 +153,7 @@ class ItemManager(django.db.models.Manager):
         )
 
     def get_with_rating(self, pk):
-        RATING_NAME = 'rating'
+        rating_name = 'rating'
         item = django.shortcuts.get_object_or_404(
             self.published(),
             pk=pk,
@@ -161,9 +161,9 @@ class ItemManager(django.db.models.Manager):
 
         ratings = item.ratings.all()
         rating_data = ratings.aggregate(
-            django.db.models.Avg(RATING_NAME),
-            django.db.models.Count(RATING_NAME)
+            django.db.models.Avg(rating_name),
+            django.db.models.Count(rating_name),
         )
-        item.ratings_number = rating_data[f'{RATING_NAME}__count']
-        item.average_rating = rating_data[f'{RATING_NAME}__avg']
+        item.ratings_number = rating_data[f'{rating_name}__count']
+        item.average_rating = rating_data[f'{rating_name}__avg']
         return item
