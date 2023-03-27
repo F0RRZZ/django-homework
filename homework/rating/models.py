@@ -18,7 +18,7 @@ class Rating(models.Model):
     item = models.ForeignKey(
         Item,
         on_delete=models.CASCADE,
-        verbose_name='Товар',
+        verbose_name='товар',
         related_name='ratings',
     )
     rating = models.PositiveSmallIntegerField(

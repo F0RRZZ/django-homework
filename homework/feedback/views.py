@@ -3,7 +3,6 @@ import os
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 from django.core.mail import send_mail
-from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import FormView
 from django.views.generic.base import TemplateView

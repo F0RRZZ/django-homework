@@ -1,9 +1,8 @@
 from django.conf import settings
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.mail import send_mail
-from django.http import Http404, HttpResponseRedirect
-from django.shortcuts import get_object_or_404, redirect, render
+from django.http import Http404
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic import (
@@ -135,6 +134,4 @@ class DrinkCoffeeView(TemplateView, LoginRequiredMixin):
         profile = request.user
         profile.coffee_count += 1
         profile.save()
-        return redirect('users:profile')
-        # При указании success_url вылетала ошибка
         return redirect('users:profile')

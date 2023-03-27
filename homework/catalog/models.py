@@ -49,7 +49,7 @@ class GalleryImage(django.db.models.Model):
     )
 
     image = django.db.models.ImageField(
-        'Галерея',
+        'галерея',
         upload_to='catalog/',
         null=True,
     )
