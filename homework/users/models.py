@@ -83,6 +83,11 @@ class UserProfile(
     birthday = models.DateTimeField(
         _('день рождения'), null=True, blank=True, help_text='День рождения'
     )
+
+    def get_image_filename(self, filename):
+        ext = os.path.splitext(filename)[-1]
+        return 'avatars/user_{}{}'.format(self.id, ext)
+
     image = models.ImageField(
         _('аватарка'),
         upload_to=get_image_filename,
@@ -105,10 +110,6 @@ class UserProfile(
     class Meta:
         verbose_name = 'пользователь'
         verbose_name_plural = 'пользователи'
-
-    def get_image_filename(self, filename):
-        ext = os.path.splitext(filename)[-1]
-        return 'avatars/user_{}{}'.format(self.id, ext)
 
     def natural_key(self):
         return self.username
