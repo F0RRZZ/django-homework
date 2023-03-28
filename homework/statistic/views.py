@@ -1,5 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import TemplateView, ListView
+from django.views.generic import ListView
 
 import catalog.models
 import users.models
@@ -22,4 +22,6 @@ class UserItemsStat(ListView, LoginRequiredMixin):
     context_object_name = 'items'
 
     def get_queryset(self):
-        return catalog.models.Item.objects.get_user_statistic(self.request.user)
+        return catalog.models.Item.objects.get_user_statistic(
+            self.request.user
+        )

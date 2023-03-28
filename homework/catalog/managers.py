@@ -167,9 +167,9 @@ class ItemManager(django.db.models.Manager):
         item.ratings_number = rating_data[f'{rating_name}__count']
         item.average_rating = rating_data[f'{rating_name}__avg']
         return item
-    
+
     def get_statistic(self):
         return self.all()
-    
+
     def get_user_statistic(self, user):
         return self.all()

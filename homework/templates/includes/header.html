@@ -83,13 +83,13 @@
                    href="{% url 'statistic:users' %}">По пользователям</a>
               </li>
               {% if user.is_authenticated %}
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li>
-                <a class="dropdown-item lng-friday {% if view_name == 'statistic:user_ratings' %} {{ 'active' }} {% endif %}"
-                   href="{% url 'statistic:user_ratings' %}">Мои оценки</a>
-              </li>
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
+                <li>
+                  <a class="dropdown-item lng-friday {% if view_name == 'statistic:user_ratings' %} {{ 'active' }} {% endif %}"
+                     href="{% url 'statistic:user_ratings' %}">Мои оценки</a>
+                </li>
               {% endif %}
             </ul>
           </li>
