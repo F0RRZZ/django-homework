@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 
 from catalog.models import Item
+from rating.managers import RatingManager
 
 
 class Rating(models.Model):
@@ -27,6 +28,8 @@ class Rating(models.Model):
         null=True,
         blank=True,
     )
+
+    objects = RatingManager()
 
     class Meta:
         verbose_name = 'оценка'

@@ -1,4 +1,5 @@
 import django.contrib.auth.models
+import django.db.models
 
 
 class UserProfileManager(django.contrib.auth.models.BaseUserManager):
@@ -24,5 +25,12 @@ class UserProfileManager(django.contrib.auth.models.BaseUserManager):
         extra_fields.setdefault('is_active', True)
         return self.create_user(username, email, password, **extra_fields)
 
-    def get_statistic(self):
-        return self.all()
+    def best_item(self, pk):
+        return (
+            self.get_queryset()
+            .filter(pk=pk)
+            .order_by(
+                'rating__rating',
+            )
+            .first()
+        )
