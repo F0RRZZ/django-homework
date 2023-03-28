@@ -33,6 +33,8 @@
 
     {% include "includes/header.html" %}
 
+    {% include 'includes/birthday_men.html' %}
+
     <main>
       {% block content %}
         здесь был контент :
@@ -44,6 +46,6 @@
     <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/bootstrap/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/bootstrap/bootstrap.esm.min.js' %}"></script>
-    <script src="{% static 'js/lang_switch.js' %}"></script>
+    {% comment %} <script src="{% static 'js/lang_switch.js' %}"></script> {% endcomment %}
   </body>
 </html>

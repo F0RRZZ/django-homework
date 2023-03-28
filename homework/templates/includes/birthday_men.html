@@ -1,0 +1,60 @@
+<div class="container mt-2">
+  <p>
+    <button class="btn btn-light"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseExample"
+            aria-expanded="false"
+            aria-controls="collapseExample">
+      Имениннички
+    </button>
+  </p>
+  <div class="collapse" id="collapseExample">
+    <div class="card card-body">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Фамилия</th>
+            <th scope="col">Почта</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in birthday_users %}
+            <tr>
+              <th scope="row">{{ forloop.counter }}</th>
+              <td>
+                {% if user.first_name %}
+                  {{ user.first_name }}
+                {% else %}
+                  <i>Не указано</i>
+                {% endif %}
+              </td>
+              <td>
+                {% if user.last_name %}
+                  {{ user.last_name }}
+                {% else %}
+                  <i>Не указано</i>
+                {% endif %}
+              </td>
+              <td>
+                {% if user.email %}
+                  {{ user.email }}
+                {% else %}
+                  <i>Не указано</i>
+                {% endif %}
+              </td>
+            </tr>
+          {% empty %}
+            <tr>
+              <td colspan="4">
+                <i>Сегодня никого!</i>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
