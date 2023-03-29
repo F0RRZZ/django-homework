@@ -29,8 +29,10 @@ class RatingManager(Manager):
         return (
             self.get_queryset()
             .filter(user_id=user_id)
-            .aggregate(ratings_count=Count('rating'),
-                       ratings_avg=Avg('rating'),)
+            .aggregate(
+                ratings_count=Count('rating'),
+                ratings_avg=Avg('rating'),
+            )
         )
 
     def get_users_item_list(self, user_id):
@@ -40,14 +42,16 @@ class RatingManager(Manager):
         return (
             self.get_queryset()
             .filter(item_id=item_id)
-            .aggregate(ratings_count=Count('rating'),
-                       ratings_avg=Avg('rating'),)
+            .aggregate(
+                ratings_count=Count('rating'),
+                ratings_avg=Avg('rating'),
+            )
         )
 
     def get_item_top_bottom_rater(self, item_id):
         user_queryset = users.models.UserProfile.objects.all().only(
-                users.models.UserProfile.username.field.name,
-            )
+            users.models.UserProfile.username.field.name,
+        )
         return django.shortcuts.get_object_or_404(
             user_queryset,
             id=(

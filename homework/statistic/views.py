@@ -26,8 +26,10 @@ class UsersStatisticsView(DetailView):
         worst_item = rating.models.Rating.objects.get_users_worst_item(
             self.kwargs['pk']
         )
-        ratings_stat = rating.models.Rating.objects.get_users_ratings_count_and_avg(
-            self.kwargs['pk']
+        ratings_stat = (
+            rating.models.Rating.objects.get_users_ratings_count_and_avg(
+                self.kwargs['pk']
+            )
         )
         context = {
             'username': username,
@@ -49,11 +51,18 @@ class ItemsStatisticsView(DetailView):
     template_name = 'statistic/item_stat_detail.html'
 
     def get(self, request, *args, **kwargs):
-        item_name = catalog.models.Item.objects.get_with_only_name(self.kwargs['pk']).name
-        item_stat = rating.models.Rating.objects.get_items_ratings_count_and_avg(
+        item_name = catalog.models.Item.objects.get_with_only_name(
             self.kwargs['pk']
+        ).name
+        item_stat = (
+            rating.models.Rating.objects.get_items_ratings_count_and_avg(
+                self.kwargs['pk']
+            )
         )
-        top_rater, bottom_rater = rating.models.Rating.objects.get_item_top_bottom_rater(
+        (
+            top_rater,
+            bottom_rater,
+        ) = rating.models.Rating.objects.get_item_top_bottom_rater(
             self.kwargs['pk']
         )
         context = {
@@ -70,11 +79,12 @@ class UserItemsStat(ListView, LoginRequiredMixin):
     template_name = 'statistic/user_items_stat.html'
 
     def get(self, request, *args, **kwargs):
-        user_id = request.user.id
+        # user_id = request.user.id
         # здесь достается queryset из объектов Rating. В шаблоне будешь
         # доставать оценку через rating.rating, а сам Item через rating.item
-        items_list = catalog.models.Item.objects.get_users_items_list(user_id)
+        # items_list =
+        # catalog.models.Item.objects.get_users_items_list(user_id)
         context = {
-            'ratings': items_list,
+            'ratings': rating.models.Rating.objects.all(),
         }
         return render(request, self.template_name, context)

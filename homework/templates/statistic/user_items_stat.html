@@ -5,5 +5,34 @@
 {% endblock title %}
 
 {% block content %}
-  <div class="container"></div>
+  <div class="container">
+    <h3>Статистика по товарам</h3>
+    <table class="table table-bordered border-dark table-responsive">
+      <tbody>
+        <tr class="table-info table-bordered border-dark">
+          <th>Имя товара</th>
+          <th>Категория</th>
+          <th>Моя оценка</th>
+          <th>Изменить</th>
+        </tr>
+        {% for rating in ratings %}
+          <tr>
+            <td>{{ rating.item.name }}</td>
+            <td>
+              {% if rating.item.category.name %}
+                {{ rating.item.category.name }}
+              {% else %}
+                <i>Не указано</i>
+              {% endif %}
+            </td>
+            <td>{{ rating.rating }}</td>
+            <td>
+              <a href="{% url 'catalog:item-detail' rating.item.id %}"
+                 class="link-secondary">К товару</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 {% endblock content %}

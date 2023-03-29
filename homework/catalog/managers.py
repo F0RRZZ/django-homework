@@ -167,7 +167,7 @@ class ItemManager(django.db.models.Manager):
         item.ratings_number = rating_data[f'{rating_name}__count']
         item.average_rating = rating_data[f'{rating_name}__avg']
         return item
-    
+
     def get_with_only_name(self, pk):
         return django.shortcuts.get_object_or_404(
             self.filter(

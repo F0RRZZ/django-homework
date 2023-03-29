@@ -27,7 +27,7 @@ class UserProfileManager(django.contrib.auth.models.BaseUserManager):
         extra_fields.setdefault('is_superuser', True)
         extra_fields.setdefault('is_active', True)
         return self.create_user(username, email, password, **extra_fields)
-    
+
     def get_with_only_username(self, pk):
         return django.shortcuts.get_object_or_404(
             self.filter(
