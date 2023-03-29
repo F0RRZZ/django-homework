@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'homepage.apps.HomepageConfig',
     'rating.apps.RatingConfig',
     'users.apps.UsersConfig',
+    'statistic.apps.StatisticConfig',
 ]
 
 MIDDLEWARE = [
@@ -79,6 +80,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                'users.context_processors.birthday_users',
             ],
         },
     },

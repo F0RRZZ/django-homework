@@ -10,6 +10,7 @@ urlpatterns = [
     path('about/', include('about.urls', namespace='about')),
     path('catalog/', include('catalog.urls', namespace='catalog')),
     path('feedback/', include('feedback.urls', namespace='feedback')),
+    path('statistic/', include('statistic.urls', namespace='statistic')),
     path('admin/', admin.site.urls),
     path('auth/', include('users.urls', namespace='users')),
     path('auth/', include(django.contrib.auth.urls)),

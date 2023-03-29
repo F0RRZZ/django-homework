@@ -8,3 +8,17 @@ body {
 .shop-table {
     width: fit-content !important;
 }
+
+.nav-link, .dropdown-item {
+    white-space: nowrap;
+}
+
+ul.nav {
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+ul.nav li {
+    display: inline-block;
+    float: none;
+}
