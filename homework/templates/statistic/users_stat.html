@@ -5,5 +5,35 @@
 {% endblock title %}
 
 {% block content %}
-  <div class="container"></div>
+  <div class="container">
+    </h3>Статистика по пользователям</h3>
+    <table class="table table-bordered border-dark table-responsive">
+      <tbody>
+        <tr class="table-info table-bordered border-dark">
+          <th>Username</th>
+          <th>Имя</th>
+          <th>Фамилия</th>
+          <th>Статистика</th>
+        </tr>
+        {% for user in users %}
+          <tr>
+            <td>{{ user.username }}</td>
+            <td>{% if user.first_name %}
+              {{ user.first_name }}
+            {% else %}
+              <i>Не указано</i>
+            {% endif %}</td>
+            <td>{% if user.last_name %}
+            {{ user.last_name }}
+          {% else %}
+            <i>Не указано</i>
+          {% endif %}</td>
+            <td>
+              <a href="{% url 'statistic:user_statistic' user.id %}" class="link-secondary">Статистика</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 {% endblock content %}

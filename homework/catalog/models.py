@@ -115,12 +115,6 @@ class Item(core.catalog.base_models.PublishedWithNameBaseModel):
         help_text='последнее изменение',
     )
 
-    rating = django.db.models.ManyToManyField(
-        'rating.Rating',
-        blank=True,
-        verbose_name='Оценка',
-    )
-
     class Meta:
         default_related_name = 'items'
         verbose_name = 'товар'

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <title>{{ username }}: статистика</title>
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <h3>{{ username }}: статистика</h3>
+        <table class="table shop-table table-bordered border-dark table-responsive">
+            <tbody>
+                <tr>
+                    <th scope="col" class="table-info table-bordered border-dark">Количество оценок</th>
+                    <td>{{ ratings_count }}</td>
+                </tr>
+                <tr>
+                    <th scope="col" class="table-info table-bordered border-dark">Средняя оценка</th>
+                    <td>{{ ratings_avg }}</td>
+                </tr>
+                <tr>
+                    <th scope="col" class="table-info table-bordered border-dark">Лучший оценённый товар</th>
+                    <td><a href="{% url 'statistic:item_statistic' best_item.id %}" class="link-secondary">{{ best_item.name }}</a></td>
+                </tr>
+                <tr>
+                    <th scope="col" class="table-info table-bordered border-dark">Худший оценённый товар</th>
+                    <td><a href="{% url 'statistic:item_statistic' worst_item.id %}" class="link-secondary">{{ worst_item.name }}</a></td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="{% url 'statistic:users_list' %}" class="link-secondary mt-2">К статистике пользователей</a>
+    </div>
+{% endblock content %}

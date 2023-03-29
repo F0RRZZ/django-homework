@@ -7,9 +7,9 @@ app_name = 'statistic'
 urlpatterns = [
     path('users/', statistic.views.UsersListView.as_view(), name='users_list'),
     path(
-        'users_ratings/<int:pk>',
+        'users/<int:pk>',
         statistic.views.UsersStatisticsView.as_view(),
-        name='users_statistics',
+        name='user_statistic',
     ),
     path(
         'items/',
@@ -17,9 +17,9 @@ urlpatterns = [
         name='items_list',
     ),
     path(
-        'items_ratings/<int:pk>',
+        'items/<int:pk>',
         statistic.views.ItemsStatisticsView.as_view(),
-        name='items_statistics',
+        name='item_statistic',
     ),
     path(
         'my_ratings/',
