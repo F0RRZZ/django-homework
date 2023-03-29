@@ -13,20 +13,20 @@
           <th scope="col" class="table-info table-bordered border-dark">Количество оценок</th>
           <td>{{ ratings_count }}</td>
         </tr>
-        <tr>
-          {% if ratings_avg %}
-          <th scope="col" class="table-info table-bordered border-dark">Средняя оценка</th>
-          <td>{{ ratings_avg }}</td>
-          {% endif %}
-        </tr>
+        {% if ratings_avg %}
+          <tr>
+            <th scope="col" class="table-info table-bordered border-dark">Средняя оценка</th>
+            <td>{{ ratings_avg }}</td>
+          </tr>
+        {% endif %}
         <tr>
           <th scope="col" class="table-info table-bordered border-dark">Автор лучшей оценки</th>
           <td>
             {% if top_rater %}
-            <a href="{% url 'statistic:user_statistic' top_rater.id %}"
-               class="link-secondary">{{ top_rater.username }}</a>
+              <a href="{% url 'statistic:user_statistic' top_rater.id %}"
+                 class="link-secondary">{{ top_rater.username }}</a>
             {% else %}
-            <p>Пусто</p>
+              Нет
             {% endif %}
           </td>
         </tr>
@@ -34,10 +34,10 @@
           <th scope="col" class="table-info table-bordered border-dark">Автор худшей оценки</th>
           <td>
             {% if bottom_rater %}
-            <a href="{% url 'statistic:user_statistic' bottom_rater.id %}"
-               class="link-secondary">{{ bottom_rater.username }}</a>
+              <a href="{% url 'statistic:user_statistic' bottom_rater.id %}"
+                 class="link-secondary">{{ bottom_rater.username }}</a>
             {% else %}
-            <p>Пусто</p>
+              Нет
             {% endif %}
           </td>
         </tr>

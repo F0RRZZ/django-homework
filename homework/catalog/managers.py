@@ -176,3 +176,19 @@ class ItemManager(django.db.models.Manager):
             ).only(catalog.models.Item.name.field.name),
             id=pk,
         )
+
+    def get_with_name_and_category(self):
+        return (
+            self.select_related('category')
+            .filter(
+                is_published=True,
+                category__is_published=True,
+            )
+            .only(
+                catalog.models.Item.name.field.name,
+                (
+                    f'{catalog.models.Item.category.field.name}__'
+                    f'{catalog.models.Category.name.field.name}'
+                ),
+            )
+        )

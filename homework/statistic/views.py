@@ -44,7 +44,7 @@ class UsersStatisticsView(DetailView):
 class ItemsListView(ListView):
     template_name = 'statistic/items_stat.html'
     context_object_name = 'items'
-    queryset = catalog.models.Item.objects.published()
+    queryset = catalog.models.Item.objects.get_with_name_and_category()
 
 
 class ItemsStatisticsView(DetailView):
