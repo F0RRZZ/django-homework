@@ -5,5 +5,32 @@
 {% endblock title %}
 
 {% block content %}
-  <div class="container"></div>
+  <div class="container">
+    <h3>Статистика по товарам</h3>
+    <table class="table table-bordered border-dark table-responsive">
+      <tbody>
+        <tr class="table-info table-bordered border-dark">
+          <th>Название</th>
+          <th>Категория</th>
+          <th>Статистика</th>
+        </tr>
+        {% for item in items %}
+          <tr>
+            <td>{{ item.name }}</td>
+            <td>
+              {% if item.category.name %}
+                {{ item.category.name }}
+              {% else %}
+                <i>Не указано</i>
+              {% endif %}
+            </td>
+            <td>
+              <a href="{% url 'statistic:item_statistic' item.id %}"
+                 class="link-secondary">Статистика</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 {% endblock content %}

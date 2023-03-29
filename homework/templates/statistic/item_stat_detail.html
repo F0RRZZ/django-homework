@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>{{ item_name }}: статистика</title>
+{% endblock title %}
+
+{% block content %}
+  <div class="container">
+    <h3>{{ item_name }}: статистика</h3>
+    <table class="table shop-table table-bordered border-dark table-responsive">
+      <tbody>
+        <tr>
+          <th scope="col" class="table-info table-bordered border-dark">Количество оценок</th>
+          <td>{{ ratings_count }}</td>
+        </tr>
+        {% if ratings_avg %}
+          <tr>
+            <th scope="col" class="table-info table-bordered border-dark">Средняя оценка</th>
+            <td>{{ ratings_avg }}</td>
+          </tr>
+        {% endif %}
+        <tr>
+          <th scope="col" class="table-info table-bordered border-dark">Автор лучшей оценки</th>
+          <td>
+            {% if top_rater %}
+              <a href="{% url 'statistic:user_statistic' top_rater.id %}"
+                 class="link-secondary">{{ top_rater.username }}</a>
+            {% else %}
+              Нет
+            {% endif %}
+          </td>
+        </tr>
+        <tr>
+          <th scope="col" class="table-info table-bordered border-dark">Автор худшей оценки</th>
+          <td>
+            {% if bottom_rater %}
+              <a href="{% url 'statistic:user_statistic' bottom_rater.id %}"
+                 class="link-secondary">{{ bottom_rater.username }}</a>
+            {% else %}
+              Нет
+            {% endif %}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <a href="{% url 'statistic:items_list' %}" class="link-secondary mt-2">К статистике товаров</a>
+  </div>
+{% endblock content %}

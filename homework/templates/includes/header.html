@@ -75,12 +75,12 @@
             </a>
             <ul class="dropdown-menu">
               <li>
-                <a class="dropdown-item lng-new {% if view_name == 'statistic:items' %} {{ 'active' }} {% endif %}"
-                   href="{% url 'statistic:items' %}">По товарам</a>
+                <a class="dropdown-item lng-new {% if view_name == 'statistic:items_list' %} {{ 'active' }} {% endif %}"
+                   href="{% url 'statistic:items_list' %}">По товарам</a>
               </li>
               <li>
-                <a class="dropdown-item lng-catalog {% if view_name == 'statistic:users' %} {{ 'active' }} {% endif %}"
-                   href="{% url 'statistic:users' %}">По пользователям</a>
+                <a class="dropdown-item lng-catalog {% if view_name == 'statistic:users_list' %} {{ 'active' }} {% endif %}"
+                   href="{% url 'statistic:users_list' %}">По пользователям</a>
               </li>
               {% if user.is_authenticated %}
                 <li>

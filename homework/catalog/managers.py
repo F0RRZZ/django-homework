@@ -168,8 +168,27 @@ class ItemManager(django.db.models.Manager):
         item.average_rating = rating_data[f'{rating_name}__avg']
         return item
 
-    def get_statistic(self):
-        return self.all()
+    def get_with_only_name(self, pk):
+        return django.shortcuts.get_object_or_404(
+            self.filter(
+                is_published=True,
+                category__is_published=True,
+            ).only(catalog.models.Item.name.field.name),
+            id=pk,
+        )
 
-    def get_user_statistic(self, user):
-        return self.all()
+    def get_with_name_and_category(self):
+        return (
+            self.select_related('category')
+            .filter(
+                is_published=True,
+                category__is_published=True,
+            )
+            .only(
+                catalog.models.Item.name.field.name,
+                (
+                    f'{catalog.models.Item.category.field.name}__'
+                    f'{catalog.models.Category.name.field.name}'
+                ),
+            )
+        )
