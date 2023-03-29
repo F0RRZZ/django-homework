@@ -13,6 +13,11 @@ urlpatterns = [
     ),
     path(
         'items/',
+        statistic.views.ItemsListView.as_view(),
+        name='items_list',
+    ),
+    path(
+        'items_ratings/<int:pk>',
         statistic.views.ItemsStatisticsView.as_view(),
         name='items_statistics',
     ),

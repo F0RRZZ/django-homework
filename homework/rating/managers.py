@@ -35,3 +35,40 @@ class RatingManager(Manager):
             .filter(user_id=user_id)
             .aggregate(ratings_avg=Avg('rating'))
         )
+
+    def get_users_item_list(self, user_id):
+        return self.get_queryset().filter(user_id=user_id).order_by('rating')
+
+    def get_items_ratings_count(self, item_id):
+        return (
+            self.get_queryset()
+            .filter(item_id=item_id)
+            .aggregate(ratings_count=Count('rating'))
+        )
+
+    def get_items_ratings_avg(self, item_id):
+        return (
+            self.get_queryset()
+            .filter(item_id=item_id)
+            .aggregate(ratings_avg=Avg('rating'))
+        )
+
+    def get_item_top_rater(self, item_id):
+        return (
+            self.get_queryset()
+            .filter(item_id=item_id)
+            .annotate(max_rating=Max('rating'))
+            .order_by('-max_rating', '-id')
+            .first()
+            .user
+        )
+
+    def get_item_bottom_rater(self, item_id):
+        return (
+            self.get_queryset()
+            .filter(item_id=item_id)
+            .annotate(min_rating=Min('rating'))
+            .order_by('min_rating', '-id')
+            .first()
+            .user
+        )
