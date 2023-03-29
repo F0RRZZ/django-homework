@@ -20,15 +20,23 @@
         <tr>
           <th scope="col" class="table-info table-bordered border-dark">Лучший оценённый товар</th>
           <td>
+            {% if best_item %}
             <a href="{% url 'statistic:item_statistic' best_item.id %}"
                class="link-secondary">{{ best_item.name }}</a>
+            {% else %}
+            <p>Пусто</p>
+            {% endif %}
           </td>
         </tr>
         <tr>
           <th scope="col" class="table-info table-bordered border-dark">Худший оценённый товар</th>
           <td>
+            {% if worst_item %}
             <a href="{% url 'statistic:item_statistic' worst_item.id %}"
                class="link-secondary">{{ worst_item.name }}</a>
+            {% else %}
+            <p>Пусто</p>
+            {% endif %}
           </td>
         </tr>
       </tbody>

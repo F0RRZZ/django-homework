@@ -20,11 +20,11 @@ class UsersStatisticsView(DetailView):
         username = users.models.UserProfile.objects.get_with_only_username(
             self.kwargs['pk'],
         ).username
-        best_item = rating.models.Rating.objects.get_users_best_item(
-            self.kwargs['pk']
+        best_item = rating.models.Rating.objects.get_users_item(
+            self.kwargs['pk'], 'max'
         )
-        worst_item = rating.models.Rating.objects.get_users_worst_item(
-            self.kwargs['pk']
+        worst_item = rating.models.Rating.objects.get_users_item(
+            self.kwargs['pk'], 'min'
         )
         ratings_stat = (
             rating.models.Rating.objects.get_users_ratings_count_and_avg(
@@ -59,11 +59,11 @@ class ItemsStatisticsView(DetailView):
                 self.kwargs['pk']
             )
         )
-        (
-            top_rater,
-            bottom_rater,
-        ) = rating.models.Rating.objects.get_item_top_bottom_rater(
-            self.kwargs['pk']
+        top_rater = rating.models.Rating.objects.get_item_rater(
+            self.kwargs['pk'], 'max'
+        )
+        bottom_rater = rating.models.Rating.objects.get_item_rater(
+            self.kwargs['pk'], 'min'
         )
         context = {
             'item_name': item_name,
@@ -79,12 +79,9 @@ class UserItemsStat(ListView, LoginRequiredMixin):
     template_name = 'statistic/user_items_stat.html'
 
     def get(self, request, *args, **kwargs):
-        # user_id = request.user.id
-        # здесь достается queryset из объектов Rating. В шаблоне будешь
-        # доставать оценку через rating.rating, а сам Item через rating.item
-        # items_list =
-        # catalog.models.Item.objects.get_users_items_list(user_id)
+        user_id = request.user.id
+        items_list = rating.models.Rating.objects.get_users_items_list(user_id)
         context = {
-            'ratings': rating.models.Rating.objects.all(),
+            'ratings': items_list,
         }
         return render(request, self.template_name, context)
